@@ -27,13 +27,13 @@ module.exports =
 
 function _getVersionFromBower(grunt, path)
 {
-  var bowerJSON = grunt.file.readJSON("bower.json");
+  var bowerJSON = grunt.file.readJSON("bower_components/" + path + "/bower.json");
   if (bowerJSON.hasOwnProperty("version"))
   {
     return bowerJSON.version;
   }
 
   // In case some packages do not have a version string, use .bower.json which  is created by bower
-  bowerJSON = grunt.file.readJSON(".bower.json");
+  bowerJSON = grunt.file.readJSON("bower_components/" + path + "/.bower.json");
   return bowerJSON.version;
 }
