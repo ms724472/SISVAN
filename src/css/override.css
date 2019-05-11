@@ -1,0 +1,120 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+.oj-web-applayout-header{
+    width: 100%;
+    top: -4px;
+    position: relative;
+}
+
+.oj-flex-bar {
+    background-color: #00395b;
+    height: 50px;
+}
+
+.ojToolbar {
+    background-color: #00395b;
+}
+
+.header-icon{
+    width:210px;
+    height:35px;
+}
+
+.header-icon:before{
+    content:url("images/iteso-header-mobile-b.png");
+}
+
+#login-icon{
+    top: 35px;
+    position: relative;
+    content:url("images/Logo-ITESO.png");
+}
+
+#userMenu {
+    color: white;
+}
+
+.login-box{
+   top: 60px;
+   width: 400px;
+   height: 634px;
+   background-color: #f5f5f5;
+   border-radius: 6px;
+   position: relative;
+}
+
+body{
+    background-image:url("images/fondo_login.jpg");
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    background-size: cover;
+}
+
+.login-pane{
+    left: 15px;
+    position: relative;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.login-input{
+    top: 20px;
+    height: 46px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    width: 368px;
+}
+
+#login-button{
+    height: 46px;
+    font-size: 18px;
+    line-height: 1.33;
+    color: white;
+    border-radius: 6px;
+    background-color: #004270;
+    width: 368px;
+    position: relative;
+}
+
+.login-input-box{
+    top: 50px;
+    position: relative;
+}
+
+.login-input::placeholder {
+  font-style: normal;
+  color: graytext;
+}
+
+#login-footer{
+    top: 90px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    position: relative;
+}
+
+#loging-help{
+    padding-left: 15px;
+}
+
+.wrapper{
+    height: 185px;
+    position: relative;
+}
+
+#page-footer{
+    left: -30px;
+    right: -50px;
+    height: 75px;
+    background-color: rgba(0,0,0,.6);
+    position: absolute;
+    bottom: -20px;
+    color: #777;
+}

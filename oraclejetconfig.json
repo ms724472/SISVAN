@@ -6,8 +6,7 @@
       "hybrid": "src-hybrid",
       "javascript": "js",
       "styles": "css",
-      "themes": "themes",
-      "tests": "tests"
+      "themes": "themes"
     },
     "staging": {
       "web": "web",
@@ -15,6 +14,5 @@
       "themes": "themes"
     }
   },
-  "defaultBrowser": "chrome",
-  "generatorVersion": "6.2.0"
+  "generatorVersion": "2.2.0"
 }

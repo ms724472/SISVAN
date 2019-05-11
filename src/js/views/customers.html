@@ -1,10 +1,36 @@
 <!--
- Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ Copyright (c) 2014, 2016, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
- -->
-<div class="oj-hybrid-padding">
-  <h1>Customers Content Area</h1>
-  <div>
-      To change the content of this section, you will make edits to the customers.html file located in the /js/views folder.
-  </div>
+-->
+<div class="oj-panel oj-margin">
+    <h3 class="oj-header-border">Customer info</h3>
+    <div class="oj-form-layout">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="txt1">Customer name</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="txt1" data-bind="ojComponent: {component: 'ojInputText'}"/>
+                </div>
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="num1">Service amount</label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="num1" data-bind="ojComponent: {component: 'ojInputNumber', 
+                                                          max:100,min:10,step:1}"/>
+                </div>
+            </div>
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="date1" data-bind="text: $parent.dueDate"/>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="date1" data-bind="ojComponent: {component: 'ojInputDate'}"/>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

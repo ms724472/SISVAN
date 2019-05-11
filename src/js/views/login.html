@@ -1,22 +1,46 @@
-<h1>logintest</h1>
-<div align="center">
-<label for="username">Usuario</label>
-<input id="username" type="text" required 
-       data-bind="ojComponent: {component: 'ojInputText',
-                                validators: [{type: 'regExp', options: {pattern: '[a-zA-Z0-9]{3,}',
-                                messageDetail: 'You must enter at least 3 letters or numbers'}}],
-                            invalidComponentTracker: tracker}" /><br /><br />
-<label for="password">Contrase&#241;a</label>
-<input id="password" type="password" required
-       data-bind="ojComponent: {component: 'ojInputPassword',
-                                validators: [{type: 'regExp', options : {pattern: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}',
-                                messageSummary : '{label} too Weak',
-                                messageDetail: 'The password must contain atleast one uppercase, one lowercase, one number and must be 6 digits long'}}],
-                                invalidComponentTracker: tracker}" /><br /><br />
-<a class="oj-button-primary oj-button-xl" 
-   href="http://localhost:8383/Test/index.html?root=home" id="create" type="button" 
-   data-bind="ojComponent: {component: 'ojButton', 
-                            label: 'Login',
-                            disabled: shouldDisableCreate()},
-        click: onClick"></a>
+<div class="oj-hybrid-padding login-page" data-bind="visible: !$parent.isLoggedIn()" align="center">
+  <div class="login-box">
+    <span role="img" id="login-icon" title="Logo ITESO" alt="Logo ITESO"></span>
+    <div class="oj-flex oj-sm-flex-direction-column oj-md-flex-direction-column login-input-box"> 
+      <div class="oj-flex-item login-pane" align="left">
+        <input id="username" class="login-input" required="true" type="text" 
+               data-bind="ojComponent: {
+                    component: 'ojInputText', 
+                    placeholder: 'Nombre de usuario',
+                    invalidComponentTracker: tracker}"/>
+      </div>
+      <div class="oj-flex-item login-pane" align="left">
+        <input id="password" class="login-input" required="true" type="password" 
+               data-bind="ojComponent: {
+                    component: 'ojInputPassword', 
+                    placeholder: 'Contraseña',
+                    invalidComponentTracker: tracker}"/>
+      </div>
+      <div class="oj-flex-item login-pane" align="left">
+          <label for="recordar">
+            <input id="recordar" type="checkbox"/>
+            Recordar nombre de usuario
+          </label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="login-button" type="button" data-bind="click: login, ojComponent: {component: 'ojButton', label: 'INGRESAR', chroming: 'full'}"/>
+      </div>
+    </div> 
+    <div id="login-footer">
+        <p id="loging-help" align="left">
+        ¿Tienes problemas para acceder?<br>
+        Envía un correo electrónico a: <a href="mailto:ms724472@iteso.mx">ms724472@iteso.mx</a>&nbsp;<br>
+        </p>
+        <p align="center"><a href="https://apps.iteso.mx/AdminCuentas-web" target="_blank" class="custom-link">¿Deseas cambiar tu contraseña?</a></p>
+        <p align="right"><a href="https://datospersonales.iteso.mx/" target="_blank" class="custom-link">Aviso de privacidad</a>&nbsp;&nbsp;&nbsp;</p>
+    </div>
+  </div>
+  <div class="wrapper">
+  </div>
+    <div id="page-footer">
+        <p>
+        <br/><br/>
+        Copyright © 2019.
+    <a href="mailto: ms724472@iteso.mx">ms724472@iteso.mx</a></p>
+    </div>
 </div>

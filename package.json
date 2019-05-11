@@ -1,17 +1,16 @@
 {
-  "name": "SISVAN",
+  "name": "oraclejet-app",
   "version": "1.0.0",
-  "description": "An Oracle JavaScript Extension Toolkit(JET) web app",
-  "dependencies": {
-    "@oracle/oraclejet": "~6.2.0"
+  "description": "A sample Oracle JavaScript Extension Toolkit (JET) web app",
+  "author": {
+    "name": "Oracle Jet Team"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
-    "@oracle/grunt-oraclejet": "~6.2.0",
+    "grunt-bowercopy": "1.2.4",
+    "grunt-oraclejet": "~2.2.0",
     "load-grunt-config": "0.19.2",
-    "@oracle/oraclejet-tooling": "~6.2.0",
-    "qunit-reporter-junit": "^1.1.1",
-    "qunit": "^2.4.1"
+    "oraclejet-tooling": "~2.2.0"
   },
   "engines": {
     "node": ">=0.10.0"
