@@ -47,10 +47,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                 return;
             });
             
-            
-            
-            
-            
+            document.body.style.background = "white";
             self.router = oj.Router.rootInstance;
             self.router.configure({
                 'dashboard': {label: 'Dashboard', isDefault: true},
