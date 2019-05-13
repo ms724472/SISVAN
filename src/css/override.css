@@ -118,3 +118,21 @@ body{
     bottom: -20px;
     color: #777;
 }
+
+#imagen-home{
+    content:url("images/fondo_home.png");
+}
+
+#curvas-oms{
+    content:url("images/curvas_oms.png");
+    width: 435px;
+}
+
+.separador{
+    width: 50px;
+}
+
+#tablas-nutricionales{
+    content:url("images/tablas_nutricionales.png");
+    width: 200px;
+}

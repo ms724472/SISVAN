@@ -3,24 +3,18 @@
  The Universal Permissive License (UPL), Version 1.0
 -->
 <div class="oj-panel oj-margin">
-    <h3 class="oj-header-border">Incident info</h3>
+    <h3 class="oj-header-border">Evaluación del estudiante</h3>
     <div class="oj-form-layout">
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
             <div class="oj-flex">
                 <div class="oj-flex-item">
-                    <label for="num1" data-bind="text: $parent.incidentNumber"/>
+                    <label for="num1">
+                        N&uacute;mero de estudiante:
+                    </label>
                 </div>
                 <div class="oj-flex-item">
                     <input id="num1" data-bind="ojComponent: {component: 'ojInputNumber', 
                                                           max:100,min:1,step:1}"/>
-                </div>
-            </div>
-            <div class="oj-flex">
-                <div class="oj-flex-item">
-                    <label for="date1" data-bind="text: $parent.dueDate"/>
-                </div>
-                <div class="oj-flex-item">
-                    <input id="date1" data-bind="ojComponent: {component: 'ojInputDate'}"/>
                 </div>
             </div>
         </div>
