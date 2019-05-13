@@ -15,7 +15,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
     */
     function LoginContentViewModel() {
         var self = this;
-        self.username = ko.observable("abaranovskis@redsamuraiconsulting.com");
+        self.username = ko.observable("ms724472@iteso.mx");
         self.password = ko.observable("welcome1");
         self.tracker = ko.observable();
         
@@ -24,6 +24,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
             if (!this._showComponentValidationErrors(trackerObj)) {
                 return;
             }
+            
+            var userName = document.getElementById("username").value;
+            var passWord = document.getElementById("password").value;
+            var bodyRequest = { usuario:userName, contrasenia:passWord };
+            $.ajax({type: "POST",
+             contentType: "text/plain; charset=utf-8",
+             url: "https://sisvan-iteso.dynu.net/SISVANWS/rest/wls/1.0/auth/getSession",
+             dataType: "text",
+             data: JSON.stringify(bodyRequest).replace(/]|[[]/g,''),
+             success: function(data, textStatus){
+                 alert('jalo');
+             }
+            }).fail( function(data){
+                alert("Error en el servidor, favor de comunicarse con el administrador 2. " + JSON.stringify(data));
+                return;
+            });
+            
+            
+            
+            
             
             self.router = oj.Router.rootInstance;
             self.router.configure({
@@ -50,7 +70,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
             rootViewModel.userLogin(self.username());
             rootViewModel.isLoggedIn('true');
             rootViewModel.restSessionId("");
-                    
+
             self.username(null);
             self.password(null);
 

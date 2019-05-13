@@ -120,6 +120,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             
             break;
           case "out":
+            document.body.style.background = "url(\"../css/images/fondo_login.jpg\")";
             self.userLogin("");
             self.isLoggedIn(false);
             self.restSessionId("");
