@@ -34,10 +34,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
              dataType: "text",
              data: JSON.stringify(bodyRequest).replace(/]|[[]/g,''),
              success: function(data, textStatus){
-                 alert('jalo');
+                 json = $.parseJSON(data);
+                 if(json.hasOwnProperty("error")){
+                     alert('Error de autenticación, por favor revisa tus datos.');
+                     return;
+                 }else{
+                     self.username(json.nombre);
+                 }
              }
             }).fail( function(data){
-                alert("Error en el servidor, favor de comunicarse con el administrador 2. " + JSON.stringify(data));
+                alert("Error en el servidor, favor de comunicarse con el administrador. " + JSON.stringify(data));
                 return;
             });
             
