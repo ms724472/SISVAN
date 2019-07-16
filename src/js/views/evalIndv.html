@@ -8,13 +8,16 @@
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
             <div class="oj-flex">
                 <div class="oj-flex-item">
-                    <label for="num1">
+                    <label for="idAlumno">
                         N&uacute;mero de estudiante:
                     </label>
                 </div>
                 <div class="oj-flex-item">
-                    <input id="num1" data-bind="ojComponent: {component: 'ojInputNumber', 
+                    <input id="idAlumno" data-bind="ojComponent: {component: 'ojInputText', 
                                                           max:100,min:1,step:1}"/>
+                    <button id="buscarAlumno" data-bind="click: obtenerInfo,
+                                                    ojComponent: {component: 'ojButton', 
+                                                          label: 'Buscar'}"/>
                 </div>
             </div>
         </div>

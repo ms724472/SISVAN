@@ -67,6 +67,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
         // Implement if needed
       };
     }
+    
+    self.obtenerInfo = function () {
+        var bodyRequest = {};
+        $.ajax({type: "POST",
+            contentType: "text/plain; charset=utf-8",
+            url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+            dataType: "text",
+            data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+            async: false,
+            success: function (data) {
+                json = $.parseJSON(data);
+                if (json.hasOwnProperty("error")) {
+                    alert('Error de autenticación, por favor revisa tus datos.');
+                    return;
+                } else {
+                    alert("Se obtuvo satisfactoriamente: " + json.id_alumno);
+                }
+            }
+        }).fail(function () {
+            alert("Error en el servidor, favor de comunicarse con el administrador.");
+            return;
+        });
+    }
 
     /*
      * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
