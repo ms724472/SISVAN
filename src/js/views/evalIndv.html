@@ -21,5 +21,12 @@
                 </div>
             </div>
         </div>
+        <oj-table id='tablaDatosAlumnos'
+                  aria-label='Datos del Alumno'
+                  data='[[origenDatosAlumnos]]'
+                  columns='{{nombresColumnas}}'
+                  style='width: 100%;'
+                  dnd.reorder.columns='enabled'>
+        </oj-table>
     </div>
 </div>

@@ -5,9 +5,22 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource', 'ojs/ojtable'],
  function(oj, ko, $) {
-  
+    self.nombresColumnas = ko.observableArray ([
+        {headerText: 'Nombre(s)', field: 'nombre' },
+        {headerText: 'Apellido Paterno', field: 'apellido_p'},
+        {headerText: 'Apellido Materno', field: 'apellido_m'},
+        {headerText: 'Sexo', field: 'sexo'},
+        {headerText: 'Fecha nacimiento', field: 'fecha_nac'},
+    ]);
+    
+    self.origenDatosAlumnos = ko.observable();
+    
+    var datos  = '{"NoData":""}';
+    datos = JSON.parse("["+datos+"]");
+    self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
+    
     function IncidentsViewModel() {
       var self = this;
       
@@ -69,10 +82,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
     }
     
     self.obtenerInfo = function () {
-        var bodyRequest = {};
+        datos  = '{"NoData":""}';
+        datos = JSON.parse("["+datos+"]");
+    
+        self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
+        
+        var idAlumno = document.getElementById("idAlumno").value;
+        var bodyRequest = { id_alumno: idAlumno };
         $.ajax({type: "POST",
             contentType: "text/plain; charset=utf-8",
-            url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+            url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerDatos",
             dataType: "text",
             data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
             async: false,
@@ -82,7 +101,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                     alert('Error de autenticación, por favor revisa tus datos.');
                     return;
                 } else {
-                    alert("Se obtuvo satisfactoriamente: " + json.id_alumno);
+                    self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
                 }
             }
         }).fail(function () {
