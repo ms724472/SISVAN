@@ -15,7 +15,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         {headerText: 'Fecha nacimiento', field: 'fecha_nac'},
         {headerText: 'Escuela', field: 'escuela'},
         {headerText: 'Grado', field: 'grado'},
-        {headerText: 'Grupo', field: 'grupo'}
+        {headerText: 'Grupo', field: 'letra'}
     ]);
     
     self.origenDatosAlumnos = ko.observable();
