@@ -10,29 +10,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
  function(oj, ko, $) {
      self.dataProvider = ko.observable();
      self.orientationValue = ko.observable();
-     var quarterData = '[' +
-      '{' +
-        '"id": 0,' +
-        '"series": "Series 1",' +
-        '"quarter": "Q1",' +
-        '"value": 1.27' +
-      '},' + 
-      '{' +
-        '"id": 1,' +
-        '"series": "Series 1",' +
-        '"quarter": "Q2",' +
-        '"value": 1.39' +
-      '},' +
-      '{' +
-        '"id": 2,' +
-        '"series": "Series 1",' +
-        '"quarter": "Q3",' +
-        '"value": 1.42' +
-      '}]';
+     self.mediciones = '{"NoData":""}';
+     
      function ChartModel() {
           /* toggle button variables */
           this.orientationValue = ko.observable('vertical');
-          this.dataProvider = new oj.ArrayDataProvider(JSON.parse(quarterData), { keyAttributes: 'id' });
+          this.dataProvider = new oj.ArrayDataProvider(JSON.parse(mediciones), { keyAttributes: 'id' });
         }
   
         var chartModel = new ChartModel();
@@ -140,6 +123,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             alert("Error en el servidor, favor de comunicarse con el administrador.");
             return;
         });
+        
+        $.ajax({type: "POST",
+            contentType: "text/plain; charset=utf-8",
+            url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+            dataType: "text",
+            data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+            async: false,
+            success: function (data) {
+                json = $.parseJSON(data);
+                if (json.hasOwnProperty("error")) {
+                    alert('Error de autenticación, por favor revisa tus datos.');
+                    return;
+                } else {
+                    self.dataProvider(new oj.ArrayDataProvider(JSON.parse(mediciones), { keyAttributes: 'id' }));
+                }
+            }
+        }).fail(function () {
+            alert("Error en el servidor, favor de comunicarse con el administrador.");
+            return;
+        });
+        
         var element = $('#chart-container')[0]; 
         ko.cleanNode(element);
         ko.applyBindings(chartModel, document.getElementById('chart-container'));
