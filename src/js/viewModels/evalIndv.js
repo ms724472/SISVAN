@@ -136,7 +136,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert('Error de autenticación, por favor revisa tus datos.');
                     return;
                 } else {
-                    self.dataProvider(new oj.ArrayDataProvider(JSON.parse(json.mediciones), { keyAttributes: 'id' }));
+                    self.dataProvider(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
                 }
             }
         }).fail(function () {
