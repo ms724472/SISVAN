@@ -10,7 +10,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
  function(oj, ko, $) {
      self.dataProvider = ko.observable();
      self.orientationValue = ko.observable();
-     self.mediciones = '{"NoData":""}';
+     self.mediciones = '[{"NoData":""}]';
      
      function ChartModel() {
           /* toggle button variables */
