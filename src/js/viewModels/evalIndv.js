@@ -5,8 +5,37 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource', 'ojs/ojtable'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource', 
+    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout'],
  function(oj, ko, $) {
+     self.dataProvider = ko.observable();
+     self.orientationValue = ko.observable();
+     var quarterData = '[' +
+      '{' +
+        '"id": 0,' +
+        '"series": "Series 1",' +
+        '"quarter": "Q1",' +
+        '"value": 1.27' +
+      '},' + 
+      '{' +
+        '"id": 1,' +
+        '"series": "Series 1",' +
+        '"quarter": "Q2",' +
+        '"value": 1.39' +
+      '},' +
+      '{' +
+        '"id": 2,' +
+        '"series": "Series 1",' +
+        '"quarter": "Q3",' +
+        '"value": 1.42' +
+      '}]';
+     function ChartModel() {
+          /* toggle button variables */
+          this.orientationValue = ko.observable('vertical');
+          this.dataProvider = new oj.ArrayDataProvider(JSON.parse(quarterData), { keyAttributes: 'id' });
+        }
+  
+        var chartModel = new ChartModel();
     self.nombresColumnas = ko.observableArray ([
         {headerText: 'Nombre(s)', field: 'nombre' },
         {headerText: 'Apellido Paterno', field: 'apellido_p'},
@@ -111,7 +140,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             alert("Error en el servidor, favor de comunicarse con el administrador.");
             return;
         });
-    }
+        var element = $('#chart-container')[0]; 
+        ko.cleanNode(element);
+        ko.applyBindings(chartModel, document.getElementById('chart-container'));
+    };
 
     /*
      * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
