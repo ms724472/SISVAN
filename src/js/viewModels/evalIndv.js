@@ -143,10 +143,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             alert("Error en el servidor, favor de comunicarse con el administrador.");
             return;
         });
-        
-        var element = $('#chart-container')[0]; 
-        ko.cleanNode(element);
-        ko.applyBindings(chartModel, document.getElementById('chart-container'));
     };
 
     /*
