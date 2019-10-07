@@ -14,7 +14,7 @@
                 </oj-flex-item>
                 <oj-flex-item>
                     <oj-button id="guardarCambios">Guardar cambios</oj-button>
-                    <oj-button id="agregarMedicion">Agregar Medici&oacute;n</oj-button>
+                    <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">Agregar Medici&oacute;n</oj-button>
                     <oj-button id="agregarAlumno" on-oj-action="[[agregarAlumno]]">Agregar alumno</oj-button>
                 </oj-flex-item>
             </div>
@@ -26,7 +26,8 @@
                   style='width: 100%;'
                   dnd.reorder.columns='enabled'>
         </oj-table>
-        <div id='chart-container'>
+        <div class="oj-flex" style="width: 100%">
+        <oj-flex-item class="oj-sm-align-items-center" style="width: 50%">
             <oj-chart id="lineChart" 
                       type="line" 
                       data="[[dataProvider]]" 
@@ -43,10 +44,29 @@
             <!-- vertical/horizontal toggle button -->
             <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
             </demo-chart-orientation-control>
+        </oj-flex-item>
+        <oj-flex-item style="width: 50%">
+            <oj-chart id="lineChart" 
+                      type="line" 
+                      data="[[dataProvider]]" 
+                      animation-on-display="auto"
+                      animation-on-data-change="auto" 
+                      orientation="[[orientationValue]]"
+                      hover-behavior="dim"
+                      style="max-width:500px;width:100%;height:350px;">
+                <template slot="itemTemplate" data-oj-as="item">
+                    <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
+                    </oj-chart-item>
+                </template>
+            </oj-chart>
+            <!-- vertical/horizontal toggle button -->
+            <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
+            </demo-chart-orientation-control>
+        </oj-flex-item>
         </div>
     </div>
 </div>
-<oj-dialog style="display:none" id="modalDialog1" dialog-title="Agregar nuevo alumno">
+<oj-dialog style="display:none" id="dialogoNuevoAlumno" dialog-title="Agregar nuevo alumno">
     <div slot="body">
         <div class="oj-form-layout">
             <div class="oj-form">
@@ -79,7 +99,27 @@
         </div>
     </div>
     <div slot="footer">
-        <oj-button id="botonAgregarAlumno" on-oj-action="[[close]]">Agregar
-        </oj-button>
+        <oj-button id="botonAgregarAlumno" on-oj-action="[[cerrarNuevoAlumno]]">Agregar</oj-button>
+    </div>
+</oj-dialog>
+<oj-dialog style="display:none" id="dialogoNuevaMedicion" dialog-title="Agregar nueva medición">
+    <div slot="body">
+        <div class="oj-form-layout">
+            <div class="oj-form">
+                <div class="oj-flex>
+                    <oj-flex-item>
+                        <oj-label-inline for="nuevaFMedicion" >Fecha medicion:</oj-label-inline>
+                        <oj-input-date id="nuevaFMedicion"/>
+                        <oj-label-inline for="nuevaMasaMedicion" >Masa:</oj-label-inline>
+                        <oj-input-text id="nuevaMasaMedicion" required></oj-input-text>
+                        <oj-label-inline for="nuevaEstaturaMedicion" >Estatura:</oj-label-inline>
+                        <oj-input-text id="nuevaEstaturaMedicion" required></oj-input-text>
+                    </oj-flex-item>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div slot="footer">
+        <oj-button id="botonAgregarMedicion" on-oj-action="[[cerrarNuevaMedicion]]">Agregar</oj-button>
     </div>
 </oj-dialog>

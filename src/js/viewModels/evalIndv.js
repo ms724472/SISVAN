@@ -147,11 +147,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.agregarAlumno = function () {
-                document.getElementById('modalDialog1').open();
+                document.getElementById('dialogoNuevoAlumno').open();
             };
 
-            this.close = function (event) {
-                document.getElementById('modalDialog1').close();
+            this.cerrarNuevoAlumno = function (event) {
+                document.getElementById('dialogoNuevoAlumno').close();
+            }
+            
+            self.agregarMedicion = function () {
+                document.getElementById('dialogoNuevaMedicion').open();
+            };
+            
+            this.cerrarNuevaMedicion = function(){
+                document.getElementById('dialogoNuevaMedicion').close();
             }
 
             /*
