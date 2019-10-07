@@ -107,7 +107,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var bodyRequest = {id_alumno: idAlumno};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerDatos",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerDatos",
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
@@ -127,7 +127,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
