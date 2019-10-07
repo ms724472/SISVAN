@@ -14,7 +14,7 @@
                 </oj-flex-item>
                 <oj-flex-item>
                     <oj-button id="guardarCambios">Guardar cambios</oj-button>
-                    <oj-button id="agregarAlumno">Agregar alumno</oj-button>
+                    <oj-button id="agregarAlumno" on-oj-action="[[agregarAlumno]]">Agregar alumno</oj-button>
                 </oj-flex-item>
             </div>
         </div>
@@ -27,29 +27,31 @@
         </oj-table>
         <div id='chart-container'>
             <oj-chart id="lineChart" 
-                type="line" 
-                data="[[dataProvider]]" 
-                animation-on-display="auto"
-                animation-on-data-change="auto" 
-                orientation="[[orientationValue]]"
-                hover-behavior="dim"
-                style="max-width:500px;width:100%;height:350px;">
-              <template slot="itemTemplate" data-oj-as="item">
-                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
-                </oj-chart-item>
-              </template>
+                      type="line" 
+                      data="[[dataProvider]]" 
+                      animation-on-display="auto"
+                      animation-on-data-change="auto" 
+                      orientation="[[orientationValue]]"
+                      hover-behavior="dim"
+                      style="max-width:500px;width:100%;height:350px;">
+                <template slot="itemTemplate" data-oj-as="item">
+                    <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
+                    </oj-chart-item>
+                </template>
             </oj-chart>
-          <!-- vertical/horizontal toggle button -->
+            <!-- vertical/horizontal toggle button -->
             <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
             </demo-chart-orientation-control>
-          </div>
+        </div>
     </div>
 </div>
-<oj-dialog id="dialogWithFooter" dialog-title="Dialog with Footer" style="width: 400px; min-width: 100px; max-width 500px;">
-   <div slot="body">
-      <p> Dialog Text
-   </div>
-   <div slot="footer">
-      <oj-button id="okButton"> OK </oj-button>
-   </div>
+<oj-dialog style="display:none" id="modalDialog1" dialog-title="Agregar nuevo alumno">
+    <div slot="body">
+        The dialog window can be moved, resized and closed with the 'x' icon.
+        Arbitrary content can be added to the the body and footer sections.
+    </div>
+    <div slot="footer">
+        <oj-button id="okButton" on-oj-action="[[close]]">OK
+        </oj-button>
+    </div>
 </oj-dialog>
