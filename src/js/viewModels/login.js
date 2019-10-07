@@ -25,41 +25,43 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                         return;
                     }
 
-                    var userName = document.getElementById("username").value;
-                    var passWord = document.getElementById("password").value;
-                    var bodyRequest = {usuario: userName, contrasenia: passWord};
-                    $.ajax({type: "POST",
-                        contentType: "text/plain; charset=utf-8",
-                        url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/auth/getSession",
-                        dataType: "text",
-                        data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
-                        async: false,
-                        success: function (data) {
-                            json = $.parseJSON(data);
-                            if (json.hasOwnProperty("error")) {
-                                alert('Error de autenticación, por favor revisa tus datos.');
-                                return;
-                            } else {
-                                self.loadContent(json.nombre);
-                            }
-                        }
-                    }).fail(function () {
-                        alert("Error en el servidor, favor de comunicarse con el administrador.");
-                        return;
-                    });
-                    
-                    if(window.location.href.includes("localhost")){
+                    if (window.location.href.includes("localhost")) {
                         self.loadContent("Debug");
+                        return;
+                    } else {
+                        var userName = document.getElementById("username").value;
+                        var passWord = document.getElementById("password").value;
+                        var bodyRequest = {usuario: userName, contrasenia: passWord};
+                        $.ajax({type: "POST",
+                            contentType: "text/plain; charset=utf-8",
+                            url: "https://sisvan-iteso.online/SISVANWS/rest/wls/1.0/auth/getSession",
+                            dataType: "text",
+                            data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+                            async: false,
+                            success: function (data) {
+                                json = $.parseJSON(data);
+                                if (json.hasOwnProperty("error")) {
+                                    alert('Error de autenticación, por favor revisa tus datos.');
+                                    return;
+                                } else {
+                                    self.loadContent(json.nombre);
+                                }
+                            }
+                        }).fail(function () {
+                            alert("Error en el servidor, favor de comunicarse con el administrador.");
+                            return;
+                        });
                     }
                 };
 
-                self.loadContent = function (username){
+                self.loadContent = function (username) {
                     self.username(username);
                     document.body.style.background = "white";
                     self.router = oj.Router.rootInstance;
                     self.router.configure({
                         'home': {label: 'Principal', isDefault: true},
                         'evalIndv': {label: 'Evaluaciones individuales'},
+                        'evalGrup': {label: 'Evaluaciones grupales'},
                         'estUtils': {label: 'Estadisticas útiles'},
                         'datEsc': {label: 'Datos escolares'}
                     });
@@ -70,10 +72,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-home-icon-24'},
                         {name: 'Evaluaciones individuales', id: 'evalIndv',
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-person-icon-24'},
+                        {name: 'Evaluaciones grupales', id: 'evalGrup',
+                            iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'},
                         {name: 'Estadisticas útiles', id: 'estUtils',
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
                         {name: 'Datos escolares', id: 'datEsc',
-                            iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'}
+                            iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}
                     ];
 
                     var rootViewModel = ko.dataFor(document.getElementById('mainContent'));

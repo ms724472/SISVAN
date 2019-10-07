@@ -3,19 +3,22 @@
  The Universal Permissive License (UPL), Version 1.0
 -->
 <div class="oj-panel oj-margin">
-    <h3 class="oj-header-border">Evaluación del alumno</h3>
-    <div class="oj-form-layout" style="width: 100%">
-        <div class="oj-form" style="width: 100%">
-            <div class="oj-flex oj-sm-justify-content-space-between" style="width: 100%">
-                <oj-flex-item style="width: 50%">
-                    <oj-label-inline for="idAlumno" >N&uacute;mero de estudiante:</oj-label-inline>
-                    <oj-input-text id="idAlumno" required></oj-input-text>
-                    <oj-button id="buscarAlumno" on-oj-action="[[obtenerInfo]]">Buscar</oj-button>
-                </oj-flex-item>
-                <oj-flex-item>
-                    <oj-button id="guardarCambios">Guardar cambios</oj-button>
-                    <oj-button id="agregarAlumno">Agregar alumno</oj-button>
-                </oj-flex-item>
+    <h3 class="oj-header-border">Evaluación del estudiante</h3>
+    <div class="oj-form-layout">
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+            <div class="oj-flex">
+                <div class="oj-flex-item">
+                    <label for="idAlumno">
+                        N&uacute;mero de estudiante:
+                    </label>
+                </div>
+                <div class="oj-flex-item">
+                    <input id="idAlumno" data-bind="ojComponent: {component: 'ojInputText', 
+                                                          max:100,min:1,step:1}"/>
+                    <button id="buscarAlumno" data-bind="click: obtenerInfo,
+                                                    ojComponent: {component: 'ojButton', 
+                                                          label: 'Buscar'}"/>
+                </div>
             </div>
         </div>
         <oj-table id='tablaDatosAlumnos'
@@ -45,11 +48,3 @@
           </div>
     </div>
 </div>
-<oj-dialog id="dialogWithFooter" dialog-title="Dialog with Footer" style="width: 400px; min-width: 100px; max-width 500px;">
-   <div slot="body">
-      <p> Dialog Text
-   </div>
-   <div slot="footer">
-      <oj-button id="okButton"> OK </oj-button>
-   </div>
-</oj-dialog>

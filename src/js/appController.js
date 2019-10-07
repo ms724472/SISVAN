@@ -98,7 +98,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                                     {name: 'Estadisticas útiles', id: 'estUtils',
                                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
                                     {name: 'Datos escolares', id: 'datEsc',
-                                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'}
+                                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}
                                 ];
                                 self.navDataSource.reset(navData, {idAttribute: 'id'});
                                 oj.Router.sync();
