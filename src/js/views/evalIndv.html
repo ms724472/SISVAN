@@ -4,11 +4,11 @@
 -->
 <div class="oj-panel oj-margin">
     <h3 class="oj-header-border">Evaluación del alumno</h3>
-    <div class="oj-form-layout" style="width: 100%">
-        <div class="oj-form" style="width: 100%">
+    <div class="oj-form-layout">
+        <div class="oj-form">
             <div class="oj-flex oj-sm-justify-content-space-between" style="width: 100%">
                 <oj-flex-item style="width: 50%">
-                    <oj-label-inline for="idAlumno" >N&uacute;mero de estudiante:</oj-label-inline>
+                    <oj-label-inline for="idAlumno" >N&uacute;mero de alumno</oj-label-inline>
                     <oj-input-text id="idAlumno" required></oj-input-text>
                     <oj-button id="buscarAlumno" on-oj-action="[[obtenerInfo]]">Buscar</oj-button>
                 </oj-flex-item>
@@ -47,11 +47,38 @@
 </div>
 <oj-dialog style="display:none" id="modalDialog1" dialog-title="Agregar nuevo alumno">
     <div slot="body">
-        The dialog window can be moved, resized and closed with the 'x' icon.
-        Arbitrary content can be added to the the body and footer sections.
+        <div class="oj-form-layout">
+            <div class="oj-form">
+                <div class="oj-flex>
+                    <oj-flex-item>
+                        <oj-label-inline for="nuevoIdAlumno" >N&uacute;mero:</oj-label-inline>
+                        <oj-input-text id="nuevoIdAlumno" required></oj-input-text>
+                        <oj-label-inline for="nuevoNombreAlumno" >Nombre(s):</oj-label-inline>
+                        <oj-input-text id="nuevoNombreAlumno" required></oj-input-text>
+                        <oj-label-inline for="nuevoApellidoPAlumno" >Apellido Paterno:</oj-label-inline>
+                        <oj-input-text id="nuevoApellidoPAlumno" required></oj-input-text>
+                        <oj-label-inline for="nuevoApellidoMAlumno" >Apellido Materno:</oj-label-inline>
+                        <oj-input-text id="nuevoApellidoMAlumno" required></oj-input-text>
+                        <oj-label-inline for="nuevoSexoAlumno" >Sexo:</oj-label-inline>
+                        <oj-select-one id="nuevoSexoAlumno" value="{{nuevoSexoAlumno}}" required>
+                            <oj-option value="Femenino">Femenino</oj-option>
+                            <oj-option value="Masculino">Masculino</oj-option>
+                        </oj-select-one>
+                        <oj-label-inline for="nuevoFNacimientoAlumno" >Fecha nacimiento:</oj-label-inline>
+                        <oj-input-date id="nuevoFNacimientoAlumno"/>
+                        <oj-label-inline for="nuevoEscuelaAlumno" >Escuela:</oj-label-inline>
+                        <oj-select-one id="nuevoEscuelaAlumno" value="{{nuevoEscuelaAlumno}}" required/>
+                        <oj-label-inline for="nuevoGradoAlumno" >Grado:</oj-label-inline>
+                        <oj-select-one id="nuevoGradoAlumno" value="{{nuevoGradoAlumno}}" required/>
+                        <oj-label-inline for="nuevoGrupoAlumno" >Grado:</oj-label-inline>
+                        <oj-select-one id="nuevoGrupoAlumno" value="{{nuevoGrupoAlumno}}" required/>
+                    </oj-flex-item>
+                </div>
+            </div>
+        </div>
     </div>
     <div slot="footer">
-        <oj-button id="okButton" on-oj-action="[[close]]">OK
+        <oj-button id="okButton" on-oj-action="[[close]]">Agregar
         </oj-button>
     </div>
 </oj-dialog>
