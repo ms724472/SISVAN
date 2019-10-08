@@ -7,7 +7,7 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
-    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata'],
+    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible'],
         function (oj, ko, $) {
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
@@ -32,12 +32,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 {headerText: 'Grado', field: 'grado'},
                 {headerText: 'Grupo', field: 'letra'}
             ]);
+            
+            self.columnasMediciones = ko.observableArray([
+                {headerText: 'Fecha medición', field: 'fecha'},
+                {headerText: 'Masa', field: 'masa'},
+                {headerText: 'Estatura', field: 'estatura'},
+                {headerText: 'Indice de Masa Coporal', field: 'imc'}
+            ]);
 
             self.origenDatosAlumnos = ko.observable();
+            self.origenDatosMediciones = ko.observable();
 
             var datos = '{"NoData":""}';
             datos = JSON.parse("[" + datos + "]");
             self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
+            self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
 
             function IncidentsViewModel() {
                 var self = this;
@@ -120,6 +129,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "POST",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+                    dataType: "text",
+                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('Error de autenticación, por favor revisa tus datos.');
+                            return;
+                        } else {
+                            self.origenDatosMediciones(new oj.ArrayTableDataSource(json.mediciones));
                         }
                     }
                 }).fail(function () {
