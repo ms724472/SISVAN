@@ -10,6 +10,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
     'ojs/ojdatetimepicker', 'ojs/ojtimezonedata'],
         function (oj, ko, $) {
             self.dataProvider = ko.observable();
+            self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
             self.mediciones = '[{"NoData":""}]';
 
@@ -17,6 +18,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 /* toggle button variables */
                 this.orientationValue = ko.observable('vertical');
                 this.dataProvider = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
+                this.datosEstatura = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
             }
 
             var chartModel = new ChartModel();
@@ -127,7 +129,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoMasa",
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
@@ -138,6 +140,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.dataProvider(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "POST",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoEstatura",
+                    dataType: "text",
+                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('Error de autenticación, por favor revisa tus datos.');
+                            return;
+                        } else {
+                            self.datosEstatura(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
                         }
                     }
                 }).fail(function () {
