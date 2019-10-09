@@ -6,7 +6,7 @@
  * Your customer ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber',
-    'ojs/ojinputtext'],
+    'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider'],
         function (oj, ko, $) {
             self.origenDatosZNinas = ko.observable();
             
