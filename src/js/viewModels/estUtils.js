@@ -18,8 +18,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                 function ChartModel() {
                     /* toggle button variables */
                     this.orientationValue = ko.observable('vertical');
-                    this.dataProvider = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
-                    this.datosEstatura = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
+                    var bodyRequest = {sexo: 'Femenino'};
+
+                    $.ajax({type: "POST",
+                        contentType: "text/plain; charset=utf-8",
+                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerPuntajesZ",
+                        dataType: "text",
+                        data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+                        async: false,
+                        success: function (data) {
+                            json = $.parseJSON(data);
+                            if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
+                                alert('Error de autenticación, por favor revisa tus datos.');
+                                return;
+                            } else {
+                                self.origenDatosZNinas(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                            }
+                        }
+                    }).fail(function () {
+                        alert("Error en el servidor, favor de comunicarse con el administrador.");
+                        return;
+                    });
                 }
 
                 var chartModel = new ChartModel();
@@ -35,27 +54,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                  * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
                  * the promise is resolved
                  */
-                var bodyRequest = {sexo: 'Femenino'};
-
-                $.ajax({type: "POST",
-                    contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerPuntajesZ",
-                    dataType: "text",
-                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
-                            alert('Error de autenticación, por favor revisa tus datos.');
-                            return;
-                        } else {
-                            self.origenDatosZNinas(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
-                        }
-                    }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
 
                 self.handleActivated = function (info) {
                     // Implement if needed
