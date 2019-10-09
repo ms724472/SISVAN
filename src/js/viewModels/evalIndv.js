@@ -259,7 +259,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById('dialogoNuevaMedicion').open();
             };
             
-            self.crearNuevaMedicionagregarMedicion = function () {
+            self.crearNuevaMedicion = function () {
                 document.getElementById('dialogoCargando').open();
                 var idAlumno = document.getElementById("idAlumno").value;
                 var fecha = document.getElementById("nuevaFMedicion").value;
