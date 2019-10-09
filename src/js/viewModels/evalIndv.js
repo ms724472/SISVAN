@@ -227,7 +227,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error") || json.status === 'fallo') {
+                        if (json.hasOwnProperty("error")) {
                             document.getElementById('dialogoCargando').close();
                             alert('Error, por favor revisa tus datos.');
                             return;
