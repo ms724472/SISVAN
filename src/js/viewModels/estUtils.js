@@ -11,8 +11,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
             function CustomerViewModel() {
                 var self = this;
                 self.origenDatosZNinas = ko.observable();
+                self.orientationValue = ko.observable();
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
+
+                function ChartModel() {
+                    /* toggle button variables */
+                    this.orientationValue = ko.observable('vertical');
+                    this.dataProvider = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
+                    this.datosEstatura = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
+                }
+
+                var chartModel = new ChartModel();
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
