@@ -253,12 +253,47 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
-                
             };
 
             self.agregarMedicion = function () {
                 document.getElementById('dialogoNuevaMedicion').open();
+            };
+            
+            self.crearNuevaMedicionagregarMedicion = function () {
+                document.getElementById('dialogoCargando').open();
+                var idAlumno = document.getElementById("idAlumno").value;
+                var fecha = document.getElementById("nuevaFMedicion").value;
+                var masa = document.getElementById("nuevaMasaMedicion").value;
+                var estatura = document.getElementById("nuevaEstaturaMedicion").value;
+                var bodyRequest = {id_alumno: idAlumno, 
+                                   fecha: fecha,
+                                   masa: masa,
+                                   estatura: estatura};
+                $.ajax({type: "POST",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/agregarMedicion",
+                    dataType: "text",
+                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            document.getElementById('dialogoCargando').close();
+                            alert('Error, por favor revisa tus datos.');
+                            return;
+                        } else {
+                            self.obtenerInfo();
+                            document.getElementById('nuevaFMedicion').close();
+                            document.getElementById('nuevaMasaMedicion').close();
+                            document.getElementById("nuevaEstaturaMedicion").value = '';
+                            alert('Agregado correctamente.');
+                        }
+                    }
+                }).fail(function () {
+                    document.getElementById('dialogoCargando').close();
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
             };
 
             this.cerrarNuevaMedicion = function () {
