@@ -11,6 +11,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
             function CustomerViewModel() {
                 var self = this;
                 self.origenDatosZNinas = ko.observable();
+                self.origenDatosZNinos = ko.observable();
                 self.orientationValue = ko.observable();
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -33,6 +34,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                                 return;
                             } else {
                                 self.origenDatosZNinas(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                            }
+                        }
+                    }).fail(function () {
+                        alert("Error en el servidor, favor de comunicarse con el administrador.");
+                        return;
+                    });
+                    
+                    bodyRequest = {sexo: 'Masculino'};
+
+                    $.ajax({type: "POST",
+                        contentType: "text/plain; charset=utf-8",
+                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerPuntajesZ",
+                        dataType: "text",
+                        data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
+                        async: false,
+                        success: function (data) {
+                            json = $.parseJSON(data);
+                            if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
+                                alert('Error de autenticación, por favor revisa tus datos.');
+                                return;
+                            } else {
+                                self.origenDatosZNinos(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
                             }
                         }
                     }).fail(function () {
