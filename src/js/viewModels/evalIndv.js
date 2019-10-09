@@ -283,8 +283,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.obtenerInfo();
-                            document.getElementById('nuevaFMedicion').close();
-                            document.getElementById('nuevaMasaMedicion').close();
+                            document.getElementById('dialogoCargando').close();
+                            document.getElementById('dialogoNuevaMedicion').close();
+                            document.getElementById('nuevaFMedicion').value = '';
+                            document.getElementById('nuevaMasaMedicion').value = '';
                             document.getElementById("nuevaEstaturaMedicion").value = '';
                             alert('Agregado correctamente.');
                         }
