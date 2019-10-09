@@ -8,10 +8,9 @@
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber',
     'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider'],
         function (oj, ko, $) {
-            self.origenDatosZNinas = ko.observable();
-            
             function CustomerViewModel() {
                 var self = this;
+                self.origenDatosZNinas = ko.observable();
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
