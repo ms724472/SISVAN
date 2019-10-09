@@ -124,7 +124,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
+                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
                             alert('Error de autenticación, por favor revisa tus datos.');
                             return;
                         } else {
@@ -144,7 +144,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
+                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
                             alert('Error de autenticación, por favor revisa tus datos.');
                             return;
                         } else {
@@ -164,7 +164,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
+                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
                             alert('Error de autenticación, por favor revisa tus datos.');
                             return;
                         } else {
@@ -184,7 +184,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
+                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
                             alert('Error de autenticación, por favor revisa tus datos.');
                             return;
                         } else {
@@ -240,7 +240,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             document.getElementById("nuevoNombreAlumno").value = '';
                             document.getElementById("nuevoApellidoPAlumno").value = '';
                             document.getElementById("nuevoApellidoMAlumno").value = '';
-                            document.getElementById("nuevoSexoAlumno").value = '';
+                            document.getElementById("nuevoSexoAlumno").value = 'Femenino';
                             document.getElementById("nuevoFNacimientoAlumno").value = '';
                             document.getElementById("nuevoEscuelaAlumno").value = '';
                             document.getElementById("nuevoGradoAlumno").value = '';
