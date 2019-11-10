@@ -19,13 +19,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                 function ChartModel() {
                     /* toggle button variables */
                     this.orientationValue = ko.observable('vertical');
-                    var bodyRequest = {sexo: 'Femenino'};
 
-                    $.ajax({type: "POST",
+                    $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerPuntajesZ",
+                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/estadisticas/obtenerPuntajesZMasa/Femenino",
                         dataType: "text",
-                        data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                         async: false,
                         success: function (data) {
                             json = $.parseJSON(data);
@@ -40,14 +38,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                         alert("Error en el servidor, favor de comunicarse con el administrador.");
                         return;
                     });
-                    
-                    bodyRequest = {sexo: 'Masculino'};
 
                     $.ajax({type: "POST",
                         contentType: "text/plain; charset=utf-8",
-                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerPuntajesZ",
+                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/estadisticas/obtenerPuntajesZMasa/Masculino",
                         dataType: "text",
-                        data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                         async: false,
                         success: function (data) {
                             json = $.parseJSON(data);

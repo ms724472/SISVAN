@@ -21,7 +21,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 this.datosEstatura = new oj.ArrayDataProvider(JSON.parse(mediciones), {keyAttributes: 'id'});
             }
 
-            var chartModel = new ChartModel();
             self.nombresColumnas = ko.observableArray([
                 {headerText: 'Nombre(s)', field: 'nombre'},
                 {headerText: 'Apellido Paterno', field: 'apellido_p'},
@@ -115,12 +114,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
 
                 var idAlumno = document.getElementById("idAlumno").value;
-                var bodyRequest = {id_alumno: idAlumno};
-                $.ajax({type: "POST",
+                $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerDatos",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerDatos/" + idAlumno,
                     dataType: "text",
-                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
@@ -136,11 +133,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     return;
                 });
 
-                $.ajax({type: "POST",
+                $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones/" + idAlumno,
                     dataType: "text",
-                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
@@ -156,11 +152,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     return;
                 });
 
-                $.ajax({type: "POST",
+                $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoMasa",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoMasa/" + idAlumno,
                     dataType: "text",
-                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
@@ -176,11 +171,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     return;
                 });
 
-                $.ajax({type: "POST",
+                $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoEstatura",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoEstatura/" + idAlumno,
                     dataType: "text",
-                    data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
