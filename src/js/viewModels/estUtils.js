@@ -39,7 +39,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                         return;
                     });
 
-                    $.ajax({type: "POST",
+                    $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
                         url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/estadisticas/obtenerPuntajesZMasa/Masculino",
                         dataType: "text",
