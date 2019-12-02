@@ -29,14 +29,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             return;
                         } else {
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                            self.obtenerPorcentajesEscolares();
                         }
                     }
                 }).fail(function () {
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
-                self.obtenerPorcentajesEscolares();
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
