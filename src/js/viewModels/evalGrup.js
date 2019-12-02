@@ -26,7 +26,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     return itemMapeado;
                 };
                 
-                var mapeoDatos = { mapeoCampos: mapeoCampos };
+                var mapeoDatos = { dataMapping: mapeoCampos };
                 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
