@@ -283,7 +283,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.seleccionarAlumno = function () {
-
+                var tabla = document.getElementById('tablaNombres');
+                var datos = '{"No se encontraron resultados":""}';
+                datos = JSON.parse("[" + datos + "]");
+                document.getElementById('idAlumno').value = tabla.currentRow.rowKey[0];
+                document.getElementById('nombreABuscar').value = '';
+                self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
+                document.getElementById('dialogoBuscarAlumno').close();
             };
 
             self.agregarMedicion = function () {
