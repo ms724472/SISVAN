@@ -7,7 +7,7 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
-    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible','ojs/ojprogress'],
+    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress'],
         function (oj, ko, $) {
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
@@ -40,11 +40,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             ]);
 
             self.origenDatosAlumnos = ko.observable();
+            self.origenDatosNombres = ko.observable();
             self.origenDatosMediciones = ko.observable();
 
             var datos = '{"NoData":""}';
             datos = JSON.parse("[" + datos + "]");
             self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
+            self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
 
             function IncidentsViewModel() {
@@ -195,6 +197,33 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById('dialogoNuevoAlumno').open();
             };
 
+            self.buscarAlumno = function () {
+                document.getElementById('dialogoBuscarAlumno').open();
+            };
+
+            self.encontrarAlumno = function () {
+                var nombreAlumno = document.getElementById("nombreABuscar").value;
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/buscarPorNombre/" + nombreAlumno,
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
+                            alert('No se encontro ningun alumno');
+                            return;
+                        } else {
+                            self.origenDatosNombres(new oj.ArrayTableDataSource(json.alumnos, {keyAttributes: 'id_alumno'}));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+            };
+
             this.cerrarNuevoAlumno = function (event) {
                 document.getElementById('dialogoNuevoAlumno').close();
             }
@@ -207,12 +236,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var apellido_m = document.getElementById("nuevoApellidoMAlumno").value;
                 var sexo = document.getElementById("nuevoSexoAlumno").value;
                 var fecha_nac = document.getElementById("nuevoFNacimientoAlumno").value;
-                var bodyRequest = {id_alumno: idAlumno, 
-                                   nombre: nombre,
-                                   apellido_p: apellido_p,
-                                   apellido_m: apellido_m,
-                                   sexo: sexo,
-                                   fecha_nac: fecha_nac};
+                var bodyRequest = {id_alumno: idAlumno,
+                    nombre: nombre,
+                    apellido_p: apellido_p,
+                    apellido_m: apellido_m,
+                    sexo: sexo,
+                    fecha_nac: fecha_nac};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/agregarAlumno",
@@ -249,20 +278,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 });
             };
 
+            self.seleccionarAlumno = function () {
+
+            };
+
             self.agregarMedicion = function () {
                 document.getElementById('dialogoNuevaMedicion').open();
             };
-            
+
             self.crearNuevaMedicion = function () {
                 document.getElementById('dialogoCargando').open();
                 var idAlumno = document.getElementById("idAlumno").value;
                 var fecha = document.getElementById("nuevaFMedicion").value;
                 var masa = document.getElementById("nuevaMasaMedicion").value;
                 var estatura = document.getElementById("nuevaEstaturaMedicion").value;
-                var bodyRequest = {id_alumno: idAlumno, 
-                                   fecha: fecha,
-                                   masa: masa,
-                                   estatura: estatura};
+                var bodyRequest = {id_alumno: idAlumno,
+                    fecha: fecha,
+                    masa: masa,
+                    estatura: estatura};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/agregarMedicion",

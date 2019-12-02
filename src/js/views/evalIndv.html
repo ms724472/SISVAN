@@ -10,6 +10,7 @@
                 <oj-flex-item style="width: 50%">
                     <oj-label-inline for="idAlumno" >N&uacute;mero de alumno</oj-label-inline>
                     <oj-input-text id="idAlumno" required></oj-input-text>
+                    <oj-button id="buscarAlumnoxNombre" on-oj-action="[[buscarAlumno]]">Avanzado</oj-button>
                     <oj-button id="buscarAlumno" on-oj-action="[[obtenerInfo]]">Buscar</oj-button>
                 </oj-flex-item>
                 <oj-flex-item>
@@ -159,5 +160,20 @@
     </div>
     <div slot="footer">
         <oj-button id="botonAgregarMedicion" on-oj-action="[[crearNuevaMedicion]]">Agregar</oj-button>
+    </div>
+</oj-dialog>
+<oj-dialog style="display:none;width: 350px;" id="dialogoBuscarAlumno" dialog-title="Encontrar alumno por nombre:">
+    <div slot="body">
+        <div class="oj-form-layout">
+            <oj-input-text style="width: 245px;" id="nombreABuscar" required></oj-input-text>
+            <oj-button id="buscarXNombre" on-oj-action="[[encontrarAlumno]]">Buscar</oj-button>
+            <oj-table columns='[{"headerText": "Nombre Completo", "field": "nombre_completo"}, 
+                                {"headerText": "Escuela de origen", "field": "nombre_escuela"}]'
+                      data='[[origenDatosNombres]]'>
+            </oj-table>
+        </div>
+    </div>
+    <div slot="footer">
+        <oj-button id="botonAgregarMedicion" on-oj-action="[[seleccionarAlumno]]">Seleccionar</oj-button>
     </div>
 </oj-dialog>
