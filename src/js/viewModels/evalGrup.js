@@ -40,7 +40,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             return;
                         } else {
                             var datosOriginales = new oj.ArrayDataProvider(json.escuelas, {keyAttributes: 'id_escuela'});
-                            self.origenDatosEscuelas(new oj.ListDataProvider(datosOriginales, {dataMapping: mapeoDatos}));
+                            self.origenDatosEscuelas(new oj.ListDataProviderView(datosOriginales, {dataMapping: mapeoDatos}));
                         }
                     }
                 }).fail(function () {
