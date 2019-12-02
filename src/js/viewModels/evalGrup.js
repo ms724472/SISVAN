@@ -51,6 +51,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             return;
                         } else {
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                            document.getElementById('seleccionadorEscuela').value = 1;
                             self.obtenerPorcentajesEscolares();
                         }
                     }
