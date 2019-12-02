@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'ojs/ojlistdataproviderview',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible'],
         function (oj, ko, $) {
             function IncidentsViewModel() {
@@ -15,18 +15,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
-                var mapeoCampos = function(item){
-                    var datos = item.data;
-                    var itemMapeado = {};
-                    itemMapeado.data = {};
-                    itemMapeado.data.label = datos.nombre;
-                    itemMapeado.data.value = datos.id_escuela;
-                    itemMapeado.metadata = { key: datos.id_escuela };
-                    
-                    return itemMapeado;
-                };
-                
-                var mapeoDatos = { dataMapping: mapeoCampos };
                 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
@@ -39,8 +27,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             alert('No se encontro ninguna escuela');
                             return;
                         } else {
-                            var datosOriginales = new oj.ArrayDataProvider(json.escuelas, {keyAttributes: 'id_escuela'});
-                            self.origenDatosEscuelas = new oj.ListDataProviderView(datosOriginales, {dataMapping: mapeoDatos});
+                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
                         }
                     }
                 }).fail(function () {
