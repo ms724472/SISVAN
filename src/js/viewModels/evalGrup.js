@@ -16,9 +16,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
-                self.obtenerPorcentajesEscolares = function () {
-                    var idEscuela = document.getElementById('seleccionadorEscuela').value;
-                    
+                self.obtenerPorcentajesEscolares = function (idEscuela) {
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
                         url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escolares/obtenerPorcentajesEscuela/" + idEscuela,
@@ -51,8 +49,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             return;
                         } else {
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
-                            document.getElementById('seleccionadorEscuela').value = 1;
-                            self.obtenerPorcentajesEscolares();
+                            self.obtenerPorcentajesEscolares(1);
                         }
                     }
                 }).fail(function () {
