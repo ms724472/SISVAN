@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'ojs/ojlistdataproviderview'
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'ojs/ojlistdataproviderview',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible'],
         function (oj, ko, $) {
             function IncidentsViewModel() {
