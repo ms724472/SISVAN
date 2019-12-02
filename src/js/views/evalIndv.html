@@ -162,14 +162,17 @@
         <oj-button id="botonAgregarMedicion" on-oj-action="[[crearNuevaMedicion]]">Agregar</oj-button>
     </div>
 </oj-dialog>
-<oj-dialog style="display:none;width: 350px;" id="dialogoBuscarAlumno" dialog-title="Encontrar alumno por nombre:">
+<oj-dialog style="display:none;width: 700px;" id="dialogoBuscarAlumno" dialog-title="Encontrar alumno por nombre:">
     <div slot="body">
         <div class="oj-form-layout">
             <oj-input-text style="width: 245px;" id="nombreABuscar" required></oj-input-text>
             <oj-button id="buscarXNombre" on-oj-action="[[encontrarAlumno]]">Buscar</oj-button>
-            <oj-table columns='[{"headerText": "Nombre Completo", "field": "nombre_completo"}, 
+            <oj-table columns='[{"headerText": "Numero de alumno", "field": "id_alumno", "style":"display:none;", "headerStyle":"display:none;"},
+                                {"headerText": "Nombre Completo", "field": "nombre_completo"}, 
                                 {"headerText": "Escuela de origen", "field": "nombre_escuela"}]'
-                      data='[[origenDatosNombres]]'>
+                      data='[[origenDatosNombres]]'
+                      selection-mode='{"row":"single"}'
+                      style="display:block;">
             </oj-table>
         </div>
     </div>

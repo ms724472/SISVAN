@@ -203,6 +203,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.encontrarAlumno = function () {
                 var nombreAlumno = document.getElementById("nombreABuscar").value;
+                var datos = '{"No se encontraron resultados":""}';
+                datos = JSON.parse("[" + datos + "]");
                 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
@@ -214,6 +216,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
                             alert('No se encontro ningun alumno');
                             return;
+                        } else if(json.error === "No hay datos."){
+                            self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
                         } else {
                             self.origenDatosNombres(new oj.ArrayTableDataSource(json.alumnos, {keyAttributes: 'id_alumno'}));
                         }
