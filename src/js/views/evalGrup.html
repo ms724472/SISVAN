@@ -3,48 +3,17 @@
  The Universal Permissive License (UPL), Version 1.0
 -->
 <div class="oj-panel oj-margin">
-    <h3 class="oj-header-border">Evaluación del estudiante</h3>
+    <h3 class="oj-header-border">Evaluaciones grupales</h3>
     <div class="oj-form-layout">
-        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
-            <div class="oj-flex">
-                <div class="oj-flex-item">
-                    <label for="idAlumno">
-                        N&uacute;mero de estudiante:
-                    </label>
-                </div>
-                <div class="oj-flex-item">
-                    <input id="idAlumno" data-bind="ojComponent: {component: 'ojInputText', 
-                                                          max:100,min:1,step:1}"/>
-                    <button id="buscarAlumno" data-bind="click: obtenerInfo,
-                                                    ojComponent: {component: 'ojButton', 
-                                                          label: 'Buscar'}"/>
-                </div>
-            </div>
+        <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
+            <oj-collapsible>
+                <h3 slot="header">Evaluación escolar</h3>
+                <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
+                <oj-select-one id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one>
+            </oj-collapsible>
+            <oj-collapsible>
+                <h3 slot="header">Evaluación grupal</h3>
+            </oj-collapsible>
         </div>
-        <oj-table id='tablaDatosAlumnos'
-                  aria-label='Datos del Alumno'
-                  data='[[origenDatosAlumnos]]'
-                  columns='{{nombresColumnas}}'
-                  style='width: 100%;'
-                  dnd.reorder.columns='enabled'>
-        </oj-table>
-        <div id='chart-container'>
-            <oj-chart id="lineChart" 
-                type="line" 
-                data="[[dataProvider]]" 
-                animation-on-display="auto"
-                animation-on-data-change="auto" 
-                orientation="[[orientationValue]]"
-                hover-behavior="dim"
-                style="max-width:500px;width:100%;height:350px;">
-              <template slot="itemTemplate" data-oj-as="item">
-                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
-                </oj-chart-item>
-              </template>
-            </oj-chart>
-          <!-- vertical/horizontal toggle button -->
-            <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
-            </demo-chart-orientation-control>
-          </div>
     </div>
 </div>
