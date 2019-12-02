@@ -9,7 +9,28 @@
             <oj-collapsible>
                 <h3 slot="header">Evaluación escolar</h3>
                 <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
-                <oj-select-one style="width: 500px;"id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one>
+                <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one>
+                <div id='chart-container'>
+                    <oj-chart id="pieChart"
+                              type="pie" 
+                              data="[[porcentajesEscuelas]]"
+                              animation-on-display="auto"
+                              animation-on-data-change="auto"
+                              hover-behavior="dim"
+                              style="max-width:500px;width:100%;height:350px;">
+
+                        <template slot='itemTemplate' data-oj-as='item'>
+                            <oj-chart-item 
+                                value='[[item.data.valor]]'
+                                group-id='[[ [item.data.escuela] ]]'
+                                series-id='[[item.data.serie]]'> 
+                            </oj-chart-item>
+                        </template>
+                    </oj-chart>
+                    <!-- 2D/3D toggle button -->
+                    <demo-chart-three-d-effect-control id="threeDControl" three-d-effect="{{threeDValue}}" aria-controls="pieChart">
+                    </demo-chart-three-d-effect-control>
+                </div>
             </oj-collapsible>
             <oj-collapsible>
                 <h3 slot="header">Evaluación grupal</h3>

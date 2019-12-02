@@ -12,10 +12,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 var self = this;
                 self.origenDatosEscuelas = ko.observable();
                 self.escuelaSeleccionada = ko.observable();
+                self.porcentajesEscuelas = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
@@ -34,7 +35,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-
+                
+                self.obtenerPorcentajesEscolares();
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
@@ -87,6 +89,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                  */
                 self.handleDetached = function (info) {
                     // Implement if needed
+                };
+
+                self.obtenerPorcentajesEscolares = function () {
+                    var idEscuela = document.getElementById('seleccionadorEscuela').value;
+                    
+                    $.ajax({type: "GET",
+                        contentType: "text/plain; charset=utf-8",
+                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escolares/obtenerPorcentajesEscuela/" + idEscuela,
+                        dataType: "text",
+                        async: false,
+                        success: function (data) {
+                            json = $.parseJSON(data);
+                            if (json.hasOwnProperty("error")) {
+                                alert('No se encontro ningun dato, contacte al administrador.');
+                                return;
+                            } else {
+                                self.porcentajesEscuelas(new oj.ArrayDataProvider(json.datos));
+                            }
+                        }
+                    }).fail(function () {
+                        alert("Error en el servidor, favor de comunicarse con el administrador.");
+                        return;
+                    });
                 };
             }
 
