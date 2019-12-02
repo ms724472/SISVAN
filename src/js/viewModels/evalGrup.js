@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'ojs/ojlistdataproviderview'
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible'],
         function (oj, ko, $) {
             function IncidentsViewModel() {
@@ -15,6 +15,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
+                var mapeoCampos = function(item){
+                    var datos = item.data;
+                    var itemMapeado = {};
+                    itemMapeado.data = {};
+                    itemMapeado.data.label = datos.nombre;
+                    itemMapeado.data.value = datos.id_escuela;
+                    itemMapeado.metadata = { key: datos.id_escuela };
+                    
+                    return itemMapeado;
+                };
+                
+                var mapeoDatos = { mapeoCampos: mapeoCampos };
+                
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
@@ -26,7 +39,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             alert('No se encontro ninguna escuela');
                             return;
                         } else {
-                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas, {keyAttributes: 'id_escuela'}));
+                            var datosOriginales = new oj.ArrayDataProvider(json.escuelas, {keyAttributes: 'id_escuela'});
+                            self.origenDatosEscuelas(new oj.ListDataProvider(datosOriginales, {dataMapping: mapeoDatos}));
                         }
                     }
                 }).fail(function () {
