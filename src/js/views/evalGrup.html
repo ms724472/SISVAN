@@ -10,6 +10,7 @@
                 <h3 slot="header">Evaluación escolar</h3>
                 <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
                 <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one>
+                <oj-button id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
                 <div id='chart-container'>
                     <oj-chart id="pieChart"
                               type="pie" 

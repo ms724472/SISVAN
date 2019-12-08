@@ -55,26 +55,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
             self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
-            
+
             $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ninguna escuela');
-                            return;
-                        } else {
-                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
-                        }
+                contentType: "text/plain; charset=utf-8",
+                url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
+                dataType: "text",
+                async: false,
+                success: function (data) {
+                    json = $.parseJSON(data);
+                    if (json.hasOwnProperty("error")) {
+                        alert('No se encontro ninguna escuela');
+                        return;
+                    } else {
+                        self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
                     }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
-            
+                }
+            }).fail(function () {
+                alert("Error en el servidor, favor de comunicarse con el administrador.");
+                return;
+            });
+
             function IncidentsViewModel() {
                 var self = this;
 
@@ -231,7 +231,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var nombreAlumno = document.getElementById("nombreABuscar").value;
                 var datos = '{"No se encontraron resultados":""}';
                 datos = JSON.parse("[" + datos + "]");
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/buscarPorNombre/" + nombreAlumno,
@@ -242,7 +242,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
                             alert('No se encontro ningun alumno');
                             return;
-                        } else if(json.error === "No hay datos."){
+                        } else if (json.error === "No hay datos.") {
                             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
                         } else {
                             self.origenDatosNombres(new oj.ArrayTableDataSource(json.alumnos, {keyAttributes: 'id_alumno'}));
@@ -328,6 +328,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var fecha = document.getElementById("nuevaFMedicion").value;
                 var masa = document.getElementById("nuevaMasaMedicion").value;
                 var estatura = document.getElementById("nuevaEstaturaMedicion").value;
+                var perimetro_cuella = document.getElementById("nuevaPerimetroCuelloMedicion").value;
+                var cintura = document.getElementById("nuevaCinturaMedicion").value;
+                var triceps = document.getElementById("nuevaTricepsMedicion").value;
+                var subEscapula = document.getElementById("nuevaSubescapulaMedicion").value;
+                var pliegueCuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
                 var bodyRequest = {id_alumno: idAlumno,
                     fecha: fecha,
                     masa: masa,

@@ -56,6 +56,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
+                
+                self.generarGraficaEscuela  = function () {
+                   self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value);
+                }; 
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
