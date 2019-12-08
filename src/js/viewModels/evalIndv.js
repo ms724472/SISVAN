@@ -33,15 +33,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             ]);
 
             self.columnasMediciones = ko.observableArray([
-                {headerText: 'Fecha medición', field: 'fecha', style: 'text-align: right;'},
-                {headerText: 'Masa', field: 'masa', style: 'text-align: right;'},
-                {headerText: 'Estatura', field: 'estatura', style: 'text-align: right;'},
-                {headerText: 'Indice de Masa Coporal', field: 'imc', style: 'text-align: right;'},
-                {headerText: 'Perimetro del Cuello', field: 'perimetro_cuello', style: 'text-align: right;'},
-                {headerText: 'Cintura', field: 'cintura', style: 'text-align: right;'},
-                {headerText: 'Triceps', field: 'triceps', style: 'text-align: right;'},
-                {headerText: 'Subescapula', field: 'subescapula', style: 'text-align: right;'},
-                {headerText: 'Pliegue del Cuello', field: 'pliegue_cuello', style: 'text-align: right;'}
+                {headerText: 'Fecha medición', field: 'fecha', sortable: 'enabled'},
+                {headerText: 'Masa', field: 'masa', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Estatura', field: 'estatura', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Indice de Masa Coporal', field: 'imc', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Perimetro del Cuello', field: 'perimetro_cuello', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Cintura', field: 'cintura', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Triceps', field: 'triceps', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Subescapula', field: 'subescapula', style: 'text-align: right;', sortable: 'enabled'},
+                {headerText: 'Pliegue del Cuello', field: 'pliegue_cuello', style: 'text-align: right;', sortable: 'enabled'}
             ]);
 
             self.origenDatosAlumnos = ko.observable();
