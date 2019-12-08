@@ -13,6 +13,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.origenDatosEscuelas = ko.observable();
                 self.escuelaSeleccionada = ko.observable();
                 self.porcentajesEscuelas = ko.observable();
+                self.origenDatosGrupos = ko.observable();
+                self.origenDatosGrupo1 = ko.observable();
+                self.origenDatosGrupo2 = ko.observable();
+                self.origenDatosGrupo3 = ko.observable();
+                self.origenDatosGrupo4 = ko.observable();
+                self.origenDatosGrupo5 = ko.observable();
+                self.origenDatosGrupo6 = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -56,6 +63,144 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/1",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ningun grupo');
+                            return;
+                        } else {
+                            self.origenDatosGrupos(new oj.ArrayDataProvider(json.grupos));
+                            self.origenDatosGrupo1(new oj.ArrayDataProvider(json.grupos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/2",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ningun grupo');
+                            return;
+                        } else {
+                            self.origenDatosGrupo2(new oj.ArrayDataProvider(json.grupos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/3",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ningun grupo');
+                            return;
+                        } else {
+                            self.origenDatosGrupo3(new oj.ArrayDataProvider(json.grupos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/4",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ningun grupo');
+                            return;
+                        } else {
+                            self.origenDatosGrupo4(new oj.ArrayDataProvider(json.grupos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/5",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ningun grupo');
+                            return;
+                        } else {
+                            self.origenDatosGrupo5(new oj.ArrayDataProvider(json.grupos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/6",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ningun grupo');
+                            return;
+                        } else {
+                            self.origenDatosGrupo6(new oj.ArrayDataProvider(json.grupos));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+                
+                self.cambioEscuela = function () {
+                    switch(document.getElementById('seleccionadorEscuela').value){
+                        case 1:
+                            self.origenDatosGrupos(self.origenDatosGrupo1());
+                        break;
+                        case 2:
+                            self.origenDatosGrupos(self.origenDatosGrupo2());
+                        break;
+                        case 3:
+                            self.origenDatosGrupos(self.origenDatosGrupo3());
+                        break;
+                        case 4:
+                            self.origenDatosGrupos(self.origenDatosGrupo4());
+                        break;
+                        case 5:
+                            self.origenDatosGrupos(self.origenDatosGrupo5());
+                        break;
+                        case 6:
+                            self.origenDatosGrupos(self.origenDatosGrupo6());
+                        break;
+                    }
+                };
                 
                 self.generarGraficaEscuela  = function () {
                    self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value);
