@@ -167,7 +167,8 @@
         <div class="oj-form-layout">
             <oj-input-text style="width: 245px;" id="nombreABuscar" required></oj-input-text>
             <oj-button id="buscarXNombre" on-oj-action="[[encontrarAlumno]]">Buscar</oj-button>
-            <oj-table columns='[{"headerText": "Numero de alumno", "field": "id_alumno", "style":"display:none;", "headerStyle":"display:none;"},
+            <oj-table id="tablaNombres"
+                      columns='[{"headerText": "Numero de alumno", "field": "id_alumno", "style":"display:none;", "headerStyle":"display:none;"},
                                 {"headerText": "Nombre Completo", "field": "nombre_completo"}, 
                                 {"headerText": "Escuela de origen", "field": "nombre_escuela"}]'
                       data='[[origenDatosNombres]]'

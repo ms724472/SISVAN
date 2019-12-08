@@ -36,7 +36,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 {headerText: 'Fecha medición', field: 'fecha'},
                 {headerText: 'Masa', field: 'masa'},
                 {headerText: 'Estatura', field: 'estatura'},
-                {headerText: 'Indice de Masa Coporal', field: 'imc'}
+                {headerText: 'Indice de Masa Coporal', field: 'imc'},
+                {headerText: 'Perimetro del Cuello', field: 'perimetro_cuello'},
+                {headerText: 'Cintura', field: 'cintura'},
+                {headerText: 'Triceps', field: 'triceps'},
+                {headerText: 'Subescapula', field: 'subescapula'},
+                {headerText: 'Pliegue del Cuello', field: 'pliegue_cuello'}
             ]);
 
             self.origenDatosAlumnos = ko.observable();
