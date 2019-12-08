@@ -34,14 +34,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.columnasMediciones = ko.observableArray([
                 {headerText: 'Fecha medición', field: 'fecha', sortable: 'disabled'},
-                {headerText: 'Masa', field: 'masa', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Estatura', field: 'estatura', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Indice de Masa Coporal', field: 'imc', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Perimetro del Cuello', field: 'perimetro_cuello', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Cintura', field: 'cintura', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Triceps', field: 'triceps', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Subescapula', field: 'subescapula', style: 'text-align: right;', sortable: 'disabled'},
-                {headerText: 'Pliegue del Cuello', field: 'pliegue_cuello', style: 'text-align: right;', sortable: 'disabled'}
+                {headerText: 'Masa', field: 'masa', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Estatura', field: 'estatura', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Indice de Masa Coporal', field: 'imc', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Perimetro del Cuello', field: 'perimetro_cuello', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Cintura', field: 'cintura', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Triceps', field: 'triceps', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Subescapula', field: 'subescapula', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
+                {headerText: 'Pliegue del Cuello', field: 'pliegue_cuello', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'}
             ]);
 
             self.origenDatosAlumnos = ko.observable();
