@@ -109,13 +109,7 @@
                         <oj-label-inline for="nuevoFNacimientoAlumno" >Fecha nacimiento:</oj-label-inline>
                         <oj-input-date id="nuevoFNacimientoAlumno"/>
                         <oj-label-inline for="nuevoEscuelaAlumno" >Escuela:</oj-label-inline>
-                        <oj-select-one id="nuevoEscuelaAlumno" value="{{nuevoEscuelaAlumno}}" required>
-                            <oj-option value="1">Escuela Primaria Cuauhtémoc</oj-option>
-                            <oj-option value="2">Escuela Primaria Tranquilino Elizondo 256</oj-option>
-                            <oj-option value="3">Escuela Primaria Federal David G. Berlanga</oj-option>
-                            <oj-option value="4">Escuela Ramon Corona</oj-option>
-                            <oj-option value="5">Escuela Urbana 410 Benito Juárez</oj-option>
-                            <oj-option value="6">Margarita Maza de Juarez</oj-option>
+                        <oj-select-one id="nuevoEscuelaAlumno" options="[[origenDatosEscuelas]]" value="{{nuevoEscuelaAlumno}}" required>
                         </oj-select-one>
                         <oj-label-inline for="nuevoGradoAlumno" >Grado:</oj-label-inline>
                         <oj-select-one id="nuevoGradoAlumno" value="{{nuevoGradoAlumno}}" required>

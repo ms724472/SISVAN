@@ -12,6 +12,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
+            self.origenDatosEscuelas = ko.observable();
             self.mediciones = '[{"NoData":""}]';
 
             function ChartModel() {
@@ -53,7 +54,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
-
+            self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
+            
+            $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = $.parseJSON(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ninguna escuela');
+                            return;
+                        } else {
+                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+            
             function IncidentsViewModel() {
                 var self = this;
 
