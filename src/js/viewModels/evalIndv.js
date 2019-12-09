@@ -383,17 +383,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/generarExcel/" + idAlumno,
                     dataType: "text",
-                    async: false,
-                    success: function (xlsx) {
-                        var link = document.createElement("a");
-                        var xlsxURl = URL.createObjectURL(xlsx);
-                        link.href = xlsxURl;
-                        link.style = "visibility:hidden;";
-                        link.download = "Reporte.xlsx";
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
+                    async: true,
+                    xhrFields:{
+                        responseType: 'blob'
                     }
+                }).done(function(xlsx){
+                    var link = document.createElement("a");
+                    var xlsxUrl = URL.createObjectURL(xlsx);
+                    link.href = xlsxUrl;
+                    link.style = "visibility:hidden";
+                    link.download = "Reporte.xlsx";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 }).fail(function () {
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
