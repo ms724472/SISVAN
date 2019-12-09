@@ -10,9 +10,10 @@
                 <h3 slot="header">Evaluación escolar</h3>
                 <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
                 <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
-                <oj-button id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
+                <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
                 <div id='chart-container'>
-                    <oj-chart id="pieChart"
+                    <button id="descargarPDFEscuelas" onclick="return descargarPDF()">Exportar PDF</button>
+                    <oj-chart id="graficaEscuela"
                               type="pie" 
                               data="[[porcentajesEscuelas]]"
                               animation-on-display="auto"
@@ -34,8 +35,8 @@
                 <h3 slot="header">Evaluación grupal</h3>
                 <oj-label for="seleccionadorEscuela">Selecciona un grupo:</oj-label>
                 <oj-select-one style="width: 500px;" id="seleccionadorEscuelaGrupo" on-value-changed="[[cambioEscuela]]" options="[[origenDatosEscuelas]]"></oj-select-one> 
-                <oj-select-one style="width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
-                <oj-button id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>
+                <oj-select-one style="padding-left: 5px; width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
+                <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>
                 <div id='chart-container'>
                     <oj-chart id="pieChart"
                               type="pie" 

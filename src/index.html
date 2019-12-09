@@ -77,8 +77,8 @@
                ** and the CSS documentation under Support/API Docs/Non-Component Styling
                ** on the JET website for more information on how to use this pattern.
             -->
-                <div data-bind="visible: userLogin() != '', ojComponent: {component:'ojToolbar'}">
-                    <header role="banner" class="oj-web-applayout-header">
+            <div data-bind="visible: userLogin() != '', ojComponent: {component:'ojToolbar'}">
+                <header role="banner" class="oj-web-applayout-header">
                     <div class="oj-flex-bar oj-sm-align-items-center">
                         <!-- Offcanvas toggle button -->
                         <div class="oj-flex-bar-start">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="oj-flex-bar-end">
                             <!-- Responsive Toolbar -->
-                        
+
                             <button id="userMenu"
                                     data-bind="ojComponent: {component: 'ojButton', label: userLogin, display: smScreen() ? 'icons' : 'all',
                                                icons: smScreen() ? {start: 'oj-icon demo-appheader-avatar', end: null} : {end: 'oj-component-icon oj-button-menu-dropdown-icon'}, chroming: 'half', menu: '#menu1'}">
@@ -107,7 +107,7 @@
                                  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
                                 <div class="oj-dialog-body">
                                     <label id="switchLabel" for="switch" class="oj-label-inline">English or Lithuanian</label>
-	                            <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value: languageChecked}" />
+                                    <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value: languageChecked}" />
                                 </div>
                                 <div class="oj-dialog-footer">
                                     <button id="okButton" data-bind="click: closePreferences, ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
@@ -115,14 +115,24 @@
                             </div>
                         </div>
                     </div>
-                    </header>
-                </div>
+                </header>
+            </div>
             <div id="mainContent" role="main" class="oj-web-applayout-content" data-bind="ojModule: router.moduleConfig">
             </div>
         </div>
     </div>
     <script type="text/javascript" src="js/libs/require/require.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script src="http://www.cloudformatter.com/Resources/Pages/CSS2Pdf/Script/xeponline.jqplugin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+    <script>
+        function descargarPDF(){
+        $('#graficaEscuela').find('svg').attr('xmlns', 'http://www.w3.org/2000/svg');
+        xepOnline.Formatter.Format('c3_chart', {pageWidth:'11in', pageHeight:'8.5in', render:'download', srctype:'svg'});
+        }
+    </script>
 </body>
 
 </html>
