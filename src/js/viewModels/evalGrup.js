@@ -44,7 +44,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         return;
                     });
                 };
-                
+
                 self.obtenerPorcentajesGrupales = function (idGrupo) {
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
@@ -65,7 +65,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         return;
                     });
                 };
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
@@ -85,7 +85,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/1",
@@ -106,7 +106,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/2",
@@ -125,7 +125,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/3",
@@ -144,7 +144,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/4",
@@ -163,7 +163,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/5",
@@ -182,7 +182,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/6",
@@ -201,33 +201,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-                
+
                 self.cambioEscuela = event => {
-                    switch(event.detail.value){
+                    switch (event.detail.value) {
                         case 1:
                             self.origenDatosGrupos(self.origenDatosGrupo1());
-                        break;
+                            break;
                         case 2:
                             self.origenDatosGrupos(self.origenDatosGrupo2());
-                        break;
+                            break;
                         case 3:
                             self.origenDatosGrupos(self.origenDatosGrupo3());
-                        break;
+                            break;
                         case 4:
                             self.origenDatosGrupos(self.origenDatosGrupo4());
-                        break;
+                            break;
                         case 5:
                             self.origenDatosGrupos(self.origenDatosGrupo5());
-                        break;
+                            break;
                         case 6:
                             self.origenDatosGrupos(self.origenDatosGrupo6());
-                        break;
+                            break;
                     }
                 };
-                
-                self.generarGraficaEscuela  = function () {
-                   self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value);
-                }; 
+
+                self.generarGraficaEscuela = function () {
+                    self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value);
+                };
+
+                self.generarGraficaGrupo = function () {
+                    self.obtenerPorcentajesGrupales(document.getElementById('seleccionadorGrupo').value);
+                };
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
