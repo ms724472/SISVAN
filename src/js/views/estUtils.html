@@ -6,9 +6,10 @@
     <h3 class="oj-header-border">Estadisticas &Uacute;tiles</h3>
     <div class="oj-form-layout">
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
-            <oj-collapsible>
-                <h3 slot="header">Indices Z masa para ni&ntilde;as</h3>
-                <oj-chart id="lineChart" 
+            <oj-accordion>
+                <oj-collapsible expanded="true">
+                    <h3 slot="header">Indices Z masa para ni&ntilde;as</h3>
+                    <oj-chart id="lineChart" 
                               type="line" 
                               data="[[origenDatosZNinas]]" 
                               animation-on-display="auto"
@@ -21,10 +22,10 @@
                             </oj-chart-item>
                         </template>
                     </oj-chart>
-            </oj-collapsible>
-            <oj-collapsible>
-                <h3 slot="header">Indices Z masa para ni&ntilde;os</h3>
-                <oj-chart id="lineChart" 
+                </oj-collapsible>
+                <oj-collapsible>
+                    <h3 slot="header">Indices Z masa para ni&ntilde;os</h3>
+                    <oj-chart id="lineChart" 
                               type="line" 
                               data="[[origenDatosZNinos]]" 
                               animation-on-display="auto"
@@ -37,7 +38,8 @@
                             </oj-chart-item>
                         </template>
                     </oj-chart>
-            </oj-collapsible>
+                </oj-collapsible>
+            </oj-accordion>
         </div>
     </div>
 </div>

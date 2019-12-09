@@ -6,57 +6,59 @@
     <h3 class="oj-header-border">Evaluaciones grupales</h3>
     <div class="oj-form-layout">
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
-            <oj-collapsible>
-                <h3 slot="header">Evaluación escolar</h3>
-                <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
-                <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
-                <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
-                <oj-button style="padding-left: 5px;" id="descargarPDFEscuelas" onclick="return descargarPDF('graficaEscuela','Porcentajes por Escuela')">Exportar PDF</oj-button>
-                <div id='chart-container'>
-                    <oj-chart id="graficaEscuela"
-                              type="pie" 
-                              data="[[porcentajesEscuelas]]"
-                              animation-on-display="auto"
-                              animation-on-data-change="auto"
-                              hover-behavior="dim"
-                              style="max-width:500px;width:100%;height:350px;">
+            <oj-accordion>
+                <oj-collapsible expanded="true">
+                    <h3 slot="header">Evaluación escolar</h3>
+                    <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
+                    <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
+                    <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
+                    <oj-button style="padding-left: 5px;" id="descargarPDFEscuelas" onclick="return descargarPDF('graficaEscuela', 'Porcentajes por Escuela')">Exportar PDF</oj-button>
+                    <div id='chart-container'>
+                        <oj-chart id="graficaEscuela"
+                                  type="pie" 
+                                  data="[[porcentajesEscuelas]]"
+                                  animation-on-display="auto"
+                                  animation-on-data-change="auto"
+                                  hover-behavior="dim"
+                                  style="max-width:500px;width:100%;height:350px;">
 
-                        <template slot='itemTemplate' data-oj-as='item'>
-                            <oj-chart-item 
-                                value='[[item.data.valor]]'
-                                group-id='[[ [item.data.escuela] ]]'
-                                series-id='[[item.data.serie]]'> 
-                            </oj-chart-item>
-                        </template>
-                    </oj-chart>
-                </div>
-            </oj-collapsible>
-            <oj-collapsible>
-                <h3 slot="header">Evaluación grupal</h3>
-                <oj-label for="seleccionadorEscuela">Selecciona un grupo:</oj-label>
-                <oj-select-one style="width: 500px;" id="seleccionadorEscuelaGrupo" on-value-changed="[[cambioEscuela]]" options="[[origenDatosEscuelas]]"></oj-select-one> 
-                <oj-select-one style="padding-left: 5px; width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
-                <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>
-                <oj-button style="padding-left: 5px;" id="descargarPDFGrupos" onclick="return descargarPDF('graficaGrupo','Porcentajes por Grupo')">Exportar PDF</oj-button>
-                <div id='chart-container'>
-                    <oj-chart id="graficaGrupo"
-                              type="pie" 
-                              data="[[porcentajesGrupos]]"
-                              animation-on-display="auto"
-                              animation-on-data-change="auto"
-                              hover-behavior="dim"
-                              style="max-width:500px;width:100%;height:350px;">
+                            <template slot='itemTemplate' data-oj-as='item'>
+                                <oj-chart-item 
+                                    value='[[item.data.valor]]'
+                                    group-id='[[ [item.data.escuela] ]]'
+                                    series-id='[[item.data.serie]]'> 
+                                </oj-chart-item>
+                            </template>
+                        </oj-chart>
+                    </div>
+                </oj-collapsible>
+                <oj-collapsible>
+                    <h3 slot="header">Evaluación grupal</h3>
+                    <oj-label for="seleccionadorEscuela">Selecciona un grupo:</oj-label>
+                    <oj-select-one style="width: 500px;" id="seleccionadorEscuelaGrupo" on-value-changed="[[cambioEscuela]]" options="[[origenDatosEscuelas]]"></oj-select-one> 
+                    <oj-select-one style="padding-left: 5px; width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
+                    <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>
+                    <oj-button style="padding-left: 5px;" id="descargarPDFGrupos" onclick="return descargarPDF('graficaGrupo', 'Porcentajes por Grupo')">Exportar PDF</oj-button>
+                    <div id='chart-container'>
+                        <oj-chart id="graficaGrupo"
+                                  type="pie" 
+                                  data="[[porcentajesGrupos]]"
+                                  animation-on-display="auto"
+                                  animation-on-data-change="auto"
+                                  hover-behavior="dim"
+                                  style="max-width:500px;width:100%;height:350px;">
 
-                        <template slot='itemTemplate' data-oj-as='item'>
-                            <oj-chart-item 
-                                value='[[item.data.valor]]'
-                                group-id='[[ [item.data.escuela] ]]'
-                                series-id='[[item.data.serie]]'> 
-                            </oj-chart-item>
-                        </template>
-                    </oj-chart>
-                </div>
-            </oj-collapsible>
+                            <template slot='itemTemplate' data-oj-as='item'>
+                                <oj-chart-item 
+                                    value='[[item.data.valor]]'
+                                    group-id='[[ [item.data.escuela] ]]'
+                                    series-id='[[item.data.serie]]'> 
+                                </oj-chart-item>
+                            </template>
+                        </oj-chart>
+                    </div>
+                </oj-collapsible>
+            </oj-accordion>
         </div>
     </div>
 </div>

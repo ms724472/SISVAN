@@ -30,57 +30,59 @@
                   style='width: 100%;'
                   dnd.reorder.columns='enabled'>
         </oj-table>
-        <oj-collapsible>
-            <h3 slot="header">Hist&oacute;rico mediciones</h3>
-            <oj-table id='tablaDatosMediciones'
-                      aria-label='Histórico de mediciones'
-                      data='[[origenDatosMediciones]]'
-                      columns='{{columnasMediciones}}'
-                      style='width: 100%;'
-                      dnd.reorder.columns='enabled'>
-            </oj-table>
-        </oj-collapsible>
-        <oj-collapsible>
-            <h3 slot="header">Gr&aacute;ficos de desarrollo</h3>    
-            <div class="oj-flex" style="width: 100%;">
-                <oj-flex-item style="width: 50%;text-align: center;">
-                    <oj-chart id="lineChart" 
-                              type="line" 
-                              data="[[dataProvider]]" 
-                              animation-on-display="auto"
-                              animation-on-data-change="auto" 
-                              orientation="[[orientationValue]]"
-                              hover-behavior="dim"
-                              style="max-width:500px;width:100%;height:350px;display: inline-block;">
-                        <template slot="itemTemplate" data-oj-as="item">
-                            <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
-                            </oj-chart-item>
-                        </template>
-                    </oj-chart>
-                    <!-- vertical/horizontal toggle button -->
-                    <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
-                    </demo-chart-orientation-control>
-                </oj-flex-item>
-                <oj-flex-item style="width: 50%;text-align: center;">
-                    <oj-chart id="lineChart" 
-                              type="line" 
-                              data="[[datosEstatura]]" 
-                              animation-on-display="auto"
-                              animation-on-data-change="auto" 
-                              orientation="[[orientationValue]]"
-                              hover-behavior="dim"
-                              style="max-width:500px;width:100%;height:350px;display: inline-block;">
-                        <template slot="itemTemplate" data-oj-as="item">
-                            <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
-                            </oj-chart-item>
-                        </template>
-                    </oj-chart>
-                    <!-- vertical/horizontal toggle button -->
-                    <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
-                    </demo-chart-orientation-control>
-                </oj-flex-item>
-            </div>
-        </oj-collapsible>
+        <oj-accordion>
+            <oj-collapsible expanded="true">
+                <h3 slot="header">Hist&oacute;rico mediciones</h3>
+                <oj-table id='tablaDatosMediciones'
+                          aria-label='Histórico de mediciones'
+                          data='[[origenDatosMediciones]]'
+                          columns='{{columnasMediciones}}'
+                          style='width: 100%;'
+                          dnd.reorder.columns='enabled'>
+                </oj-table>
+            </oj-collapsible>
+            <oj-collapsible>
+                <h3 slot="header">Gr&aacute;ficos de desarrollo</h3>    
+                <div class="oj-flex" style="width: 100%;">
+                    <oj-flex-item style="width: 50%;text-align: center;">
+                        <oj-chart id="lineChart" 
+                                  type="line" 
+                                  data="[[dataProvider]]" 
+                                  animation-on-display="auto"
+                                  animation-on-data-change="auto" 
+                                  orientation="[[orientationValue]]"
+                                  hover-behavior="dim"
+                                  style="max-width:500px;width:100%;height:350px;display: inline-block;">
+                            <template slot="itemTemplate" data-oj-as="item">
+                                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
+                                </oj-chart-item>
+                            </template>
+                        </oj-chart>
+                        <!-- vertical/horizontal toggle button -->
+                        <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
+                        </demo-chart-orientation-control>
+                    </oj-flex-item>
+                    <oj-flex-item style="width: 50%;text-align: center;">
+                        <oj-chart id="lineChart" 
+                                  type="line" 
+                                  data="[[datosEstatura]]" 
+                                  animation-on-display="auto"
+                                  animation-on-data-change="auto" 
+                                  orientation="[[orientationValue]]"
+                                  hover-behavior="dim"
+                                  style="max-width:500px;width:100%;height:350px;display: inline-block;">
+                            <template slot="itemTemplate" data-oj-as="item">
+                                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
+                                </oj-chart-item>
+                            </template>
+                        </oj-chart>
+                        <!-- vertical/horizontal toggle button -->
+                        <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
+                        </demo-chart-orientation-control>
+                    </oj-flex-item>
+                </div>
+            </oj-collapsible>
+        </oj-accordion>
     </div>
 </div>
 <oj-dialog style="display:none" id="dialogoCargando" cancel-behavior="none" dialog-title="Agregando datos...">
@@ -176,8 +178,8 @@
             <oj-button id="buscarXNombre" on-oj-action="[[encontrarAlumno]]">Buscar</oj-button>
             <oj-table id="tablaNombres"
                       columns='[{"headerText": "Numero de alumno", "field": "id_alumno", "style":"display:none;", "headerStyle":"display:none;"},
-                                {"headerText": "Nombre Completo", "field": "nombre_completo"}, 
-                                {"headerText": "Escuela de origen", "field": "nombre_escuela"}]'
+                      {"headerText": "Nombre Completo", "field": "nombre_completo"}, 
+                      {"headerText": "Escuela de origen", "field": "nombre_escuela"}]'
                       data='[[origenDatosNombres]]'
                       selection-mode='{"row":"single"}'
                       style="display:block;">
