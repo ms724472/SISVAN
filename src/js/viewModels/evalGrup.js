@@ -13,6 +13,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.origenDatosEscuelas = ko.observable();
                 self.escuelaSeleccionada = ko.observable();
                 self.porcentajesEscuelas = ko.observable();
+                self.porcentajesGrupos = ko.observable();
                 self.origenDatosGrupos = ko.observable();
                 self.origenDatosGrupo1 = ko.observable();
                 self.origenDatosGrupo2 = ko.observable();
@@ -36,6 +37,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 return;
                             } else {
                                 self.porcentajesEscuelas(new oj.ArrayDataProvider(json.datos));
+                            }
+                        }
+                    }).fail(function () {
+                        alert("Error en el servidor, favor de comunicarse con el administrador.");
+                        return;
+                    });
+                };
+                
+                self.obtenerPorcentajesGrupales = function (idGrupo) {
+                    $.ajax({type: "GET",
+                        contentType: "text/plain; charset=utf-8",
+                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escolares/obtenerPorcentajesGrupo/" + idGrupo,
+                        dataType: "text",
+                        async: false,
+                        success: function (data) {
+                            json = $.parseJSON(data);
+                            if (json.hasOwnProperty("error")) {
+                                alert('No se encontro ningun dato, contacte al administrador.');
+                                return;
+                            } else {
+                                self.porcentajesGrupos(new oj.ArrayDataProvider(json.datos));
                             }
                         }
                     }).fail(function () {
@@ -77,6 +99,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         } else {
                             self.origenDatosGrupos(new oj.ArrayDataProvider(json.grupos));
                             self.origenDatosGrupo1(new oj.ArrayDataProvider(json.grupos));
+                            self.obtenerPorcentajesGrupales(1);
                         }
                     }
                 }).fail(function () {
