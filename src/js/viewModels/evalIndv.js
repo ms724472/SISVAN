@@ -329,7 +329,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var fecha = document.getElementById("nuevaFMedicion").value;
                 var masa = document.getElementById("nuevaMasaMedicion").value;
                 var estatura = document.getElementById("nuevaEstaturaMedicion").value;
-                var perimetro_cuella = document.getElementById("nuevaPerimetroCuelloMedicion").value;
+                var perimetro_cuello = document.getElementById("nuevaPerimetroCuelloMedicion").value;
                 var cintura = document.getElementById("nuevaCinturaMedicion").value;
                 var triceps = document.getElementById("nuevaTricepsMedicion").value;
                 var subEscapula = document.getElementById("nuevaSubescapulaMedicion").value;
@@ -337,7 +337,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var bodyRequest = {id_alumno: idAlumno,
                     fecha: fecha,
                     masa: masa,
-                    estatura: estatura};
+                    estatura: estatura,
+                    perimetro_cuello: perimetro_cuello,
+                    cintura: cintura,
+                    triceps: triceps,
+                    subEscapula: subEscapula,
+                    pliegueCuello: pliegueCuello};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
                     url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/agregarMedicion",
@@ -369,11 +374,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             this.cerrarNuevaMedicion = function () {
                 document.getElementById('dialogoNuevaMedicion').close();
-            }
-            
-            this.descargarInfo = function() {
-                
-            }
+            };
+
+            this.descargarInfo = function () {
+                var idAlumno = document.getElementById("idAlumno").value;
+
+                $.ajax({type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/generarExcel/" + idAlumno,
+                    dataType: "text",
+                    async: false,
+                    success: function (xlsx) {
+                        var link = document.createElement("a");
+                        var xlsxURl = URL.createObjectURL(xlsx);
+                        link.href = xlsxURl;
+                        link.style = "visibility:hidden;";
+                        link.download = "Reporte.xlsx";
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+            };
 
             /*
              * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
