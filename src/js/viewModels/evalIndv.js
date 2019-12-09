@@ -173,6 +173,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.origenDatosMediciones(new oj.ArrayTableDataSource(json.mediciones));
+                            document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                         }
                     }
                 }).fail(function () {
