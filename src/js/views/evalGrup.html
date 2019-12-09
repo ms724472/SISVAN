@@ -34,7 +34,7 @@
                 <h3 slot="header">Evaluación grupal</h3>
                 <oj-label for="seleccionadorEscuela">Selecciona un grupo:</oj-label>
                 <oj-select-one style="width: 500px;" id="seleccionadorEscuelaGrupo" on-value-changed="[[cambioEscuela]]" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
-                <oj-select-one style="width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]" value="{{grupoSeleccionado}}"></oj-select-one> 
+                <oj-select-one style="width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
                 <oj-button id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
                 <div id='chart-container'>
                     <oj-chart id="pieChart"
