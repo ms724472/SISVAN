@@ -179,8 +179,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     return;
                 });
                 
-                self.cambioEscuela = function () {
-                    switch(document.getElementById('seleccionadorEscuela').value){
+                self.cambioEscuela = event => {
+                    switch(event.detail.value){
                         case 1:
                             self.origenDatosGrupos(self.origenDatosGrupo1());
                         break;
