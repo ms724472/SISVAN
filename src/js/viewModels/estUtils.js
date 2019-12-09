@@ -6,7 +6,7 @@
  * Your customer ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber',
-    'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart'],
+    'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojaccordion'],
         function (oj, ko, $) {
             function CustomerViewModel() {
                 var self = this;
