@@ -128,8 +128,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
     <script>
         function descargarPDF(contenedor){
-        $('#'+contenedor).find('svg').attr('xmlns', 'http://www.w3.org/2000/svg');
-        xepOnline.Formatter.Format(contenedor, {pageWidth:'11in', pageHeight:'8.5in', render:'download', srctype:'svg', filename: 'Porcentajes de IMC'});
+        $('#graficaEscuela').find('svg').attr('xmlns', 'http://www.w3.org/2000/svg');
+        xepOnline.Formatter.Format('graficaEscuela', {pageWidth:'11in', pageHeight:'8.5in', render:'download', srctype:'svg', filename: 'Porcentajes de IMC'});
         }
     </script>
 </body>
