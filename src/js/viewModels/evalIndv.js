@@ -369,6 +369,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             this.cerrarNuevaMedicion = function () {
                 document.getElementById('dialogoNuevaMedicion').close();
             }
+            
+            this.descargarInfo = function() {
+                
+            }
 
             /*
              * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
