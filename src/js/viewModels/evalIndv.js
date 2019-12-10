@@ -379,29 +379,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             this.descargarInfo = function () {
                 var idAlumno = document.getElementById("idAlumno").value;
 
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/generarExcel/" + idAlumno,
-                    dataType: "text",
-                    async: true,
-                    xhrFields:{
-                        responseType: 'blob'
-                    }
-                }).done(function(data){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/generarExcel/" + idAlumno, true);
+                xhr.responseType = 'arraybuffer';
+
+                xhr.onload = function (event) {
                     var link = document.createElement("a");
-                    var binaryData = [];
-                    binaryData.push(data);
-                    var xlsxUrl = URL.createObjectURL(new Blob(binaryData, { type: "application/octet-stream" }));
+                    var arrayBuffer = xhr.response;
+                    var blob = new Blob([arrayBuffer], {type: "application/vnd.ms-excel"});
+                    var xlsxUrl = URL.createObjectURL(blob);
                     link.href = xlsxUrl;
                     link.style = "visibility:hidden";
                     link.download = "Reporte.xlsx";
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
+                };
+
+                xhr.send();
             };
 
             /*
