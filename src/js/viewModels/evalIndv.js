@@ -387,9 +387,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     xhrFields:{
                         responseType: 'blob'
                     }
-                }).done(function(xlsx){
+                }).done(function(data){
                     var link = document.createElement("a");
-                    var xlsxUrl = URL.createObjectURL(xlsx);
+                    var binaryData = [];
+                    binaryData.push(data);
+                    var xlsxUrl = URL.createObjectURL(new Blob(binaryData, { type: "application/octet-stream" }));
                     link.href = xlsxUrl;
                     link.style = "visibility:hidden";
                     link.download = "Reporte.xlsx";
