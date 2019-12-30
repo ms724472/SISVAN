@@ -23,10 +23,10 @@
                         </template>
                         <template slot="seriesTemplate" data-oj-as="series">
                             <oj-chart-series 
-                                color="[[series.includes('3') ? '#000000': 
-                                         series.includes('2') ? '#990000': 
-                                         series.includes('1') ? '#FF9933': 
-                                         series.includes('0') ? '#006600':
+                                color="[[series.id.includes('3') ? '#000000': 
+                                         series.id.includes('2') ? '#990000': 
+                                         series.id.includes('1') ? '#FF9933': 
+                                         series.id.includes('0') ? '#006600':
                                          null]]"
                                 marker-shape="square"
                                 marker-displayed="on">
