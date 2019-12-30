@@ -21,6 +21,17 @@
                             <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie]]">
                             </oj-chart-item>
                         </template>
+                        <template slot="seriesTemplate" data-oj-as="series">
+                            <oj-chart-series 
+                                color="[[series.includes('3') ? '#000000': 
+                                         series.includes('2') ? '#990000': 
+                                         series.includes('1') ? '#FF9933': 
+                                         series.includes('0') ? '#006600':
+                                         null]]"
+                                marker-shape="square"
+                                marker-displayed="on">
+                            </oj-chart-series>
+                        </template>
                     </oj-chart>
                 </oj-collapsible>
                 <oj-collapsible>
