@@ -57,6 +57,13 @@
                                 <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
                                 </oj-chart-item>
                             </template>
+                            <template slot="seriesTemplate" data-oj-as="series">
+                                <oj-chart-series 
+                                    color="[[series.id === 'ideal' ? '#006600': null]]"
+                                    marker-shape="square"
+                                    marker-displayed="on">
+                                </oj-chart-series>
+                            </template>
                         </oj-chart>
                         <!-- vertical/horizontal toggle button -->
                         <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
@@ -74,6 +81,13 @@
                             <template slot="itemTemplate" data-oj-as="item">
                                 <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
                                 </oj-chart-item>
+                            </template>
+                            <template slot="seriesTemplate" data-oj-as="series">
+                                <oj-chart-series 
+                                    color="[[series.id === 'ideal' ? '#006600': null]]"
+                                    marker-shape="square"
+                                    marker-displayed="on">
+                                </oj-chart-series>
                             </template>
                         </oj-chart>
                         <!-- vertical/horizontal toggle button -->
