@@ -58,7 +58,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             $.ajax({type: "GET",
                 contentType: "text/plain; charset=utf-8",
-                url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
+                url: oj.gWSUrl() + "obtenerEscuelas",
                 dataType: "text",
                 async: false,
                 success: function (data) {
@@ -144,7 +144,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var idAlumno = document.getElementById("idAlumno").value;
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerDatos/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerDatos/" + idAlumno,
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -163,7 +163,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerMediciones/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerMediciones/" + idAlumno,
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -183,7 +183,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoMasa/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoMasa/" + idAlumno,
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -202,7 +202,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/obtenerHistoricoEstatura/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoEstatura/" + idAlumno,
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -235,7 +235,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/buscarPorNombre/" + nombreAlumno,
+                    url: oj.gWSUrl() + "alumnos/buscarPorNombre/" + nombreAlumno,
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -275,7 +275,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     fecha_nac: fecha_nac};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/agregarAlumno",
+                    url: oj.gWSUrl() + "alumnos/agregarAlumno",
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
@@ -345,7 +345,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     pliegueCuello: pliegueCuello};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/agregarMedicion",
+                    url: oj.gWSUrl() + "alumnos/agregarMedicion",
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
@@ -380,7 +380,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var idAlumno = document.getElementById("idAlumno").value;
 
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/alumnos/generarExcel/" + idAlumno, true);
+                xhr.open("GET", oj.gWSUrl() + "alumnos/generarExcel/" + idAlumno, true);
                 xhr.responseType = 'arraybuffer';
 
                 xhr.onload = function (event) {

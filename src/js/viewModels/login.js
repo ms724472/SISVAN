@@ -34,7 +34,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                         var bodyRequest = {usuario: userName, contrasenia: passWord};
                         $.ajax({type: "POST",
                             contentType: "text/plain; charset=utf-8",
-                            url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/autenticacion/iniciarSesion",
+                            url: oj.gWSUrl() + "autenticacion/iniciarSesion",
                             dataType: "text",
                             data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                             async: false,

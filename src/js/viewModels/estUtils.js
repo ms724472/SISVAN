@@ -22,7 +22,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
 
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/estadisticas/obtenerPuntajesZMasa/Femenino",
+                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/Femenino",
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -41,7 +41,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
 
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/estadisticas/obtenerPuntajesZMasa/Masculino",
+                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/Masculino",
                         dataType: "text",
                         async: false,
                         success: function (data) {

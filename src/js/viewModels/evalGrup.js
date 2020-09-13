@@ -27,7 +27,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.obtenerPorcentajesEscolares = function (idEscuela) {
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escolares/obtenerPorcentajesEscuela/" + idEscuela,
+                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesEscuela/" + idEscuela,
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -48,7 +48,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.obtenerPorcentajesGrupales = function (idGrupo) {
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escolares/obtenerPorcentajesGrupo/" + idGrupo,
+                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesGrupo/" + idGrupo,
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -68,7 +68,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/obtenerEscuelas",
+                    url: oj.gWSUrl() + "obtenerEscuelas",
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -88,7 +88,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/1",
+                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/1",
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -109,7 +109,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/2",
+                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/2",
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -128,7 +128,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/3",
+                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/3",
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -147,7 +147,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/4",
+                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/4",
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -166,7 +166,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/5",
+                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/5",
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -185,7 +185,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: "http://sisvan-iteso.online/SISVANWS/rest/wls/1.0/escuelas/obtenerGrupos/6",
+                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/6",
                     dataType: "text",
                     async: false,
                     success: function (data) {

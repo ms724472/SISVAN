@@ -10,6 +10,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         function (oj, ko) {
             function ControllerViewModel() {
                 var self = this;
+                oj.gWSUrl = ko.observable("http://ec2-50-19-114-75.compute-1.amazonaws.com/SISVANWS/rest/wls/1.0/");
 
                 // Media queries for repsonsive layouts
                 var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
