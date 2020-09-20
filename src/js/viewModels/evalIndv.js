@@ -338,8 +338,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var perimetro_cuello = document.getElementById("nuevaPerimetroCuelloMedicion").value;
                 var cintura = document.getElementById("nuevaCinturaMedicion").value;
                 var triceps = document.getElementById("nuevaTricepsMedicion").value;
-                var subEscapula = document.getElementById("nuevaSubescapulaMedicion").value;
-                var pliegueCuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
+                var subescapula = document.getElementById("nuevaSubescapulaMedicion").value;
+                var pliegue_cuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
                 var bodyRequest = {id_alumno: idAlumno,
                     fecha: fecha,
                     masa: masa,
@@ -347,8 +347,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     perimetro_cuello: perimetro_cuello,
                     cintura: cintura,
                     triceps: triceps,
-                    subEscapula: subEscapula,
-                    pliegueCuello: pliegueCuello};
+                    subescapula: subescapula,
+                    pliegue_cuello: pliegue_cuello};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/agregarMedicion",
