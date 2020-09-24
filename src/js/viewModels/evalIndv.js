@@ -155,8 +155,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
-                            alert('Error de autenticación, por favor revisa tus datos.');
+                        if (json.hasOwnProperty("error")) {
+                            alert('Identificador de alumno no valido, por favor revisa tus datos.');
                             return;
                         } else {
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
@@ -174,8 +174,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
-                            alert('Error de autenticación, por favor revisa tus datos.');
+                        if (json.hasOwnProperty("error")) {
+                            if(json.error === "No hay datos.") {
+                                self.origenDatosMediciones(new oj.ArrayTableDataSource([{"Sin datos": ""}]));
+                            document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
+                            } else {
+                                alert('No es posible obtener los datos, por favor contacta al administrador.');
+                            }                            
                             return;
                         } else {
                             self.origenDatosMediciones(new oj.ArrayTableDataSource(json.mediciones));
@@ -183,7 +188,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         }
                     }
                 }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    alert("No es posible obtener los datos, por favor contacta al administrador.");
                     return;
                 });
 
@@ -194,8 +199,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
-                            alert('Error de autenticación, por favor revisa tus datos.');
+                        if (json.hasOwnProperty("error")) {
+                            if(json.error === "No hay datos.") {
+                                self.dataProvider(new oj.ArrayDataProvider([{"Sin datos": ""}]));
+                            } else {
+                                alert('No es posible obtener los datos, por favor contacta al administrador.');
+                            }
                             return;
                         } else {
                             self.dataProvider(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
@@ -213,8 +222,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     async: false,
                     success: function (data) {
                         json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
-                            alert('Error de autenticación, por favor revisa tus datos.');
+                        if (json.hasOwnProperty("error")) {
+                            if(json.error === "No hay datos.") {
+                                self.datosEstatura(new oj.ArrayDataProvider([{"Sin datos": ""}]));
+                            } else {
+                                alert('No es posible obtener los datos, por favor contacta al administrador.');
+                            }
                             return;
                         } else {
                             self.datosEstatura(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
@@ -322,6 +335,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById('idAlumno').value = tabla.currentRow.rowKey[0];
                 document.getElementById('nombreABuscar').value = '';
                 self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
+                self.obtenerInfo();
                 document.getElementById('dialogoBuscarAlumno').close();
             };
 
