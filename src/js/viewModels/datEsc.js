@@ -5,13 +5,40 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable'],
  function(oj, ko, $) {
   
     function AboutViewModel() {
       var self = this;
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
+
+      self.origenDatosEscuelas = ko.observable();
+      self.nombresColumnas = ko.observableArray([
+        { headerText: 'Nombre', field: 'nombre' },
+        { headerText: 'Dirección', field: 'direccion' },
+        { headerText: 'Colonia', field: 'colonia' },
+        { headerText: 'Código Postal', field: 'codigo_postal' },
+        { headerText: 'Municipio', field: 'municipio' },
+        { headerText: 'Estado', field: 'estado' },
+        { headerText: 'Teléfono', field: 'telefono' }
+      ]);
+
+      var peticionDatosEscuelas = XMLHttpRequest();
+      peticionDatosEscuelas.open('GET', oj.gWSUrl() + "obtenerDatosEscuelas", false);
+      peticionDatosEscuelas.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            var json = JSON.parse(this.responseText);
+            if (json.hasOwnProperty("error")) {
+              alert('No se encontro ningun dato, contacte al administrador.');
+              return;
+            } else {
+              self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+            }
+          }
+        }
+      };
 
       /**
        * Optional ViewModel method invoked when this ViewModel is about to be
