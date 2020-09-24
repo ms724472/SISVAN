@@ -16,7 +16,7 @@
                               style='width: 100%;' 
                               dnd.reorder.columns='enabled'
                               selection-mode='{"row": "single"}'
-                              on-selected-changed='[[escuelaSeleccionada]]'>
+                              on-selected-changed='{{escuelaSeleccionada}}'>
                         <oj-paging-control id="paging" data="[[origenDatosEscuelas]]" page-size="5" slot="bottom">
                         </oj-paging-control>
                     </oj-table>
