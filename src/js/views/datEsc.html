@@ -7,9 +7,12 @@
     <div class="oj-form-layout">
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
             <div class="oj-flex">
-                <div class="oj-flex-item" style="max-width: 100%; width: 100%;">
+                <div class="oj-flex-item" style="max-width: 100%; width: 100%; display: contents;">
                     <oj-table id="tablaEscuelas" aria-label='Datos del Alumno' data='[[origenDatosEscuelas]]'
-                        columns='{{nombresColumnas}}' style='width: 100%;' dnd.reorder.columns='enabled'></oj-table>
+                        columns='{{nombresColumnas}}' style='width: 100%;' dnd.reorder.columns='enabled'>
+                        <oj-paging-control id="paging" data="[[origenDatosEscuelas]]" page-size="5" slot="bottom">
+                        </oj-paging-control>
+                    </oj-table>
                 </div>
             </div>
         </div>

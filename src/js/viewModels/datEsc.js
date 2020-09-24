@@ -5,7 +5,8 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraydataprovider'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraydataprovider',
+'ojs/ojpagingdataproviderview', 'ojs/ojpagingcontrol'],
  function(oj, ko, $) {
   
     function AboutViewModel() {
@@ -34,7 +35,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
               alert('No se encontro ningun dato, contacte al administrador.');
               return;
             } else {
-              self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+              self.origenDatosEscuelas(new oj.PagingDataProviderView(new oj.ArrayDataProvider(json.escuelas)));
             }
           }
         }
