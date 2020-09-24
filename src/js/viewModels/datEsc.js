@@ -15,6 +15,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
       // Please reference the ojModule jsDoc for additionaly available methods.
 
       self.origenDatosEscuelas = ko.observable();
+      self.origenDatosGrupos = ko.observable();
+      
       self.nombresColumnas = ko.observableArray([
         { headerText: 'Nombre', field: 'nombre' },
         { headerText: 'Dirección', field: 'direccion' },
@@ -23,6 +25,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
         { headerText: 'Municipio', field: 'municipio' },
         { headerText: 'Estado', field: 'estado' },
         { headerText: 'Teléfono', field: 'telefono' }
+      ]);
+
+      self.columnasGrupos = ko.observableArray([
+        { headerText: 'Grado', field: 'grado' },
+        { headerText: 'Letra', field: 'letra' },
+        { headerText: 'Año de ingreso', field: 'anio_ingreso' },
+        { headerText: 'Año de egreso', field: 'anio_graduacion' }
       ]);
 
       var peticionDatosEscuelas = new XMLHttpRequest();
@@ -43,10 +52,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
 
       peticionDatosEscuelas.send();
 
+      var peticionDatosGrupos = new XMLHttpRequest();
+      peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/1", false);
+      peticionDatosGrupos.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            var json = JSON.parse(this.responseText);
+            if (json.hasOwnProperty("error")) {
+              alert('No se encontro ningun dato, contacte al administrador.');
+              return;
+            } else {
+              self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.grupos, {idAttribute: 'id_grupo'})));
+            }
+          }
+        }
+      };
+
+      peticionDatosGrupos.send();
+
       self.escuelaSeleccionada = function(event) {
         console.log(event.target.value);
       }
 
+      self.grupoSeleccionado = function(event) {
+        console.log(event.target.value);
+      }
       /**
        * Optional ViewModel method invoked when this ViewModel is about to be
        * used for the View transition.  The application can put data fetch logic
