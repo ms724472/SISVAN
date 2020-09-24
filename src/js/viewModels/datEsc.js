@@ -6,7 +6,7 @@
  * Your about ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraytabledatasource',
-'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol'],
+'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojbutton', 'ojs/ojtoolbar'],
  function(oj, ko, $) {
   
     function AboutViewModel() {
@@ -44,7 +44,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
       peticionDatosEscuelas.send();
 
       self.escuelaSeleccionada = function(event) {
-        console.log(event);
+        console.log(event.target.value);
       }
 
       /**

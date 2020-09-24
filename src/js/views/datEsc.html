@@ -9,6 +9,23 @@
             <div class="oj-flex">
                 <div class="oj-flex-item" 
                      style="max-width: 100%; width: 100%; display: contents;">
+                    <oj-toolbar id='myToolbar' 
+                                aria-label='Barra de edición' 
+                                aria-controls='controlled' 
+                                class="oj-toolbar-bottom-border">
+                        <oj-button id='btnAgregarEscuela' display='icons'>
+                            <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
+                            Agregar escuela
+                        </oj-button>
+                        <oj-button id='btnEditarEscuela' display='icons'>
+                            <span slot='startIcon' class='demo-icon-font demo-edit-icon-24'></span>
+                            Editar escuela
+                        </oj-button>
+                        <oj-button id='btnEliminarEscuela' display='icons'>
+                            <span slot='startIcon' class='demo-icon-font demo-garbage-icon-24'></span>
+                            Eliminar escuela
+                        </oj-button>
+                    </oj-toolbar>
                     <oj-table id="tablaEscuelas" 
                               aria-label='Datos del Alumno' 
                               data='[[origenDatosEscuelas]]'
