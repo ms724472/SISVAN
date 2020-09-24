@@ -43,6 +43,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
 
       peticionDatosEscuelas.send();
 
+      self.escuelaSeleccionada = function(event) {
+        console.log(event);
+      }
+
       /**
        * Optional ViewModel method invoked when this ViewModel is about to be
        * used for the View transition.  The application can put data fetch logic
