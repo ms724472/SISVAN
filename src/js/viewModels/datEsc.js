@@ -24,7 +24,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable'],
         { headerText: 'Teléfono', field: 'telefono' }
       ]);
 
-      var peticionDatosEscuelas = XMLHttpRequest();
+      var peticionDatosEscuelas = new XMLHttpRequest();
       peticionDatosEscuelas.open('GET', oj.gWSUrl() + "obtenerDatosEscuelas", false);
       peticionDatosEscuelas.onreadystatechange = function () {
         if (this.readyState === 4) {
