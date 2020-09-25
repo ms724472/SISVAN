@@ -44,7 +44,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/oj
               alert('No se encontro ningun dato, contacte al administrador.');
               return;
             } else {
-              self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, {idAttribute: 'id_escuela'})));
+              self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, {idAttribute: 'id_escuela'})));
             }
           }
         }
