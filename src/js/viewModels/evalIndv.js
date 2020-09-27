@@ -386,7 +386,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevoAlumno = function () {
-            var trackerObj = ko.utils.unwrapObservable(self.tracker);
+            var trackerObj = ko.utils.unwrapObservable(self.tracker());
             if (!self._showComponentValidationErrors(trackerObj)) {
                 return;
             }
