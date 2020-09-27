@@ -113,7 +113,7 @@
                 <div class="oj-flex">
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoIdAlumno" >N&uacute;mero:</oj-label-inline>
+                            <oj-label-inline for="nuevoIdAlumno" >Identificador:</oj-label-inline>
                             <oj-input-text id="nuevoIdAlumno" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
@@ -145,22 +145,8 @@
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoGradoAlumno" >Grado:</oj-label-inline>
-                            <oj-select-one id="nuevoGradoAlumno" value="{{nuevoGradoAlumno}}" required>
-                                <oj-option value="1">1er Grado</oj-option>
-                                <oj-option value="2">2do Grado</oj-option>
-                                <oj-option value="3">3er Grado</oj-option>
-                                <oj-option value="4">4to Grado</oj-option>
-                                <oj-option value="5">5to Grado</oj-option>
-                                <oj-option value="6">6to Grado</oj-option>
-                            </oj-select-one>
-                        </oj-form-layout>
-                        <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoGrupoAlumno" >Grupo:</oj-label-inline>
-                            <oj-select-one id="nuevoGrupoAlumno" value="{{nuevoGrupoAlumno}}" required>
-                                <oj-option value="1">Grupo A</oj-option>
-                                <oj-option value="2">Grupo B</oj-option>
-                                <oj-option value="3">Grupo C</oj-option>
+                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoAlumno}}" required>
                             </oj-select-one>
                         </oj-form-layout>
                     </oj-flex-item>
