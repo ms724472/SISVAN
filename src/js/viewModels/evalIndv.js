@@ -188,7 +188,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
                             self.escuelaDelAlumno(json.datos[0].id_escuela);
                             if(json.datos[0].grado !== "EGRESADO") {
-                                self.nuevoGrupoMedicion(json.datos[0].id_grupo.toString());
+                                self.nuevoGrupoMedicion(json.datos[0].id_grupo);
                             }                            
                         }
                     }
@@ -377,13 +377,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById('dialogoBuscarAlumno').close();
             };
 
-            self.agregarMedicion = async function () {
+            self.agregarMedicion = function () {
                 if(self.alumnoActual() === '') {
-                    await alert("Para agregar mediciones es necesario seleccionar un alumno.")
+                    alert("Para agregar mediciones es necesario seleccionar un alumno.")
                 } else {
-                    await self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[await self.escuelaDelAlumno()], {keyAttributes: 'value'}));
-                    document.getElementById("nuevoGrupoAlumno").value = await self.nuevoGrupoMedicion();
-                    await document.getElementById('dialogoNuevaMedicion').open();
+                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], {keyAttributes: 'value'}));
+                    document.getElementById('dialogoNuevaMedicion').open();
                 }                
             };
 
@@ -399,7 +398,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var subescapula = document.getElementById("nuevaSubescapulaMedicion").value;
                 var pliegue_cuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
                 var bodyRequest = {id_alumno: idAlumno,
-                    id_grupo : self.nuevoGrupoMedicion(),
+                    id_grupo : self.nuevoGrupoMedicion().toString(),
                     fecha: fecha,
                     masa: masa,
                     estatura: estatura,
