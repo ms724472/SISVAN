@@ -67,6 +67,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosNombres = ko.observable();
             self.origenDatosMediciones = ko.observable();
 
+            self.tituloIMC = ko.pureComputed(function () {
+                return {
+                    title: "Historico IMC"
+                };
+            });
+
+            self.tituloTalla = ko.pureComputed(function () {
+                return {
+                    title: "Historico Talla"
+                };
+            });
+
+            self.tituloPeso = ko.pureComputed(function () {
+                return {
+                    title: "Historico Peso"
+                };
+            });
+
+
             var datos = '{"NoData":""}';
             datos = JSON.parse("[" + datos + "]");
             self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
@@ -288,7 +307,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 }
                                 return;
                             } else {
-                                self.datosIMC(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                                self.datosIMC(new oj.ArrayDataProvider(jsonResponse.mediciones, {keyAttributes: 'id'}));
                             }
                         } else {
                             alert("Error en el servidor, favor de comunicarse con el administrador.");
