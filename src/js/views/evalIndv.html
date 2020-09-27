@@ -143,7 +143,7 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoFNacimientoAlumno" >Fecha nacimiento:</oj-label-inline>
-                            <oj-input-date id="nuevoFNacimientoAlumno"/>
+                            <oj-input-date id="nuevoFNacimientoAlumno" converter=[[convertidorFechas]]/>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoEscuelaAlumno" >Escuela:</oj-label-inline>
@@ -172,7 +172,7 @@
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaFMedicion" >Fecha medici&oacute;n:</oj-label-inline>
-                            <oj-input-date required="true" id="nuevaFMedicion" value="{{fechaNuevaMedicion}}"/>
+                            <oj-input-date required="true" id="nuevaFMedicion" value="{{fechaNuevaMedicion}}" converter=[[convertidorFechas]]/>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaMasaMedicion" >Peso:</oj-label-inline>
