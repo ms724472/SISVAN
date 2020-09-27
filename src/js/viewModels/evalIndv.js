@@ -12,12 +12,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
-            self.origenDatosEscuelas = ko.observable();
-            self.origenDatosGrupos = ko.observable();
+            self.origenDatosEscuelas = ko.observable();            
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
-            var grupos = {
+            self.grupos = {
                 "1": [
                     {
                         "value": 1,
@@ -39,6 +38,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     }
                 ]
             };
+
+            self.origenDatosGrupos = new ArrayDataProvider(self.grupos, {keyAttributes: 'value'});
 
             function ChartModel() {
                 /* toggle button variables */
@@ -87,7 +88,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
             self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
-            self.origenDatosGrupos(new oj.ArrayTableDataSource(grupos["1"]));
 
             $.ajax({type: "GET",
                 contentType: "text/plain; charset=utf-8",
