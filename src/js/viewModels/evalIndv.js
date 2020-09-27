@@ -11,6 +11,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         function (oj, ko, $) {
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
+            self.datosIMC = ko.observable();
             self.orientationValue = ko.observable();
             self.origenDatosEscuelas = ko.observable();    
             self.origenDatosGrupos = ko.observable()
@@ -174,6 +175,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             }
 
             self.obtenerInfo = function () {
+                var peticionHistoticoIMC = new XMLHttpRequest();
                 datos = '{"NoData":""}';
                 datos = JSON.parse("[" + datos + "]");
 
@@ -272,6 +274,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
+
+                peticionHistoticoIMC.open("GET", oj.gWSUrl() + "alumnos/obtenerHistoricoIMC/" + self.alumnoActual(), false);
+                peticionHistoticoIMC.onreadystatechange = function () {
+                    if(this.readyState === 4) {
+                        if(this.status === 200) {
+                            var jsonResponse = JSON.parse(this.responseText);
+                            if (jsonResponse.hasOwnProperty("error")) { 
+                                if(jsonResponse.error === "No hay datos.") {
+                                    self.datosIMC(new oj.ArrayDataProvider([{"Sin datos": ""}]));
+                                } else {
+                                    alert('No es posible obtener los datos, por favor contacta al administrador.');
+                                }
+                                return;
+                            } else {
+                                self.datosIMC(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                            }
+                        } else {
+                            alert("Error en el servidor, favor de comunicarse con el administrador.");
+                        }
+                    }
+                };
+
             };
 
             self.agregarAlumno = function () {

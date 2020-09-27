@@ -44,10 +44,10 @@
             <oj-collapsible>
                 <h3 slot="header">Gr&aacute;ficos de desarrollo</h3>    
                 <div class="oj-flex" style="width: 100%;">
-                    <oj-flex-item style="width: 50%;text-align: center;">
+                    <oj-flex-item style="width: 33%;text-align: center;">
                         <oj-chart id="lineChart" 
                                   type="line" 
-                                  data="[[dataProvider]]" 
+                                  data="[[datosIMC]]" 
                                   animation-on-display="auto"
                                   animation-on-data-change="auto" 
                                   orientation="[[orientationValue]]"
@@ -65,11 +65,8 @@
                                 </oj-chart-series>
                             </template>
                         </oj-chart>
-                        <!-- vertical/horizontal toggle button -->
-                        <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
-                        </demo-chart-orientation-control>
-                    </oj-flex-item>
-                    <oj-flex-item style="width: 50%;text-align: center;">
+                    </oj-flex-item>                    
+                    <oj-flex-item style="width: 33%;text-align: center;">
                         <oj-chart id="lineChart" 
                                   type="line" 
                                   data="[[datosEstatura]]" 
@@ -90,9 +87,28 @@
                                 </oj-chart-series>
                             </template>
                         </oj-chart>
-                        <!-- vertical/horizontal toggle button -->
-                        <demo-chart-orientation-control id="orientationControl" type="line" orientation="{{orientationValue}}" aria-controls="lineChart">
-                        </demo-chart-orientation-control>
+                        <oj-flex-item style="width: 33%;text-align: center;">
+                            <oj-chart id="lineChart" 
+                                      type="line" 
+                                      data="[[dataProvider]]" 
+                                      animation-on-display="auto"
+                                      animation-on-data-change="auto" 
+                                      orientation="[[orientationValue]]"
+                                      hover-behavior="dim"
+                                      style="max-width:500px;width:100%;height:350px;display: inline-block;">
+                                <template slot="itemTemplate" data-oj-as="item">
+                                    <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
+                                    </oj-chart-item>
+                                </template>
+                                <template slot="seriesTemplate" data-oj-as="series">
+                                    <oj-chart-series 
+                                        color="[[series.id === 'ideal' ? '#006600': null]]"
+                                        marker-shape="square"
+                                        marker-displayed="on">
+                                    </oj-chart-series>
+                                </template>
+                            </oj-chart>
+                        </oj-flex-item>
                     </oj-flex-item>
                 </div>
             </oj-collapsible>
