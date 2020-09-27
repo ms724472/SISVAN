@@ -38,7 +38,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 {headerText: 'Sexo', field: 'sexo'},
                 {headerText: 'Fecha nacimiento', field: 'fecha_nac'},
                 {headerText: 'Escuela', field: 'escuela'},
-                {headerText: 'Grado', field: 'grado'},
+                {headerText: 'Grado estimado', field: 'grado'},
                 {headerText: 'Grupo', field: 'letra'}
             ]);
 
@@ -377,13 +377,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById('dialogoBuscarAlumno').close();
             };
 
-            self.agregarMedicion = function () {
+            self.agregarMedicion = async function () {
                 if(self.alumnoActual() === '') {
-                    alert("Para agregar mediciones es necesario seleccionar un alumno.")
+                    await alert("Para agregar mediciones es necesario seleccionar un alumno.")
                 } else {
-                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], {keyAttributes: 'value'}));
-                    document.getElementById("nuevoGrupoAlumno").value = self.nuevoGrupoMedicion();
-                    document.getElementById('dialogoNuevaMedicion').open();
+                    await self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[await self.escuelaDelAlumno()], {keyAttributes: 'value'}));
+                    document.getElementById("nuevoGrupoAlumno").value = await self.nuevoGrupoMedicion();
+                    await document.getElementById('dialogoNuevaMedicion').open();
                 }                
             };
 
