@@ -376,6 +376,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevoAlumno = function () {
+            var trackerObj = ko.utils.unwrapObservable(self.tracker);
+            if (!this._showComponentValidationErrors(trackerObj)) {
+                return;
+            }
+
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("nuevoIdAlumno").value;
             var nombre = document.getElementById("nuevoNombreAlumno").value;
@@ -456,6 +461,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevaMedicion = function () {
+            var trackerObj = ko.utils.unwrapObservable(self.tracker);
+            if (!this._showComponentValidationErrors(trackerObj)) {
+                return;
+            }
+            
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("idAlumno").value;
             var fecha = self.fechaNuevaMedicion();
