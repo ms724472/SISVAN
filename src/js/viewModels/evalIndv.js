@@ -7,7 +7,8 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
-    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion'],
+    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion', 
+    'ojs/ojknockout-validation'],
     function (oj, ko, $) {
         self.dataProvider = ko.observable();
         self.datosEstatura = ko.observable();
@@ -377,7 +378,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
         self.crearNuevoAlumno = function () {
             var trackerObj = ko.utils.unwrapObservable(self.tracker);
-            if (!this._showComponentValidationErrors(trackerObj)) {
+            if (!self._showComponentValidationErrors(trackerObj)) {
                 return;
             }
 
@@ -462,10 +463,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
         self.crearNuevaMedicion = function () {
             var trackerObj = ko.utils.unwrapObservable(self.tracker);
-            if (!this._showComponentValidationErrors(trackerObj)) {
+            if (!self._showComponentValidationErrors(trackerObj)) {
                 return;
             }
-            
+
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("idAlumno").value;
             var fecha = self.fechaNuevaMedicion();
