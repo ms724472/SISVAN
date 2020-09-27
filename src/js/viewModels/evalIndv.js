@@ -70,7 +70,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         self.convertidorFechas = ko.observable(oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter(
                 {
-                    pattern: "dd/MM/yyyyy"
+                    pattern: "dd/MM/yyyy"
                 }));
 
         self.tituloIMC = ko.pureComputed(function () {
