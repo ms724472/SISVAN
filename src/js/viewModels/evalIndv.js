@@ -7,15 +7,14 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
-    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion',
-    'ojs/ojvalidation-base'],
+    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion'],
         function (oj, ko, $) {
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
             self.origenDatosEscuelas = ko.observable();
             self.mediciones = '[{"NoData":""}]';
-            self.fechaNuevaMedicion = ko.observable(ValidationBase.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
             function ChartModel() {
                 /* toggle button variables */
@@ -382,7 +381,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             self.obtenerInfo();
                             document.getElementById('dialogoCargando').close();
                             document.getElementById('dialogoNuevaMedicion').close();
-                            self.fechaNuevaMedicion(ValidationBase.IntlConverterUtils.dateToLocalIso(new Date()));
+                            self.fechaNuevaMedicion(oj.IntlConverterUtils.dateToLocalIso(new Date()));
                             document.getElementById('nuevaMasaMedicion').value = '';
                             document.getElementById("nuevaEstaturaMedicion").value = '';
                             alert('Agregado correctamente.');
