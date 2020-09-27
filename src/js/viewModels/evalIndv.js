@@ -39,7 +39,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 ]
             };
 
-            self.origenDatosGrupos = new ArrayDataProvider(self.grupos["1"], {keyAttributes: 'value'});
+            self.origenDatosGrupos = new oj.ArrayDataProvider(self.grupos["1"], {keyAttributes: 'value'});
 
             function ChartModel() {
                 /* toggle button variables */
