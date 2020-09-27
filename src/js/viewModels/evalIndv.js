@@ -22,7 +22,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
-            var grupos;
+            var grupos = {};
 
             function ChartModel() {
                 /* toggle button variables */
@@ -45,6 +45,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.columnasMediciones = ko.observableArray([
                 {headerText: 'Fecha medición', field: 'fecha', sortable: 'disabled'},
                 {headerText: 'Meses', field: 'meses', sortable: 'disabled'},
+                {headerText: 'Grupo', field: 'grupo', sortable: 'disabled'},
                 {headerText: 'Peso', field: 'masa', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
                 {headerText: 'DxPeso', field: 'diagnostico_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},  
                 {headerText: 'zPeso', field: 'z_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},                          
@@ -100,7 +101,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         if(jsonResponse.hasOwnProperty("error")) {
                             alert('No al inicializar el modulo, por favor contacta al administrador.');
                         } else {
-                            grupos = jsonResponse;
+                            if(Object.keys(jsonResponse).length > 0) {
+                                alert("Te recomendamos agregar un grupo para agregar nuevos alumnos o mediciones.")
+                            } else {
+                                grupos = jsonResponse;
+                            }                            
                         }                        
                     }
                 }
@@ -310,7 +315,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.escuelaSeleccionada = function(event) {
                 var id_escuela = event['detail'].value.toString();
-                if(id_escuela !== "") {
+                if(id_escuela !== "" && Object.keys(grupos).length > 0) {
                     self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[id_escuela], {keyAttributes: 'value'}));           
                 }
             };
@@ -355,7 +360,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             document.getElementById("nuevoFNacimientoAlumno").value = '';
                             self.nuevoEscuelaAlumno('');
                             self.nuevoGrupoAlumno('');
-                            self.origenDatosGrupos(new oj.ArrayDataProvider(datos));
+                            if(Object.keys(grupos).length > 0) {
+                                self.origenDatosGrupos(new oj.ArrayDataProvider(datos));
+                            }                            
                             alert('Agregado correctamente.');
                         }
                     }
@@ -381,8 +388,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 if(self.alumnoActual() === '') {
                     alert("Para agregar mediciones es necesario seleccionar un alumno.")
                 } else {
-                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], {keyAttributes: 'value'}));
-                    document.getElementById('dialogoNuevaMedicion').open();
+                    if(Object.keys(grupos).length > 0) {
+                        self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], {keyAttributes: 'value'}));
+                        document.getElementById('dialogoNuevaMedicion').open();
+                    } else {
+                        alert("Favor de agregar un nuevo grupo.");
+                    }
                 }                
             };
 
