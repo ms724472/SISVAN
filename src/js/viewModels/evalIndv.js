@@ -87,7 +87,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
             self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
-            self.origenDatosGrupos(new oj.ArrayTableDataSource(grupos[1]));
+            self.origenDatosGrupos(new oj.ArrayTableDataSource(grupos["1"]));
 
             $.ajax({type: "GET",
                 contentType: "text/plain; charset=utf-8",
