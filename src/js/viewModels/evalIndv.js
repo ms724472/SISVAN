@@ -12,11 +12,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
-            self.origenDatosEscuelas = ko.observable();            
+            self.origenDatosEscuelas = ko.observable();    
+            self.origenDatosGrupos = ko.observable();        
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
-            self.grupos = {
+            var grupos = {
                 "1": [
                     {
                         "value": 1,
@@ -38,8 +39,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     }
                 ]
             };
-
-            self.origenDatosGrupos = new oj.ArrayDataProvider(self.grupos["1"], {keyAttributes: 'value'});
 
             function ChartModel() {
                 /* toggle button variables */
@@ -88,6 +87,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
             self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
+            self.origenDatosGrupos(new oj.ArrayDataProvider(grupos["1"], {keyAttributes: 'value'}));
 
             $.ajax({type: "GET",
                 contentType: "text/plain; charset=utf-8",
@@ -100,7 +100,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         alert('No se encontro ninguna escuela');
                         return;
                     } else {
-                        self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                        self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));                        
                     }
                 }
             }).fail(function () {
