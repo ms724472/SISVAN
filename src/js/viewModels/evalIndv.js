@@ -23,6 +23,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         self.nuevoGrupoMedicion = ko.observable();
         self.mediciones = '[{"NoData":""}]';
         self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+        self.tracker = ko.observable();
 
         var grupos = {};
 
