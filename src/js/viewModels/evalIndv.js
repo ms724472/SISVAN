@@ -35,6 +35,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.columnasMediciones = ko.observableArray([
                 {headerText: 'Fecha medición', field: 'fecha', sortable: 'disabled'},
+                {headerText: 'Meses', field: 'meses', sortable: 'disabled'},
                 {headerText: 'Peso', field: 'masa', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
                 {headerText: 'DxPeso', field: 'diagnostico_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},  
                 {headerText: 'zPeso', field: 'z_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},                          
