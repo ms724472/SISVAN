@@ -309,7 +309,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             }
 
             self.escuelaSeleccionada = function(event) {
-                self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[event['detail'].value.toString()], {keyAttributes: 'value'}));
+                var id_escuela = event['detail'].value.toString();
+                if(id_escuela !== "") {
+                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[id_escuela], {keyAttributes: 'value'}));           
+                }
             };
 
             self.crearNuevoAlumno = function () {
