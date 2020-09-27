@@ -185,7 +185,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
-                            self.escuelaDelAlumno(json.datos.id_escuela);
+                            self.escuelaDelAlumno(json.datos[0].id_escuela);
                         }
                     }
                 }).fail(function () {
