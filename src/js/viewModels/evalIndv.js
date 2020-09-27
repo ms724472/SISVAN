@@ -18,6 +18,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.nuevoGrupoAlumno = ko.observable();
             self.alumnoActual = ko.observable('');
             self.escuelaDelAlumno = ko.observable();
+            self.nuevoGrupoMedicion = ko.observable();
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
@@ -186,6 +187,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         } else {
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
                             self.escuelaDelAlumno(json.datos[0].id_escuela);
+                            if(json.datos[0].grado !== "EGRESADO") {
+                                self.nuevoGrupoMedicion(json.datos[0].id_grupo.toString());
+                            }                            
                         }
                     }
                 }).fail(function () {
@@ -391,6 +395,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var subescapula = document.getElementById("nuevaSubescapulaMedicion").value;
                 var pliegue_cuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
                 var bodyRequest = {id_alumno: idAlumno,
+                    id_grupo = self.nuevoGrupoMedicion(),
                     fecha: fecha,
                     masa: masa,
                     estatura: estatura,

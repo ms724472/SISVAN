@@ -198,8 +198,7 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoGrupoAlumno" >Grupo:</oj-label-inline>
-                            <oj-select-one id="nuevoGrupoAlumno" required>
-                                <oj-option value="1">5 A</oj-option>
+                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoMedicion}}" required>
                             </oj-select-one>
                         </oj-form-layout>
                     </oj-flex-item>
