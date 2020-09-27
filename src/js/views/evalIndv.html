@@ -141,7 +141,7 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoEscuelaAlumno" >Escuela:</oj-label-inline>
-                            <oj-select-one id="nuevoEscuelaAlumno" options="[[origenDatosEscuelas]]" value="{{nuevoEscuelaAlumno}}" required>
+                            <oj-select-one id="nuevoEscuelaAlumno" options="[[origenDatosEscuelas]]" value="{{nuevoEscuelaAlumno}}" on-value-changed="[[escuelaSeleccionada]]" required>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">

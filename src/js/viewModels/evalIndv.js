@@ -13,32 +13,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
             self.origenDatosEscuelas = ko.observable();    
-            self.origenDatosGrupos = ko.observable();        
+            self.origenDatosGrupos = ko.observable()
+            self.nuevoEscuelaAlumno = ko.observable;   
+            self.nuevoGrupoAlumno = ko.observable;
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
-            var grupos = {
-                "1": [
-                    {
-                        "value": 1,
-                        "label": "1 A"
-                    },
-                    {
-                        "value": 2,
-                        "label": "1 B"
-                    }
-                ],
-                "2": [
-                    {
-                        "value": 3,
-                        "label": "2 C"
-                    },
-                    {
-                        "value": 4,
-                        "label": "1 E"
-                    }
-                ]
-            };
+            var grupos;
 
             function ChartModel() {
                 /* toggle button variables */
@@ -87,8 +68,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
             self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
-            self.origenDatosGrupos(new oj.ArrayDataProvider(grupos["1"], {keyAttributes: 'value'}));
-
+            
             $.ajax({type: "GET",
                 contentType: "text/plain; charset=utf-8",
                 url: oj.gWSUrl() + "obtenerEscuelas",
@@ -107,6 +87,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 alert("Error en el servidor, favor de comunicarse con el administrador.");
                 return;
             });
+
+            var peticionGrupos = new XMLHttpRequest();
+            peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos", false);
+            peticionGrupos.onreadystatechange = function () {
+                if(this.readyState === 4) {
+                    if(this.status === 200) {
+                        var jsonResponse = JSON.parse(this.responseText);
+                        if(jsonResponse.hasOwnProperty("error")) {
+                            alert('No al inicializar el modulo, por favor contacta al administrador.');
+                        } else {
+                            grupos = jsonResponse;
+                        }                        
+                    }
+                }
+            };
+            
+            peticionGrupos.send();
 
             function IncidentsViewModel() {
                 var self = this;
@@ -301,9 +298,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 });
             };
 
-            this.cerrarNuevoAlumno = function (event) {
+            self.cerrarNuevoAlumno = function (event) {
                 document.getElementById('dialogoNuevoAlumno').close();
             }
+
+            self.escuelaSeleccionada = function(event) {
+                self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[event['detail'].toString()], {keyAttributes: 'value'}));
+            };
 
             self.crearNuevoAlumno = function () {
                 document.getElementById('dialogoCargando').open();
@@ -318,7 +319,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     apellido_p: apellido_p,
                     apellido_m: apellido_m,
                     sexo: sexo,
-                    fecha_nac: fecha_nac};
+                    fecha_nac: fecha_nac,
+                    id_grupo: self.nuevoGrupoAlumno()};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/agregarAlumno",
@@ -342,9 +344,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             document.getElementById("nuevoApellidoMAlumno").value = '';
                             document.getElementById("nuevoSexoAlumno").value = 'Femenino';
                             document.getElementById("nuevoFNacimientoAlumno").value = '';
-                            document.getElementById("nuevoEscuelaAlumno").value = '';
-                            document.getElementById("nuevoGradoAlumno").value = '';
-                            document.getElementById("nuevoGrupoAlumno").value = '';
+                            self.nuevoEscuelaAlumno('');
+                            self.nuevoGrupoAlumno('');
+                            self.origenDatosGrupos(new oj.ArrayDataProvider(datos));
                             alert('Agregado correctamente.');
                         }
                     }
