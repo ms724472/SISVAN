@@ -257,7 +257,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
                             if(json.error === "No hay datos.") {
-                                self.dataProvider(new oj.ArrayDataProvider([{NoData: ""}]));
+                                self.dataProvider(new oj.ArrayDataProvider([]));
                             } else {
                                 alert('No es posible obtener los datos, por favor contacta al administrador.');
                             }
@@ -280,7 +280,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
                             if(json.error === "No hay datos.") {
-                                self.datosEstatura(new oj.ArrayDataProvider([{NoData: ""}]));
+                                self.datosEstatura(new oj.ArrayDataProvider([]));
                             } else {
                                 alert('No es posible obtener los datos, por favor contacta al administrador.');
                             }
@@ -301,7 +301,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             var jsonResponse = JSON.parse(this.responseText);
                             if (jsonResponse.hasOwnProperty("error")) { 
                                 if(jsonResponse.error === "No hay datos.") {
-                                    self.datosIMC(new oj.ArrayDataProvider([{NoData: ""}]));
+                                    self.datosIMC(new oj.ArrayDataProvider([]));
                                 } else {
                                     alert('No es posible obtener los datos, por favor contacta al administrador.');
                                 }
