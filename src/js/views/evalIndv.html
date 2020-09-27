@@ -120,11 +120,15 @@
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoIdAlumno" >Identificador:</oj-label-inline>
-                            <oj-input-text id="nuevoIdAlumno" required="true"></oj-input-text>
+                            <oj-input-text id="nuevoIdAlumno" required="true" data-bind="ojComponent: {
+                                component: 'ojInputText', 
+                                invalidComponentTracker: tracker}"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoNombreAlumno" >Nombre(s):</oj-label-inline>
-                            <oj-input-text id="nuevoNombreAlumno" required="true"></oj-input-text>
+                            <oj-input-text id="nuevoNombreAlumno" required="true" data-bind="ojComponent: {
+                                component: 'ojInputText', 
+                                invalidComponentTracker: tracker}"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoApellidoPAlumno" >Apellido Paterno:</oj-label-inline>
