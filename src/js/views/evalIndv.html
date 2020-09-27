@@ -52,6 +52,7 @@
                                   animation-on-data-change="auto" 
                                   orientation="[[orientationValue]]"
                                   x-axis="[[tituloIMC]]"
+                                  legend.position="top"
                                   hover-behavior="dim"
                                   style="max-width:500px;width:100%;height:350px;display: inline-block;">
                             <template slot="itemTemplate" data-oj-as="item">
@@ -68,7 +69,7 @@
                         </oj-chart>
                     </oj-flex-item>                    
                     <oj-flex-item style="width: 33%;text-align: center;">
-                        <oj-chart id="graficoTalla" type="line" data="[[datosEstatura]]" animation-on-display="auto"
+                        <oj-chart id="graficoTalla" type="line" data="[[datosEstatura]]" animation-on-display="auto" legend.position="top"
                             animation-on-data-change="auto" x-axis="[[tituloTalla]]" orientation="[[orientationValue]]" hover-behavior="dim"
                             style="max-width:500px;width:100%;height:350px;display: inline-block;">
                             <template slot="itemTemplate" data-oj-as="item">
@@ -84,7 +85,7 @@
                         </oj-chart>
                     </oj-flex-item>
                     <oj-flex-item style="width: 33%;text-align: center;">
-                        <oj-chart id="graficoPeso" type="line" data="[[dataProvider]]" animation-on-display="auto"
+                        <oj-chart id="graficoPeso" type="line" data="[[dataProvider]]" animation-on-display="auto" legend.position="top"
                             animation-on-data-change="auto" x-axis="[[tituloPeso]]" orientation="[[orientationValue]]" hover-behavior="dim"
                             style="max-width:500px;width:100%;height:350px;display: inline-block;">
                             <template slot="itemTemplate" data-oj-as="item">
