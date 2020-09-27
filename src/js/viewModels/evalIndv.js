@@ -374,7 +374,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 if(self.alumnoActual() === '') {
                     alert("Para agregar mediciones es necesario seleccionar un alumno.")
                 } else {
-                    self.origenDatosGrupos(new oj.ArrayDataProvider(self.escuelaDelAlumno(), {keyAttributes: 'value'}));
+                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], {keyAttributes: 'value'}));
                     document.getElementById('dialogoNuevaMedicion').open();
                 }                
             };
