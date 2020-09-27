@@ -398,7 +398,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var subescapula = document.getElementById("nuevaSubescapulaMedicion").value;
                 var pliegue_cuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
                 var bodyRequest = {id_alumno: idAlumno,
-                    id_grupo = self.nuevoGrupoMedicion(),
+                    id_grupo : self.nuevoGrupoMedicion(),
                     fecha: fecha,
                     masa: masa,
                     estatura: estatura,
