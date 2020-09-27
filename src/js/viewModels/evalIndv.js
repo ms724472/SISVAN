@@ -295,7 +295,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         }
                     }
                 };
-
+                peticionHistoticoIMC.send();
             };
 
             self.agregarAlumno = function () {
