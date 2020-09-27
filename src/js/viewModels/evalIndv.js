@@ -14,8 +14,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.orientationValue = ko.observable();
             self.origenDatosEscuelas = ko.observable();    
             self.origenDatosGrupos = ko.observable()
-            self.nuevoEscuelaAlumno = ko.observable;   
-            self.nuevoGrupoAlumno = ko.observable;
+            self.nuevoEscuelaAlumno = ko.observable();   
+            self.nuevoGrupoAlumno = ko.observable();
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
@@ -303,7 +303,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             }
 
             self.escuelaSeleccionada = function(event) {
-                self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[event['detail'].toString()], {keyAttributes: 'value'}));
+                self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[event['detail'].value.toString()], {keyAttributes: 'value'}));
             };
 
             self.crearNuevoAlumno = function () {
