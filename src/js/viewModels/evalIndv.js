@@ -92,6 +92,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
         });
 
+        self._showComponentValidationErrors = function (trackerObj) {
+            trackerObj.showMessages();
+            if (trackerObj.focusOnFirstInvalid())
+                return false;
+
+            return true;
+        };
+
 
         var datos = '{"NoData":""}';
         datos = JSON.parse("[" + datos + "]");
