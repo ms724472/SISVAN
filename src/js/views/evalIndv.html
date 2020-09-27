@@ -178,22 +178,44 @@
             <div class="oj-form">
                 <div class="oj-flex">
                     <oj-flex-item>
-                        <oj-label-inline for="nuevaFMedicion" >Fecha medici&oacute;n:</oj-label-inline>
-                        <oj-input-date required="true" id="nuevaFMedicion"/>
-                        <oj-label-inline for="nuevaMasaMedicion" >Peso:</oj-label-inline>
-                        <oj-input-text required="true" id="nuevaMasaMedicion" required></oj-input-text>
-                        <oj-label-inline for="nuevaEstaturaMedicion" >Talla:</oj-label-inline>
-                        <oj-input-text required="true" id="nuevaEstaturaMedicion" required></oj-input-text>
-                        <oj-label-inline for="nuevaPerimetroCuelloMedicion" >Perimetro del Cuello:</oj-label-inline>
-                        <oj-input-text id="nuevaPerimetroCuelloMedicion" required></oj-input-text>
-                        <oj-label-inline for="nuevaCinturaMedicion" >Cintura:</oj-label-inline>
-                        <oj-input-text id="nuevaCinturaMedicion" required></oj-input-text>
-                        <oj-label-inline for="nuevaTricepsMedicion" >Triceps:</oj-label-inline>
-                        <oj-input-text id="nuevaTricepsMedicion" required></oj-input-text>
-                        <oj-label-inline for="nuevaSubescapulaMedicion" >Subescapula:</oj-label-inline>
-                        <oj-input-text id="nuevaSubescapulaMedicion" required></oj-input-text>
-                        <oj-label-inline for="nuevaPliegueCuelloMedicion" >Pliegue del cuello:</oj-label-inline>
-                        <oj-input-text id="nuevaPliegueCuelloMedicion" required></oj-input-text>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaFMedicion" >Fecha medici&oacute;n:</oj-label-inline>
+                            <oj-input-date required="true" id="nuevaFMedicion" value="{{}}"/>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaMasaMedicion" >Peso:</oj-label-inline>
+                            <oj-input-text required="true" id="nuevaMasaMedicion" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaEstaturaMedicion" >Talla:</oj-label-inline>
+                            <oj-input-text required="true" id="nuevaEstaturaMedicion" required></oj-input-text>                        
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaPerimetroCuelloMedicion" >Perimetro del Cuello:</oj-label-inline>
+                            <oj-input-text id="nuevaPerimetroCuelloMedicion" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaCinturaMedicion" >Cintura:</oj-label-inline>
+                            <oj-input-text id="nuevaCinturaMedicion" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaTricepsMedicion" >Triceps:</oj-label-inline>
+                            <oj-input-text id="nuevaTricepsMedicion" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaSubescapulaMedicion" >Subescapula:</oj-label-inline>
+                            <oj-input-text id="nuevaSubescapulaMedicion" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevaPliegueCuelloMedicion" >Pliegue del cuello:</oj-label-inline>
+                            <oj-input-text id="nuevaPliegueCuelloMedicion" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="nuevoGrupoAlumno" >Grupo:</oj-label-inline>
+                            <oj-select-one id="nuevoGrupoAlumno" required>
+                                <oj-option value="1">5 A</oj-option>
+                            </oj-select-one>
+                        </oj-form-layout>
                     </oj-flex-item>
                 </div>
             </div>

@@ -7,13 +7,15 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
-    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion'],
+    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion',
+    'ojs/ojconverterutils-i18n'],
         function (oj, ko, $) {
             self.dataProvider = ko.observable();
             self.datosEstatura = ko.observable();
             self.orientationValue = ko.observable();
             self.origenDatosEscuelas = ko.observable();
             self.mediciones = '[{"NoData":""}]';
+            self.fechaNuevaMedicion = ko.observable(ConverterUtilsI18n.IntlConverterUtils.dateToLocalIso(new Date()));
 
             function ChartModel() {
                 /* toggle button variables */
@@ -347,7 +349,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.crearNuevaMedicion = function () {
                 document.getElementById('dialogoCargando').open();
                 var idAlumno = document.getElementById("idAlumno").value;
-                var fecha = document.getElementById("nuevaFMedicion").value;
+                var fecha = self.fechaNuevaMedicion();
                 var masa = document.getElementById("nuevaMasaMedicion").value;
                 var estatura = document.getElementById("nuevaEstaturaMedicion").value;
                 var perimetro_cuello = document.getElementById("nuevaPerimetroCuelloMedicion").value;
@@ -380,7 +382,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             self.obtenerInfo();
                             document.getElementById('dialogoCargando').close();
                             document.getElementById('dialogoNuevaMedicion').close();
-                            document.getElementById('nuevaFMedicion').value = '';
+                            self.fechaNuevaMedicion(ConverterUtilsI18n.IntlConverterUtils.dateToLocalIso(new Date()));
                             document.getElementById('nuevaMasaMedicion').value = '';
                             document.getElementById("nuevaEstaturaMedicion").value = '';
                             alert('Agregado correctamente.');
