@@ -29,6 +29,11 @@
     display: inline-block !important;
     padding: 5px;
     width: 200px;
+    visibility: unset !important;
+}
+
+#dialogoNuevoAlumno {
+    width: 650px;
 }
 
 .header-icon:before{
