@@ -32,7 +32,7 @@
     visibility: unset !important;
 }
 
-#dialogoNuevoAlumno {
+.dialogoInserccionDatos {
     width: 665px;
 }
 
