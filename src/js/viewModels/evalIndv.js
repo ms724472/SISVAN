@@ -16,6 +16,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosGrupos = ko.observable()
             self.nuevoEscuelaAlumno = ko.observable();   
             self.nuevoGrupoAlumno = ko.observable();
+            self.alumnoActual = ko.observable('');
+            self.escuelaDelAlumno = ko.observable();
             self.mediciones = '[{"NoData":""}]';
             self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
@@ -170,11 +172,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 datos = JSON.parse("[" + datos + "]");
 
                 self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
-
-                var idAlumno = document.getElementById("idAlumno").value;
+                
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/obtenerDatos/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerDatos/" + self.alumnoActual(),
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -184,6 +185,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
+                            self.escuelaDelAlumno(json.datos.id_escuela);
                         }
                     }
                 }).fail(function () {
@@ -193,7 +195,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/obtenerMediciones/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerMediciones/" + self.alumnoActual(),
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -218,7 +220,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoMasa/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoMasa/" + self.alumnoActual(),
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -241,7 +243,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
                 $.ajax({type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoEstatura/" + idAlumno,
+                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoEstatura/" + self.alumnoActual(),
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -320,7 +322,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     apellido_m: apellido_m,
                     sexo: sexo,
                     fecha_nac: fecha_nac,
-                    id_grupo: self.nuevoGrupoAlumno()};
+                    id_grupo: self.nuevoGrupoAlumno().toString()};
                 $.ajax({type: "POST",
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/agregarAlumno",
@@ -369,7 +371,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.agregarMedicion = function () {
-                document.getElementById('dialogoNuevaMedicion').open();
+                if(self.alumnoActual() === '') {
+                    alert("Para agregar mediciones es necesario seleccionar un alumno.")
+                } else {
+                    self.origenDatosGrupos(new oj.ArrayDataProvider(self.escuelaDelAlumno(), {keyAttributes: 'value'}));
+                    document.getElementById('dialogoNuevaMedicion').open();
+                }                
             };
 
             self.crearNuevaMedicion = function () {

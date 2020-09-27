@@ -9,7 +9,7 @@
             <div class="oj-flex oj-sm-justify-content-space-between" style="width: 100%">
                 <oj-flex-item style="width: 50%">
                     <oj-label-inline for="idAlumno" >Identificador de alumno</oj-label-inline>
-                    <oj-input-text id="idAlumno" required></oj-input-text>
+                    <oj-input-text id="idAlumno" value="{{alumnoActual}}" required></oj-input-text>
                     <oj-button id="buscarAlumnoxNombre" on-oj-action="[[buscarAlumno]]">Avanzado</oj-button>
                     <oj-button id="buscarAlumno" on-oj-action="[[obtenerInfo]]">Buscar</oj-button>
                 </oj-flex-item>
