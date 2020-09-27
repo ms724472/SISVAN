@@ -25,6 +25,12 @@
     height:35px;
 }
 
+.campo-formulario {
+    display: inline-block !important;
+    padding: 5px;
+    width: 200px;
+}
+
 .header-icon:before{
     content:url("images/iteso-header-mobile-b.png");
 }
