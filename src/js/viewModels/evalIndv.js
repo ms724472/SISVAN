@@ -417,7 +417,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById("nuevoApellidoMAlumno").value = datosAlumnoActual.apellido_m;
                 document.getElementById("nuevoSexoAlumno").value = datosAlumnoActual.sexo.toLowerCase();
                 var compFechaNac = datosAlumnoActual.fecha_nac.split("/");
-                nuevaFechaNac(compFechaNac[2] + "-" + compFechaNac[1] + "-" + compFechaNac[0]);
+                self.nuevaFechaNac(compFechaNac[2] + "-" + compFechaNac[1] + "-" + compFechaNac[0]);
                 self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);
                 document.getElementById("nuevoGrupoAlumno").value = datosAlumnoActual.id_grupo;
                 document.getElementById('dialogoNuevoAlumno').open();
