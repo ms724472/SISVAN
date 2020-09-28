@@ -415,16 +415,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.editarAlumno = function() {
-            document.getElementById("nuevoIdAlumno").value = self.alumnoActual(); 
+            document.getElementById("nuevoIdAlumno").value = self.alumnoActual().toString();
             self.idDeshabilitado(true);
             document.getElementById("nuevoNombreAlumno").value = datosAlumnoActual.nombre;
             document.getElementById("nuevoApellidoPAlumno").value = datosAlumnoActual.apellido_p;
             document.getElementById("nuevoApellidoMAlumno").value = datosAlumnoActual.apellido_m;
             document.getElementById("nuevoSexoAlumno").value = datosAlumnoActual.sexo.toLowerCase();
             var compFechaNac = datosAlumnoActual.fecha_nac.split("/");
-            nuevaFechaNac(new Date(compFechaNac[1] + "/" + compFechaNac[0] + "/" + nuevaFechaNac[2]));
+            nuevaFechaNac(compFechaNac[2] + "-" + compFechaNac[1] + "-" + compFechaNac[0]);
             self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);
             document.getElementById("nuevoGrupoAlumno").value = datosAlumnoActual.id_grupo;
+            document.getElementById('dialogoNuevoAlumno').open();
         };
 
         self.crearNuevoAlumno = function () {
