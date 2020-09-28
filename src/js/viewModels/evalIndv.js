@@ -187,7 +187,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 return [{
                     type: 'regExp',
                     options: {
-                      pattern: '[A-Za-z ]+',
+                      pattern: '[A-Za-z\\s]+',
                       messageSummary: 'Valor invalido',
                       messageDetail: 'Corrija el campo.'}}];
               });
@@ -198,6 +198,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     options: {
                       pattern: '.+',
                       messageSummary: 'Valor invalido',
+                      messageDetail: 'Corrija el campo.'}}];
+              });
+
+              self.validadorGrupos = ko.computed(function () {
+                return [{
+                    type: 'regExp',
+                    options: {
+                      pattern: '[0-6] [A-Z]',
+                      messageSummary: 'Grupo invalido',
                       messageDetail: 'Corrija el campo.'}}];
               });
 
