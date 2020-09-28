@@ -179,9 +179,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                       pattern: '[0-9]+',
-                      messageDetail: 'Valor requerido.'}}];
+                      messageSummary: 'Valor invalido',
+                      messageDetail: 'Corrija el campo.'}}];
               });
 
+              self.validadorTexto = ko.computed(function () {
+                return [{
+                    type: 'regExp',
+                    options: {
+                      pattern: '[A-Za-z ]+',
+                      messageSummary: 'Valor invalido',
+                      messageDetail: 'Corrija el campo.'}}];
+              });
+
+              self.validadorFechas = ko.computed(function () {
+                return [{
+                    type: 'regExp',
+                    options: {
+                      pattern: '[0-9]{2}/[0-9]{2}/[0-9]{4}',
+                      messageSummary: 'Valor invalido',
+                      messageDetail: 'Corrija el campo.'}}];
+              });
 
             /**
              * Optional ViewModel method invoked after the bindings are applied on this View. 
@@ -384,17 +402,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevoAlumno = function () {
-            document.getElementById("nuevoIdAlumno").validate();
-            if(document.getElementById("nuevoIdAlumno").valid === 'invalidShown') {
+            var campoId = document.getElementById("nuevoIdAlumno");
+            var campoNombre = document.getElementById("nuevoNombreAlumno");
+            var campoApellidoP = document.getElementById("nuevoApellidoPAlumno");
+            var campoApellidoM = document.getElementById("nuevoApellidoMAlumno");
+            var campoSexoAlumno = document.getElementById("nuevoSexoAlumno");
+            var campoFechaNac = document.getElementById("nuevoFNacimientoAlumno");
+            var campoGrupoAlumno = document.getElementById("nuevoGrupoAlumno");
+
+            campoId.validate();
+            campoNombre.validate();
+            campoApellidoP.validate();
+            campoApellidoM.validate();
+            campoFechaNac.validate();
+            campoGrupoAlumno.validate();
+            if(campoId.valid === 'invalidShown' || campoNombre.valid === 'invalidShown' ||
+               campoApellidoP.valid === 'invalidShown' || campoApellidoM.valid === 'invalidShown' ||
+               campoFechaNac.valid === 'invalidShown' || campoGrupoAlumno.valid === 'invalidShown') {
                 return;
             }
             document.getElementById('dialogoCargando').open();
-            var idAlumno = document.getElementById("nuevoIdAlumno").value;
-            var nombre = document.getElementById("nuevoNombreAlumno").value;
-            var apellido_p = document.getElementById("nuevoApellidoPAlumno").value;
-            var apellido_m = document.getElementById("nuevoApellidoMAlumno").value;
-            var sexo = document.getElementById("nuevoSexoAlumno").value;
-            var fecha_nac = document.getElementById("nuevoFNacimientoAlumno").value;
+            var idAlumno = campoId.value;
+            var nombre = campoNombre.value;
+            var apellido_p = campoApellidoP.value;
+            var apellido_m =campoApellidoM .value;
+            var sexo = campoSexoAlumno.value;
+            var fecha_nac = campoFechaNac.value;
             var bodyRequest = {
                 id_alumno: idAlumno,
                 nombre: nombre,
@@ -422,12 +455,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         self.obtenerInfo();
                         document.getElementById('dialogoCargando').close();
                         document.getElementById('dialogoNuevoAlumno').close();
-                        document.getElementById("nuevoIdAlumno").value = '';
-                        document.getElementById("nuevoNombreAlumno").value = '';
-                        document.getElementById("nuevoApellidoPAlumno").value = '';
-                        document.getElementById("nuevoApellidoMAlumno").value = '';
-                        document.getElementById("nuevoSexoAlumno").value = 'Femenino';
-                        document.getElementById("nuevoFNacimientoAlumno").value = '';
+                        campoId.value = '';
+                        campoNombre.value = '';
+                        campoApellidoP.value = '';
+                        campoApellidoM.value = '';
+                        campoSexoAlumno.value = 'Femenino';
+                        campoFechaNac.value = '';
                         self.nuevoEscuelaAlumno('');
                         self.nuevoGrupoAlumno('');
                         if (Object.keys(grupos).length > 0) {

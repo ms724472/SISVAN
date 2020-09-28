@@ -128,15 +128,27 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoNombreAlumno" show-required>Nombre(s):</oj-label-inline>
-                            <oj-input-text id="nuevoNombreAlumno" required></oj-input-text>
+                            <oj-input-text id="nuevoNombreAlumno" validators="[[validadorTexto]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoApellidoPAlumno" show-required>Apellido Paterno:</oj-label-inline>
-                            <oj-input-text id="nuevoApellidoPAlumno" required></oj-input-text>
+                            <oj-input-text id="nuevoApellidoPAlumno" validators="[[validadorTexto]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoApellidoMAlumno" show-required>Apellido Materno:</oj-label-inline>
-                            <oj-input-text id="nuevoApellidoMAlumno" required></oj-input-text>
+                            <oj-input-text id="nuevoApellidoMAlumno" validators="[[validadorTexto]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoSexoAlumno" show-required>Sexo:</oj-label-inline>
@@ -147,7 +159,11 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoFNacimientoAlumno" show-required>Fecha nacimiento:</oj-label-inline>
-                            <oj-input-date id="nuevoFNacimientoAlumno" converter=[[convertidorFechas]] required/>
+                            <oj-input-date id="nuevoFNacimientoAlumno" converter=[[convertidorFechas]] validators="[[validadorFechas]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'/>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoEscuelaAlumno" show-required>Escuela:</oj-label-inline>
@@ -156,7 +172,11 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoGrupoAlumno" show-required>Grupo:</oj-label-inline>
-                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoAlumno}}" required>
+                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoAlumno}}" validators="[[validadorTexto]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'>
                             </oj-select-one>
                         </oj-form-layout>
                     </oj-flex-item>
