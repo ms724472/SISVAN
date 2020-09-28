@@ -120,7 +120,11 @@
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoIdAlumno" show-required>Identificador:</oj-label-inline>
-                            <oj-input-text id="nuevoIdAlumno" validators="[[validadorNumerico]]" required></oj-input-text>
+                            <oj-input-text id="nuevoIdAlumno" validators="[[validadorNumerico]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoNombreAlumno" show-required>Nombre(s):</oj-label-inline>

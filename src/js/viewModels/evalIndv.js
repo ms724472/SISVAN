@@ -385,6 +385,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
         self.crearNuevoAlumno = function () {
             document.getElementById("nuevoIdAlumno").validate();
+            if(document.getElementById("nuevoIdAlumno").valid === 'invalidShown') {
+                return;
+            }
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("nuevoIdAlumno").value;
             var nombre = document.getElementById("nuevoNombreAlumno").value;
