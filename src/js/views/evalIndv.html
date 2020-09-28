@@ -14,9 +14,10 @@
                     <oj-button id="buscarAlumno" on-oj-action="[[obtenerInfo]]">Buscar</oj-button>
                 </oj-flex-item>
                 <oj-flex-item>
-                    <oj-button id="guardarCambios">Editar alumno</oj-button>
-                    <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">Agregar Medici&oacute;n</oj-button>
                     <oj-button id="agregarAlumno" on-oj-action="[[agregarAlumno]]">Agregar alumno</oj-button>
+                    <oj-button id="editarAlumno" on-oj-action="[[editarAlumno]]">Editar alumno</oj-button>
+                    <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">Agregar medici&oacute;n</oj-button>
+                    <oj-button id="editarMedicion">Editar medici&oacute;n</oj-button>
                     <oj-button id="descargarInfo" on-oj-action="[[descargarInfo]]" display='icons'>
                         <span slot='startIcon' class="demo-download-icon-24 demo-icon-font-24"></span>
                     </oj-button>
@@ -120,7 +121,7 @@
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoIdAlumno" show-required>Identificador:</oj-label-inline>
-                            <oj-input-text id="nuevoIdAlumno" validators="[[validadorNumerico]]" 
+                            <oj-input-text id="nuevoIdAlumno" disabled="[[idDeshabilitado]]" validators="[[validadorNumerico]]" 
                             required translations='{
                                 "required": {
                                   "messageSummary": "Valor requerido.",  
@@ -159,7 +160,7 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoFNacimientoAlumno" show-required>Fecha nacimiento:</oj-label-inline>
-                            <oj-input-date id="nuevoFNacimientoAlumno" converter=[[convertidorFechas]] validators="[[validadorFechas]]" 
+                            <oj-input-date id="nuevoFNacimientoAlumno" value="{{nuevaFechaNac}}" converter=[[convertidorFechas]] validators="[[validadorFechas]]" 
                             required translations='{
                                 "required": {
                                   "messageSummary": "Valor requerido.",  

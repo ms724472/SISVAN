@@ -22,7 +22,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         self.nuevoGrupoMedicion = ko.observable();
         self.mediciones = '[{"NoData":""}]';
         self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-
+        self.idDeshabilitado = ko.observable(false);
+        self.nuevaFechaNac = ko.observable();
+        
+        var datosAlumnoActual = {};
         var grupos = {};
 
         function ChartModel() {
@@ -256,6 +259,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     } else {
                         self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
                         self.escuelaDelAlumno(json.datos[0].id_escuela);
+                        datosAlumnoActual = json.datos[0];
                         if (json.datos[0].grado !== "EGRESADO") {
                             self.nuevoGrupoMedicion(json.datos[0].id_grupo);
                         }
@@ -410,6 +414,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             }
         };
 
+        self.editarAlumno = function() {
+            document.getElementById("nuevoIdAlumno").value = self.alumnoActual(); 
+            self.idDeshabilitado(true);
+            document.getElementById("nuevoNombreAlumno").value = datosAlumnoActual.nombre;
+            document.getElementById("nuevoApellidoPAlumno").value = datosAlumnoActual.apellido_p;
+            document.getElementById("nuevoApellidoMAlumno").value = datosAlumnoActual.apellido_m;
+            document.getElementById("nuevoSexoAlumno").value = datosAlumnoActual.sexo.toLowerCase();
+            var compFechaNac = datosAlumnoActual.fecha_nac.split("/");
+            nuevaFechaNac(new Date(compFechaNac[1] + "/" + compFechaNac[0] + "/" + nuevaFechaNac[2]));
+            self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);
+            document.getElementById("nuevoGrupoAlumno").value = datosAlumnoActual.id_grupo;
+        };
+
         self.crearNuevoAlumno = function () {
             var campoId = document.getElementById("nuevoIdAlumno");
             var campoNombre = document.getElementById("nuevoNombreAlumno");
@@ -468,7 +485,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         campoNombre.value = '';
                         campoApellidoP.value = '';
                         campoApellidoM.value = '';
-                        campoSexoAlumno.value = 'Femenino';
+                        campoSexoAlumno.value = 'femenino';
                         campoFechaNac.value = '';
                         self.nuevoEscuelaAlumno('');
                         self.nuevoGrupoAlumno('');
