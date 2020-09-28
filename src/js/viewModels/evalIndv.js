@@ -7,8 +7,7 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
-    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion', 
-    'ojs/ojknockout-validation'],
+    'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion'],
     function (oj, ko, $) {
         self.dataProvider = ko.observable();
         self.datosEstatura = ko.observable();
@@ -23,7 +22,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         self.nuevoGrupoMedicion = ko.observable();
         self.mediciones = '[{"NoData":""}]';
         self.fechaNuevaMedicion = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-        self.tracker = ko.observable();
 
         var grupos = {};
 
@@ -92,14 +90,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 title: "Historico Peso"
             };
         });
-
-        self._showComponentValidationErrors = function (trackerObj) {
-            trackerObj.showMessages();
-            if (trackerObj.focusOnFirstInvalid())
-                return false;
-
-            return true;
-        };
 
 
         var datos = '{"NoData":""}';
@@ -386,11 +376,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevoAlumno = function () {
-            var trackerObj = ko.utils.unwrapObservable(self.tracker());
-            if (!self._showComponentValidationErrors(trackerObj)) {
-                return;
-            }
-
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("nuevoIdAlumno").value;
             var nombre = document.getElementById("nuevoNombreAlumno").value;
@@ -471,11 +456,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevaMedicion = function () {
-            var trackerObj = ko.utils.unwrapObservable(self.tracker);
-            if (!self._showComponentValidationErrors(trackerObj)) {
-                return;
-            }
-
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("idAlumno").value;
             var fecha = self.fechaNuevaMedicion();
