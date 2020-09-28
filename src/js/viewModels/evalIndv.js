@@ -174,6 +174,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 // Implement if needed
             };
 
+            self.validadorNumerico = ko.computed(function () {
+                return [{
+                    type: 'regExp',
+                    options: {
+                      pattern: '[0-9]+',
+                      messageDetail: 'Valor requerido.'}}];
+              });
+
 
             /**
              * Optional ViewModel method invoked after the bindings are applied on this View. 
@@ -198,7 +206,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.handleDetached = function (info) {
                 // Implement if needed
             };
-        }
+        };
 
         self.obtenerInfo = function () {
             var peticionHistoticoIMC = new XMLHttpRequest();
@@ -376,6 +384,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
         };
 
         self.crearNuevoAlumno = function () {
+            document.getElementById("nuevoIdAlumno").validate();
             document.getElementById('dialogoCargando').open();
             var idAlumno = document.getElementById("nuevoIdAlumno").value;
             var nombre = document.getElementById("nuevoNombreAlumno").value;

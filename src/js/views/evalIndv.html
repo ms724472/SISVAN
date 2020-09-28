@@ -120,39 +120,39 @@
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoIdAlumno" show-required>Identificador:</oj-label-inline>
-                            <oj-input-text id="nuevoIdAlumno" required="true"></oj-input-text>
+                            <oj-input-text id="nuevoIdAlumno" validators="[[validadorNumerico]]" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoNombreAlumno" show-required>Nombre(s):</oj-label-inline>
-                            <oj-input-text id="nuevoNombreAlumno" required="true"></oj-input-text>
+                            <oj-input-text id="nuevoNombreAlumno" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoApellidoPAlumno" show-required>Apellido Paterno:</oj-label-inline>
-                            <oj-input-text id="nuevoApellidoPAlumno" required="true"></oj-input-text>
+                            <oj-input-text id="nuevoApellidoPAlumno" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoApellidoMAlumno" show-required>Apellido Materno:</oj-label-inline>
-                            <oj-input-text id="nuevoApellidoMAlumno" required="true"></oj-input-text>
+                            <oj-input-text id="nuevoApellidoMAlumno" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoSexoAlumno" show-required>Sexo:</oj-label-inline>
-                            <oj-select-one id="nuevoSexoAlumno" value="{{nuevoSexoAlumno}}" required="true">
+                            <oj-select-one id="nuevoSexoAlumno" value="{{nuevoSexoAlumno}}" required>
                                 <oj-option value="femenino">Femenino</oj-option>
                                 <oj-option value="masculino">Masculino</oj-option>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoFNacimientoAlumno" show-required>Fecha nacimiento:</oj-label-inline>
-                            <oj-input-date id="nuevoFNacimientoAlumno" converter=[[convertidorFechas]] required="true"/>
+                            <oj-input-date id="nuevoFNacimientoAlumno" converter=[[convertidorFechas]] required/>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoEscuelaAlumno" show-required>Escuela:</oj-label-inline>
-                            <oj-select-one required="true" id="nuevoEscuelaAlumno" options="[[origenDatosEscuelas]]" value="{{nuevoEscuelaAlumno}}" on-value-changed="[[escuelaSeleccionada]]" required>
+                            <oj-select-one id="nuevoEscuelaAlumno" options="[[origenDatosEscuelas]]" value="{{nuevoEscuelaAlumno}}" on-value-changed="[[escuelaSeleccionada]]" required>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoGrupoAlumno" show-required>Grupo:</oj-label-inline>
-                            <oj-select-one required="true" id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoAlumno}}" required>
+                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoAlumno}}" required>
                             </oj-select-one>
                         </oj-form-layout>
                     </oj-flex-item>
