@@ -196,7 +196,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 return [{
                     type: 'regExp',
                     options: {
-                      pattern: '[0-9]{2}\/[0-9]{2}\/[0-9]{4}',
+                      pattern: '[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}',
                       messageSummary: 'Valor invalido',
                       messageDetail: 'Corrija el campo.'}}];
               });
