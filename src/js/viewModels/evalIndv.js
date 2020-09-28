@@ -128,7 +128,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     if (jsonResponse.hasOwnProperty("error")) {
                         alert('No al inicializar el modulo, por favor contacta al administrador.');
                     } else {
-                        if (Object.keys(jsonResponse).length > 0) {
+                        if (Object.keys(jsonResponse).length == 0) {
                             alert("Te recomendamos agregar un grupo para agregar nuevos alumnos o mediciones.")
                         } else {
                             grupos = jsonResponse;
