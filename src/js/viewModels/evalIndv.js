@@ -417,7 +417,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.editarAlumno = function () {
                 if(Object.keys(datosAlumnoActual).length === 0){
-                    alert("Para editar es necesario seleccionar un alumno.")
+                    alert("Para editar es necesario seleccionar un alumno.");
+                    return;
                 }
                 self.dialogoAlumno("Editar alumno");
                 self.botonFormularioAlumno("Guardar");
@@ -470,10 +471,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     fecha_nac: fecha_nac,
                     id_grupo: self.nuevoGrupoAlumno().toString()
                 };
+                var servicio = 'agregarAlumno';
+                if(self.botonFormularioAlumno() === 'Guardar') {
+                    servicio = 'actualizarAlumno';
+                }
                 $.ajax({
                     type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/agregarAlumno",
+                    url: oj.gWSUrl() + "alumnos/" + servicio,
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
@@ -488,7 +493,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             self.obtenerInfo();
                             document.getElementById('dialogoCargando').close();
                             self.cerrarNuevoAlumno();
-                            alert('Agregado correctamente.');
+                            if(self.botonFormularioAlumno() === 'Guardar') {
+                                alert('Agregado correctamente.');
+                            } else {
+                                alert('Guardado correctamente.');
+                            }
+                            
                         }
                     }
                 }).fail(function () {
@@ -510,7 +520,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.agregarMedicion = function () {
-                if (self.alumnoActual() === '') {
+                if(Object.keys(datosAlumnoActual).length === 0){
                     alert("Para agregar mediciones es necesario seleccionar un alumno.");
                 } else {
                     if (Object.keys(grupos).length > 0) {
