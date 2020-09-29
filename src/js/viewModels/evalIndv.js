@@ -60,6 +60,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.nuevaFechaNac = ko.observable();
             self.dialogoAlumno = ko.observable("Agregar nuevo alumno");
             self.botonFormularioAlumno = ko.observable("Agregar");
+            self.tituloMedicion = ko.observable("Agregar nueva medición");
+            self.botonFormularioMedicion = ko.observable("Agregar");
 
             var datosAlumnoActual = {};
             var grupos = {};
@@ -518,6 +520,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.crearNuevaMedicion = function () {
+                self.botonFormularioMedicion("Agregar");
+                self.tituloMedicion("Agregar nueva medición");
                 document.getElementById('dialogoCargando').open();
                 var idAlumno = document.getElementById("idAlumno").value;
                 var fecha = self.fechaNuevaMedicion();
@@ -556,10 +560,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         } else {
                             self.obtenerInfo();
                             document.getElementById('dialogoCargando').close();
-                            document.getElementById('dialogoNuevaMedicion').close();
-                            self.fechaNuevaMedicion(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-                            document.getElementById('nuevaMasaMedicion').value = '';
-                            document.getElementById("nuevaEstaturaMedicion").value = '';
+                            self.cerrarNuevaMedicion();
                             alert('Agregado correctamente.');
                         }
                     }
@@ -570,8 +571,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 });
             };
 
-            this.cerrarNuevaMedicion = function () {
+            self.cerrarNuevaMedicion = function () {
                 document.getElementById('dialogoNuevaMedicion').close();
+                self.fechaNuevaMedicion(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+                document.getElementById('nuevaMasaMedicion').value = '';
+                document.getElementById("nuevaEstaturaMedicion").value = '';
+                document.getElementById("nuevaPerimetroCuelloMedicion").value  = '';
+                document.getElementById("nuevaCinturaMedicion").value  = '';
+                document.getElementById("nuevaTricepsMedicion").value  = '';
+                document.getElementById("nuevaSubescapulaMedicion").value  = '';
+                document.getElementById("nuevaPliegueCuelloMedicion").value  = '';
             };
 
             this.descargarInfo = function () {
