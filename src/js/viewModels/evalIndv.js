@@ -416,6 +416,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.editarAlumno = function () {
+                if(Object.keys(datosAlumnoActual).length === 0){
+                    alert("Para editar es necesario seleccionar un alumno.")
+                }
                 self.dialogoAlumno("Editar alumno");
                 self.botonFormularioAlumno("Guardar");
                 document.getElementById("nuevoIdAlumno").value = self.alumnoActual().toString();
@@ -508,7 +511,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.agregarMedicion = function () {
                 if (self.alumnoActual() === '') {
-                    alert("Para agregar mediciones es necesario seleccionar un alumno.")
+                    alert("Para agregar mediciones es necesario seleccionar un alumno.");
                 } else {
                     if (Object.keys(grupos).length > 0) {
                         self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
