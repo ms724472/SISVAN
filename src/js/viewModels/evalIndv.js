@@ -59,6 +59,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.idDeshabilitado = ko.observable(false);
             self.nuevaFechaNac = ko.observable();
             self.dialogoAlumno = ko.observable("Agregar nuevo alumno");
+            self.botonFormularioAlumno = ko.observable("Agregar");
 
             var datosAlumnoActual = {};
             var grupos = {};
@@ -353,6 +354,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.agregarAlumno = function () {
                 self.dialogoAlumno("Agregar nuevo alumno");
+                self.botonFormularioAlumno("Agregar");
                 document.getElementById('dialogoNuevoAlumno').open();
             };
 
@@ -413,6 +415,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.editarAlumno = function () {
                 self.dialogoAlumno("Editar alumno");
+                self.botonFormularioAlumno("Guardar");
                 document.getElementById("nuevoIdAlumno").value = self.alumnoActual().toString();
                 self.idDeshabilitado(true);
                 document.getElementById("nuevoNombreAlumno").value = datosAlumnoActual.nombre;

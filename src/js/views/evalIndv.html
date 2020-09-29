@@ -113,7 +113,7 @@
         <p/>
     </div>
 </oj-dialog>
-<oj-dialog style="display:none" id="dialogoNuevoAlumno" class="dialogoInserccionDatos" dialog-title="[[dialogoAlumno]]">
+<oj-dialog style="display:none" id="dialogoNuevoAlumno" class="dialogoInserccionDatos" cancel-behavior="none" dialog-title="[[dialogoAlumno]]">
     <div id="cuperpoDialogoAlumno" slot="body">
         <div class="oj-form-layout">
             <div class="oj-form">
@@ -186,7 +186,10 @@
         </div>
     </div>
     <div slot="footer">
-        <oj-button id="botonAgregarAlumno" on-oj-action="[[crearNuevoAlumno]]">Agregar</oj-button>
+        <oj-button id="botonCerrarDialogo" on-oj-action="[[cerrarNuevoAlumno]]">Cancelar</oj-button>
+        <oj-button id='botonAgregarAlumno' on-oj-action='[[crearNuevoAlumno]]'>
+            <span><oj-bind-text value="[[botonFormularioAlumno]]"></oj-bind-text></span>
+        </oj-button>
     </div>
 </oj-dialog>
 <oj-dialog style="display:none" id="dialogoNuevaMedicion" class="dialogoInserccionDatos" dialog-title="Agregar nueva medición">
