@@ -417,7 +417,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.editarMedicion = function(event) {
-                console.log(self.medicionSeleccionada()[0].startIndex);
+                if(Object.keys(datosAlumnoActual).length === 0){
+                    alert("Para editar es necesario seleccionar un alumno.");
+                    return;
+                } else if(self.medicionSeleccionada()[0].startIndex === undefined) {
+                    alert("Seleccione una medición.");
+                    return;
+                } else if(JSON.stringify(self.origenDatosMediciones().data).includes("Sin datos")) {
+                    alert("No hay mediciones para editar.");
+                    return;
+                }
+                var medicionSeleccionada = self.medicionSeleccionada()[0].startIndex.row;
+                var mediciones = self.origenDatosMediciones().data[medicionSeleccionada];
+                var compFecha = mediciones.fecha.split("/");
+                
+                self.botonFormularioMedicion("Guardar");
+                self.botonFormularioMedicion("Editar medición");
+                self.fechaNuevaMedicion(compFecha[2] + '-' + compFecha[1] + '-' + compFecha[0]);
+                document.getElementById("nuevaMasaMedicion").value = mediciones.masa;
+                document.getElementById("nuevaEstaturaMedicion").value = mediciones.estatura;
+                document.getElementById("nuevaPerimetroCuelloMedicion").value = mediciones.perimetro_cuello;
+                document.getElementById("nuevaCinturaMedicion").value = mediciones.cintura;
+                document.getElementById("nuevaTricepsMedicion").value = mediciones.triceps;
+                document.getElementById("nuevaSubescapulaMedicion").value = mediciones.subescapula;
+                document.getElementById("nuevaPliegueCuelloMedicion").value = mediciones.pliegue_cuello;
+                self.nuevoGrupoMedicion(mediciones.id_grupo);
             };
 
             self.editarAlumno = function () {
@@ -476,10 +500,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     fecha_nac: fecha_nac,
                     id_grupo: self.nuevoGrupoAlumno().toString()
                 };
-                var servicio = 'agregarAlumno';
-                if(self.botonFormularioAlumno() === 'Guardar') {
-                    servicio = 'actualizarAlumno';
-                }
+                var servicio = self.botonFormularioAlumno() === 'Agregar' ? 
+                                                                'agregarAlumno' :
+                                                                'actualizarAlumno';
+                
                 $.ajax({
                     type: "POST",
                     contentType: "text/plain; charset=utf-8",
@@ -562,10 +586,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     subescapula: subescapula,
                     pliegue_cuello: pliegue_cuello
                 };
+
+                var servicio = self.botonFormularioMedicion() === "Agregar" ? 
+                                                                  "agregarMedicion" : 
+                                                                  "actualizarMedicion";
+
                 $.ajax({
                     type: "POST",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/agregarMedicion",
+                    url: oj.gWSUrl() + "alumnos/" + servicio,
                     dataType: "text",
                     data: JSON.stringify(bodyRequest).replace(/]|[[]/g, ''),
                     async: false,
@@ -579,7 +608,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             self.obtenerInfo();
                             document.getElementById('dialogoCargando').close();
                             self.cerrarNuevaMedicion();
-                            alert('Agregado correctamente.');
+                            if(self.botonFormularioMedicion() === "Agregar") {
+                                alert('Agregado correctamente.');
+                            } else {
+                                alert('Guardado correctamente.');
+                            }                            
                         }
                     }
                 }).fail(function () {
