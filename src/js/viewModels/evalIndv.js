@@ -642,10 +642,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             this.descargarInfo = function () {
-                var idAlumno = document.getElementById("idAlumno").value;
+                var cuerpoPeticion = {
+                    id_alumno : document.getElementById("idAlumno").value,
+                    ancho : document.getElementsByTagName("svg")[0].clientWidth,
+                    alto : document.getElementsByTagName("svg")[0].clientHeight,
+                    grafico_imc : document.getElementsByTagName("svg")[0].outerHTML,
+                    grafico_talla : document.getElementsByTagName("svg")[2].outerHTML,
+                    grafico_peso : document.getElementsByTagName("svg")[4].outerHTML
+                };
 
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", oj.gWSUrl() + "alumnos/generarExcel/" + idAlumno, true);
+                xhr.open("POST", oj.gWSUrl() + "alumnos/generarExcel", true);
                 xhr.responseType = 'arraybuffer';
 
                 xhr.onload = function (event) {
@@ -661,7 +668,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     document.body.removeChild(link);
                 };
 
-                xhr.send();
+                xhr.send(cuerpoPeticion.toString());
             };
 
             /**
