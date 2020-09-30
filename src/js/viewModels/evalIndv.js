@@ -642,17 +642,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             this.descargarInfo = function () {
+                var colapsableGrafico = document.getElementById("colapsableHistoricoMediciones");
+                colapsableGrafico.setAttribute("expanded", "true");
+                 
+                //while(colapsableGrafico.hasAttribute() === false || colapsableGrafico.getAttribute("expanded") === false);
+
                 var cuerpoPeticion = {
                     id_alumno : document.getElementById("idAlumno").value,
                     ancho : document.getElementsByTagName("svg")[0].clientWidth,
-                    alto : document.getElementsByTagName("svg")[0].clientHeight,
+                    alto :  document.getElementsByTagName("svg")[0].clientHeight,
                     grafico_imc : document.getElementsByTagName("svg")[0].outerHTML,
                     grafico_talla : document.getElementsByTagName("svg")[2].outerHTML,
                     grafico_peso : document.getElementsByTagName("svg")[4].outerHTML
                 };
 
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", oj.gWSUrl() + "alumnos/generarExcel", true);
+                xhr.open("POST", oj.gWSUrl() + "alumnos/generarExcel", false);
                 xhr.responseType = 'arraybuffer';
 
                 xhr.onload = function (event) {
@@ -668,7 +673,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     document.body.removeChild(link);
                 };
 
-                xhr.send(cuerpoPeticion.toString());
+                xhr.send(JSON.stringify(cuerpoPeticion));
+                document.getElementById("colapsableHistoricoMediciones").setAttribute("expanded", "true");
             };
 
             /**
