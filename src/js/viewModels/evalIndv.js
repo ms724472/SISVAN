@@ -427,21 +427,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert("No hay mediciones para editar.");
                     return;
                 }
-                var medicionSeleccionada = self.medicionSeleccionada()[0].startIndex.row;
-                var mediciones = self.origenDatosMediciones().data[medicionSeleccionada];
-                var compFecha = mediciones.fecha.split("/");
-                
-                self.botonFormularioMedicion("Guardar");
-                self.botonFormularioMedicion("Editar medición");
-                self.fechaNuevaMedicion(compFecha[2] + '-' + compFecha[1] + '-' + compFecha[0]);
-                document.getElementById("nuevaMasaMedicion").value = mediciones.masa;
-                document.getElementById("nuevaEstaturaMedicion").value = mediciones.estatura;
-                document.getElementById("nuevaPerimetroCuelloMedicion").value = mediciones.perimetro_cuello;
-                document.getElementById("nuevaCinturaMedicion").value = mediciones.cintura;
-                document.getElementById("nuevaTricepsMedicion").value = mediciones.triceps;
-                document.getElementById("nuevaSubescapulaMedicion").value = mediciones.subescapula;
-                document.getElementById("nuevaPliegueCuelloMedicion").value = mediciones.pliegue_cuello;
-                self.nuevoGrupoMedicion(mediciones.id_grupo);
+                                
+                if (Object.keys(grupos).length > 0) {
+                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
+                    var medicionSeleccionada = self.medicionSeleccionada()[0].startIndex.row;
+                    var mediciones = self.origenDatosMediciones().data[medicionSeleccionada];
+                    var compFecha = mediciones.fecha.split("/");
+
+                    self.botonFormularioMedicion("Guardar");
+                    self.tituloMedicion("Editar medición");
+                    self.fechaNuevaMedicion(compFecha[2] + '-' + compFecha[1] + '-' + compFecha[0]);
+                    document.getElementById("nuevaMasaMedicion").value = mediciones.masa.toString();
+                    document.getElementById("nuevaEstaturaMedicion").value = mediciones.estatura.toString();
+                    document.getElementById("nuevaPerimetroCuelloMedicion").value = mediciones.perimetro_cuello.toString();
+                    document.getElementById("nuevaCinturaMedicion").value = mediciones.cintura.toString();
+                    document.getElementById("nuevaTricepsMedicion").value = mediciones.triceps.toString();
+                    document.getElementById("nuevaSubescapulaMedicion").value = mediciones.subescapula.toString();
+                    document.getElementById("nuevaPliegueCuelloMedicion").value = mediciones.pliegue_cuello.toString();
+                    self.nuevoGrupoMedicion(mediciones.id_grupo);
+                    document.getElementById('dialogoNuevaMedicion').open();
+                } else {
+                    alert("Favor de agregar un nuevo grupo.");
+                }
             };
 
             self.editarAlumno = function () {
@@ -553,6 +560,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert("Para agregar mediciones es necesario seleccionar un alumno.");
                 } else {
                     if (Object.keys(grupos).length > 0) {
+                        self.botonFormularioMedicion("Agregar");
+                        self.tituloMedicion("Agregar nueva medición");
                         self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
                         document.getElementById('dialogoNuevaMedicion').open();
                     } else {
@@ -562,8 +571,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.crearNuevaMedicion = function () {
-                self.botonFormularioMedicion("Agregar");
-                self.tituloMedicion("Agregar nueva medición");
                 document.getElementById('dialogoCargando').open();
                 var idAlumno = document.getElementById("idAlumno").value;
                 var fecha = self.fechaNuevaMedicion();
