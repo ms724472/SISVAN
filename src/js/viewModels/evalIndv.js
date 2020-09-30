@@ -62,6 +62,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.botonFormularioAlumno = ko.observable("Agregar");
             self.tituloMedicion = ko.observable("Agregar nueva medición");
             self.botonFormularioMedicion = ko.observable("Agregar");
+            self.medicionSeleccionada = ko.observable();
 
             var datosAlumnoActual = {};
             var grupos = {};
@@ -415,6 +416,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 }
             };
 
+            self.editarMedicion = function(event) {
+                console.log(self.medicionSeleccionada()[0].startIndex);
+            };
+
             self.editarAlumno = function () {
                 if(Object.keys(datosAlumnoActual).length === 0){
                     alert("Para editar es necesario seleccionar un alumno.");
@@ -493,10 +498,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             self.obtenerInfo();
                             document.getElementById('dialogoCargando').close();
                             self.cerrarNuevoAlumno();
-                            if(self.botonFormularioAlumno() === 'Guardar') {
-                                alert('Agregado correctamente.');
-                            } else {
+                            if(self.botonFormularioAlumno() === 'Guardar') {                                
                                 alert('Guardado correctamente.');
+                            } else {
+                                alert('Agregado correctamente.');
                             }
                             
                         }

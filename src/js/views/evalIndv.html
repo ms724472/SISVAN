@@ -17,7 +17,7 @@
                     <oj-button id="agregarAlumno" on-oj-action="[[agregarAlumno]]">Agregar alumno</oj-button>
                     <oj-button id="editarAlumno" on-oj-action="[[editarAlumno]]">Editar alumno</oj-button>
                     <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">Agregar medici&oacute;n</oj-button>
-                    <oj-button id="editarMedicion">Editar medici&oacute;n</oj-button>
+                    <oj-button id="editarMedicion" on-oj-action="[[editarMedicion]]">Editar medici&oacute;n</oj-button>
                     <oj-button id="descargarInfo" on-oj-action="[[descargarInfo]]" display='icons'>
                         <span slot='startIcon' class="demo-download-icon-24 demo-icon-font-24"></span>
                     </oj-button>
@@ -38,6 +38,8 @@
                           aria-label='Histórico de mediciones'
                           data='[[origenDatosMediciones]]'
                           columns='{{columnasMediciones}}'
+                          selection='{{medicionSeleccionada}}'
+                          selection-mode='{"row": "single"}' 
                           style='width: 100%;'
                           dnd.reorder.columns='enabled'>
                 </oj-table>
