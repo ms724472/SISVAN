@@ -3,6 +3,57 @@
  The Universal Permissive License (UPL), Version 1.0
 -->
 <div class="oj-panel oj-margin">
+    <oj-chart id="graficoIMC" 
+                                  type="line" 
+                                  data="[[datosIMC]]" 
+                                  animation-on-display="auto"
+                                  animation-on-data-change="auto" 
+                                  orientation="[[orientationValue]]"
+                                  x-axis="[[tituloIMC]]"
+                                  legend.position="top"
+                                  hover-behavior="dim"
+                                  style="position: absolute; top: 0px; right: 0px;">
+                            <template slot="itemTemplate" data-oj-as="item">
+                                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[item.data.serie]]">
+                                </oj-chart-item>
+                            </template>
+                            <template slot="seriesTemplate" data-oj-as="series">
+                                <oj-chart-series 
+                                    color="[[series.id === 'ideal' ? '#006600': null]]"
+                                    marker-shape="square"
+                                    marker-displayed="on">
+                                </oj-chart-series>
+                            </template>
+                        </oj-chart>
+
+                        <oj-chart type="line" data="[[datosEstatura]]" animation-on-display="auto" legend.position="top"
+                            animation-on-data-change="auto" x-axis="[[tituloTalla]]" orientation="[[orientationValue]]" hover-behavior="dim"
+                            style="position: absolute; top: 0px; right: 0px;">
+                            <template slot="itemTemplate" data-oj-as="item">
+                                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]"
+                                    series-id="[[item.data.serie]]">
+                                </oj-chart-item>
+                            </template>
+                            <template slot="seriesTemplate" data-oj-as="series">
+                                <oj-chart-series color="[[series.id === 'ideal' ? '#006600': null]]" marker-shape="square"
+                                    marker-displayed="on">
+                                </oj-chart-series>
+                            </template>
+                        </oj-chart>
+                        <oj-chart type="line" data="[[dataProvider]]" animation-on-display="auto" legend.position="top"
+                            animation-on-data-change="auto" x-axis="[[tituloPeso]]" orientation="[[orientationValue]]" hover-behavior="dim"
+                            style="position: absolute; top: 0px; right: 0px;">
+                            <template slot="itemTemplate" data-oj-as="item">
+                                <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]"
+                                    series-id="[[item.data.serie]]">
+                                </oj-chart-item>
+                            </template>
+                            <template slot="seriesTemplate" data-oj-as="series">
+                                <oj-chart-series color="[[series.id === 'ideal' ? '#006600': null]]" marker-shape="square"
+                                    marker-displayed="on">
+                                </oj-chart-series>
+                            </template>
+                        </oj-chart>
     <h3 class="oj-header-border">Evaluación del alumno</h3>
     <div class="oj-form-layout">
         <div class="oj-form">
