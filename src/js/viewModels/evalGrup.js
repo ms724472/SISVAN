@@ -10,18 +10,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
         function (oj, ko, $) {
             function IncidentsViewModel() {
                 var self = this;
+                var todosLosGrupos = {};
                 self.origenDatosEscuelas = ko.observable();
                 self.escuelaSeleccionada = ko.observable();
                 self.porcentajesEscuelas = ko.observable();
                 self.porcentajesGrupos = ko.observable();
-                self.origenDatosGrupos = ko.observable();
+                self.origenDatosGrupos = ko.observable();    
+                self.valorDesde = ko.observable();
+                self.valorHasta = ko.observable();            
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
                 self.obtenerPorcentajesEscolares = function (idEscuela) {
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesEscuela/" + idEscuela,
+                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesEscuela/?id_escuela=" + idEscuela + "&desde=" + self.valorDesde() + "&hasta=" + self.valorHasta(),
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -39,9 +42,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     });
                 };
 
-                self.valorDesde = ko.observable();
-                self.valorHasta = ko.observable();
-
                 self.funcionTecho = function (desde) {
                     var fecha = new Date(desde());
                     if (fecha.getMonth() >= 8 && fecha.getMonth() <= 12) {
@@ -55,7 +55,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.obtenerPorcentajesGrupales = function (idGrupo) {
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesGrupo/" + idGrupo,
+                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesGrupo/?id_grupo=" + idGrupo + "&desde=" + self.valorDesde() + "&hasta=" + self.valorHasta(),
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -85,13 +85,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             return;
                         } else {
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
-                            self.obtenerPorcentajesEscolares(1);
                         }
                     }
                 }).fail(function () {
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
+
+                var peticionGrupos = new XMLHttpRequest();
+                peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/" + self.hasta(), false);
+                peticionGrupos.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            todosLosGrupos = JSON.parse(this.responseText);
+                            self.origenDatosGrupos(new oj.ArrayDataProvider(todosLosGrupos[1], { keyAttributes: 'value' }));
+                         }
+                    }
+                };
 
                 var peticionRangos = new XMLHttpRequest();
                 peticionRangos.open("GET", oj.gWSUrl() + "obtenerRangos", false);
@@ -101,6 +111,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             var respuestaJSON = JSON.parse(this.responseText);
                             self.valorDesde(respuestaJSON.rangos[0].desde);
                             self.valorHasta(respuestaJSON.rangos[0].hasta);
+                            self.obtenerPorcentajesEscolares(1);
+                            self.obtenerPorcentajesGrupales(1);
+                            peticionGrupos.send();
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
