@@ -29,6 +29,10 @@
     width: 100px;
 }
 
+#hasta,#desde {
+    width: 50px;
+}
+
 .campo-formulario {
     display: inline-block !important;
     padding: 5px;

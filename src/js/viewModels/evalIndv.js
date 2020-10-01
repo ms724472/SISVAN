@@ -162,7 +162,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             });
 
             var peticionGrupos = new XMLHttpRequest();
-            peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos", false);
+            peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/hoy", false);
             peticionGrupos.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 200) {
