@@ -90,18 +90,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 }).fail(function () {
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
-                });
+                });  
 
-                var peticionGrupos = new XMLHttpRequest();
-                peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/" + self.valorHasta(), false);
-                peticionGrupos.onreadystatechange = function () {
-                    if (this.readyState === 4) {
-                        if (this.status === 200) {
-                            todosLosGrupos = JSON.parse(this.responseText);
-                            self.origenDatosGrupos(new oj.ArrayDataProvider(todosLosGrupos[1], { keyAttributes: 'value' }));
-                         }
-                    }
-                };
+                self.obtenerTodosLosGrupos = function() {
+                    var peticionGrupos = new XMLHttpRequest();
+                    peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/" + self.valorHasta(), false);
+                    peticionGrupos.onreadystatechange = function () {
+                        if (this.readyState === 4) {
+                            if (this.status === 200) {
+                                todosLosGrupos = JSON.parse(this.responseText);
+                                self.origenDatosGrupos(new oj.ArrayDataProvider(todosLosGrupos[1], { keyAttributes: 'value' }));
+                            }
+                        }
+                    };
+                    peticionGrupos.send();
+                }              
 
                 var peticionRangos = new XMLHttpRequest();
                 peticionRangos.open("GET", oj.gWSUrl() + "obtenerRangos", false);
@@ -113,7 +116,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             self.valorHasta(respuestaJSON.rangos[0].hasta);
                             self.obtenerPorcentajesEscolares(1);
                             self.obtenerPorcentajesGrupales(1);
-                            peticionGrupos.send();
+                            self.obtenerTodosLosGrupos();
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
