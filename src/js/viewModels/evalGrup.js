@@ -15,12 +15,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.porcentajesEscuelas = ko.observable();
                 self.porcentajesGrupos = ko.observable();
                 self.origenDatosGrupos = ko.observable();
-                self.origenDatosGrupo1 = ko.observable();
-                self.origenDatosGrupo2 = ko.observable();
-                self.origenDatosGrupo3 = ko.observable();
-                self.origenDatosGrupo4 = ko.observable();
-                self.origenDatosGrupo5 = ko.observable();
-                self.origenDatosGrupo6 = ko.observable();
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -43,6 +37,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         alert("Error en el servidor, favor de comunicarse con el administrador.");
                         return;
                     });
+                };
+
+                self.valorDesde = ko.observable();
+                self.valorHasta = ko.observable();
+
+                self.funcionTecho = function (desde) {
+                    var fecha = new Date(desde());
+                    if (fecha.getMonth() >= 8 && fecha.getMonth() <= 12) {
+                        var anio = fecha.getFullYear() + 1;
+                        return anio + '-' + '07-31';
+                    } else {
+                        this.test(desde());
+                        return fecha.getFullYear() + '-' + '07-31';
+                    }
                 };
 
                 self.obtenerPorcentajesGrupales = function (idGrupo) {
@@ -86,121 +94,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     return;
                 });
 
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/1",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ningun grupo');
-                            return;
+                var peticionRangos = new XMLHttpRequest();
+                peticionRangos.open("GET", oj.gWSUrl() + "obtenerRangos", false);
+                peticionRangos.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var respuestaJSON = JSON.parse(this.responseText);
+                            self.valorDesde(respuestaJSON.rangos.desde);
+                            self.valorHasta(respuestaJSON.rangos.hasta);
                         } else {
-                            self.origenDatosGrupos(new oj.ArrayDataProvider(json.grupos));
-                            self.origenDatosGrupo1(new oj.ArrayDataProvider(json.grupos));
-                            self.obtenerPorcentajesGrupales(1);
+                            alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
                     }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
+                };
 
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/2",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ningun grupo');
-                            return;
-                        } else {
-                            self.origenDatosGrupo2(new oj.ArrayDataProvider(json.grupos));
-                        }
-                    }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
-
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/3",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ningun grupo');
-                            return;
-                        } else {
-                            self.origenDatosGrupo3(new oj.ArrayDataProvider(json.grupos));
-                        }
-                    }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
-
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/4",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ningun grupo');
-                            return;
-                        } else {
-                            self.origenDatosGrupo4(new oj.ArrayDataProvider(json.grupos));
-                        }
-                    }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
-
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/5",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ningun grupo');
-                            return;
-                        } else {
-                            self.origenDatosGrupo5(new oj.ArrayDataProvider(json.grupos));
-                        }
-                    }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
-
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "escuelas/obtenerGrupos/6",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ningun grupo');
-                            return;
-                        } else {
-                            self.origenDatosGrupo6(new oj.ArrayDataProvider(json.grupos));
-                        }
-                    }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });
+                peticionRangos.send();
 
                 self.cambioEscuela = event => {
                     switch (event.detail.value) {

@@ -5,6 +5,13 @@
 <div class="oj-panel oj-margin">
     <h3 class="oj-header-border">Evaluaciones grupales</h3>
     <div class="oj-form-layout">
+        <div class="oj-form">
+            <oj-label-inline for="idAlumno" >Rango de fechas</oj-label-inline>
+            <oj-input-date id="desde" value={{valorDesde}} max="[[valorHasta]]">
+            </oj-input-date>
+            <oj-input-date id="hasta" value={{valorHAsta}} min="[[valorDesde]]" max="[[funcionTecho(valorDesde)]]">
+            </oj-input-date>
+        </div>
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
             <oj-accordion>
                 <oj-collapsible expanded="true">
@@ -13,6 +20,7 @@
                     <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
                     <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
                     <oj-button style="padding-left: 5px;" id="descargarPDFEscuelas" onclick="return descargarPDF('graficaEscuela', 'Porcentajes por Escuela')">Exportar PDF</oj-button>
+                    <oj-button style="padding-left: 5px;" id="descargarExcelEscuelas">Exportar Excel</oj-button>
                     <div id='chart-container'>
                         <oj-chart id="graficaEscuela"
                                   type="pie" 
@@ -39,6 +47,7 @@
                     <oj-select-one style="padding-left: 5px; width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
                     <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>
                     <oj-button style="padding-left: 5px;" id="descargarPDFGrupos" onclick="return descargarPDF('graficaGrupo', 'Porcentajes por Grupo')">Exportar PDF</oj-button>
+                    <oj-button style="padding-left: 5px;" id="descargarExcelGrupos">Exportar Excel</oj-button>
                     <div id='chart-container'>
                         <oj-chart id="graficaGrupo"
                                   type="pie" 
