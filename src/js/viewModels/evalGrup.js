@@ -48,7 +48,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         var anio = fecha.getFullYear() + 1;
                         return anio + '-' + '07-31';
                     } else {
-                        this.test(desde());
                         return fecha.getFullYear() + '-' + '07-31';
                     }
                 };
