@@ -226,20 +226,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 }];
             });
 
-            function longfunctionfirst(callback) {
-                setTimeout(function() {
-                            document.getElementById("colapsableGraficoMediciones").setAttribute("expanded", "true");
-                    console.log('first function finished');
-                    if(typeof callback == 'function')
-                        callback();
-                }, 500);
-            };
-
-            function shortfunctionsecond() {
-                        console.log('second function finished');
-                document.getElementById("colapsableHistoricoMediciones").setAttribute("expanded", "true");    
-            };
-
             self.obtenerInfo = function () {
                 var peticionHistoticoIMC = new XMLHttpRequest();
                 datos = '{"NoData":""}';
@@ -283,12 +269,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         if (json.hasOwnProperty("error")) {
                             if (json.error === "No hay datos.") {
                                 self.origenDatosMediciones(new oj.ArrayTableDataSource([{ "Sin datos": "" }]));
+                                document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                             } else {
                                 alert('No es posible obtener los datos, por favor contacta al administrador.');
                             }
                             return;
                         } else {
                             self.origenDatosMediciones(new oj.ArrayTableDataSource(json.mediciones));
+                            document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                         }
                     }
                 }).fail(function () {
@@ -313,6 +301,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.dataProvider(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
+                            document.getElementById("graficoPeso").refresh();
                         }
                     }
                 }).fail(function () {
@@ -337,6 +326,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.datosEstatura(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
+                            document.getElementById("graficoTalla").refresh();
                         }
                     }
                 }).fail(function () {
@@ -358,7 +348,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 return;
                             } else {
                                 self.datosIMC(new oj.ArrayDataProvider(jsonResponse.mediciones, { keyAttributes: 'id' }));
-                                longfunctionfirst(shortfunctionsecond);
+                                document.getElementById("graficoIMC").refresh();
                             }
                         } else {
                             alert("Error en el servidor, favor de comunicarse con el administrador.");
@@ -366,7 +356,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     }
                 };
                 peticionHistoticoIMC.send();
-            };            
+            };
+            
 
             self.agregarAlumno = function () {
                 self.dialogoAlumno("Agregar nuevo alumno");
@@ -655,10 +646,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             this.descargarInfo = function () {
-                colapsableGrafico.setAttribute("expanded", "true");
-                 
-                //while(colapsableGrafico.hasAttribute() === false || colapsableGrafico.getAttribute("expanded") === false);
-
                 var cuerpoPeticion = {
                     id_alumno : document.getElementById("idAlumno").value,
                     ancho : document.getElementsByTagName("svg")[0].clientWidth,
