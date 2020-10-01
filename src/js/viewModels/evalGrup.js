@@ -101,8 +101,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             var respuestaJSON = JSON.parse(this.responseText);
                             self.valorDesde(respuestaJSON.rangos.desde);
                             self.valorHasta(respuestaJSON.rangos.hasta);
-                            console.log(self.valorDesde());
-                            console.log(self.valorHasta());
+                            console.log(respuestaJSON.rangos.desde);
+                            console.log(this.responseText);
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
