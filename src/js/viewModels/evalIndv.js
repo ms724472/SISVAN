@@ -226,6 +226,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 }];
             });
 
+            function longfunctionfirst(callback) {
+                setTimeout(function() {
+                            document.getElementById("colapsableGraficoMediciones").setAttribute("expanded", "true");
+                    console.log('first function finished');
+                    if(typeof callback == 'function')
+                        callback();
+                }, 500);
+            };
+
+            function shortfunctionsecond() {
+                        console.log('second function finished');
+                document.getElementById("colapsableHistoricoMediciones").setAttribute("expanded", "true");    
+            };
+
             self.obtenerInfo = function () {
                 var peticionHistoticoIMC = new XMLHttpRequest();
                 datos = '{"NoData":""}';
@@ -269,14 +283,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         if (json.hasOwnProperty("error")) {
                             if (json.error === "No hay datos.") {
                                 self.origenDatosMediciones(new oj.ArrayTableDataSource([{ "Sin datos": "" }]));
-                                document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                             } else {
                                 alert('No es posible obtener los datos, por favor contacta al administrador.');
                             }
                             return;
                         } else {
                             self.origenDatosMediciones(new oj.ArrayTableDataSource(json.mediciones));
-                            document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                         }
                     }
                 }).fail(function () {
@@ -346,6 +358,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 return;
                             } else {
                                 self.datosIMC(new oj.ArrayDataProvider(jsonResponse.mediciones, { keyAttributes: 'id' }));
+                                longfunctionfirst(shortfunctionsecond);
                             }
                         } else {
                             alert("Error en el servidor, favor de comunicarse con el administrador.");
@@ -353,9 +366,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     }
                 };
                 peticionHistoticoIMC.send();
-
-                document.getElementById("colapsableGraficoMediciones").setAttribute("expanded", "true");
-                document.getElementById("colapsableHistoricoMediciones").setAttribute("expanded", "true");
             };            
 
             self.agregarAlumno = function () {
@@ -645,7 +655,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             this.descargarInfo = function () {
-                var colapsableGrafico = document.getElementById("colapsableGraficoMediciones");
                 colapsableGrafico.setAttribute("expanded", "true");
                  
                 //while(colapsableGrafico.hasAttribute() === false || colapsableGrafico.getAttribute("expanded") === false);
@@ -677,7 +686,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 };
 
                 xhr.send(JSON.stringify(cuerpoPeticion));
-                document.getElementById("colapsableHistoricoMediciones").setAttribute("expanded", "true");
             };
 
             /**
