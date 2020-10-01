@@ -93,7 +93,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 });
 
                 var peticionGrupos = new XMLHttpRequest();
-                peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/" + self.hasta(), false);
+                peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/" + self.valorHasta(), false);
                 peticionGrupos.onreadystatechange = function () {
                     if (this.readyState === 4) {
                         if (this.status === 200) {
