@@ -101,6 +101,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             var respuestaJSON = JSON.parse(this.responseText);
                             self.valorDesde(respuestaJSON.rangos.desde);
                             self.valorHasta(respuestaJSON.rangos.hasta);
+                            console.log(self.valorDesde());
+                            console.log(self.valorHasta());
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
@@ -111,24 +113,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 self.cambioEscuela = event => {
                     switch (event.detail.value) {
-                        case 1:
-                            self.origenDatosGrupos(self.origenDatosGrupo1());
-                            break;
-                        case 2:
-                            self.origenDatosGrupos(self.origenDatosGrupo2());
-                            break;
-                        case 3:
-                            self.origenDatosGrupos(self.origenDatosGrupo3());
-                            break;
-                        case 4:
-                            self.origenDatosGrupos(self.origenDatosGrupo4());
-                            break;
-                        case 5:
-                            self.origenDatosGrupos(self.origenDatosGrupo5());
-                            break;
-                        case 6:
-                            self.origenDatosGrupos(self.origenDatosGrupo6());
-                            break;
+                        
                     }
                 };
 
