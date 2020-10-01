@@ -33,6 +33,11 @@
     width: 50px;
 }
 
+#etiqueta-rangos {
+    position: relative;
+    bottom: 5px;
+}
+
 .campo-formulario {
     display: inline-block !important;
     padding: 5px;
