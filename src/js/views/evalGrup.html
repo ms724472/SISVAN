@@ -6,18 +6,20 @@
     <h3 class="oj-header-border">Evaluaciones grupales</h3>
     <div class="oj-form-layout">
         <div class="oj-form">
-            <oj-label-inline id="etiqueta-rangos" for="desde">Rango de fechas</oj-label-inline>
-            <oj-input-date id="desde" value={{valorDesde}}>
-            </oj-input-date>
-            <oj-input-date id="hasta" value={{valorHasta}} min="[[valorDesde]]" max="[[funcionTecho(valorDesde)]]">
-            </oj-input-date>
-            <oj-button style="position: relative;  bottom: 3px;" on-oj-action="[[actualizarDatos]]">Buscar</oj-button>
+            <oj-toolbar id='barra-consulta' aria-label='Barra de consulta' aria-controls='controlled' class="oj-toolbar-bottom-border">
+                <oj-label id="etiqueta-rangos" for="desde">Rango de fechas</oj-label>
+                <oj-input-date id="desde" value={{valorDesde}}>
+                </oj-input-date>
+                <oj-input-date id="hasta" value={{valorHasta}} min="[[valorDesde]]" max="[[funcionTecho(valorDesde)]]">
+                </oj-input-date>
+                <oj-button style="position: relative;  bottom: 3px;" on-oj-action="[[actualizarDatos]]">Buscar</oj-button>
+            </oj-toolbar>
         </div>
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
             <oj-accordion>
-                <oj-collapsible expanded="true">
+                <oj-collapsible id="colapsable-escolar" expanded="true">
                     <h3 slot="header">Evaluación escolar</h3>
-                    <oj-label for="seleccionadorEscuela">Selecciona una escuela:</oj-label>
+                    <oj-label-inline for="seleccionadorEscuela">Selecciona una escuela:</oj-label-inline>
                     <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
                     <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
                     <oj-button style="padding-left: 5px;" id="descargarPDFEscuelas" onclick="return descargarPDF('graficaEscuela', 'Porcentajes por Escuela')">Exportar PDF</oj-button>
@@ -41,9 +43,9 @@
                         </oj-chart>
                     </div>
                 </oj-collapsible>
-                <oj-collapsible>
+                <oj-collapsible id="colapsable-grupal">
                     <h3 slot="header">Evaluación grupal</h3>
-                    <oj-label for="seleccionadorEscuela">Selecciona un grupo:</oj-label>
+                    <oj-label-inline for="seleccionadorEscuela">Selecciona un grupo:</oj-label-inline>
                     <oj-select-one style="width: 500px;" id="seleccionadorEscuelaGrupo" on-value-changed="[[cambioEscuela]]" options="[[origenDatosEscuelas]]"></oj-select-one> 
                     <oj-select-one style="padding-left: 5px; width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
                     <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>

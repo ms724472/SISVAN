@@ -36,6 +36,7 @@
 #etiqueta-rangos {
     position: relative;
     bottom: 5px;
+    padding-right: 5px;
 }
 
 .campo-formulario {
