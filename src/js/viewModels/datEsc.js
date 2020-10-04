@@ -233,7 +233,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
             if (this.status === 200) {
               var json = JSON.parse(this.responseText);
               if (json.hasOwnProperty("error")) {
-                alert('No se encontro ningun dato, contacte al administrador.');
+                if(json.error === "No hay datos.") {
+                  self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource([{NoData:""}])));
+                } else {
+                  alert('No se encontro ningun dato, contacte al administrador.');
+                }                
                 return;
               } else {
                 self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.grupos, { idAttribute: 'id_grupo' })));
