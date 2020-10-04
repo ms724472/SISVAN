@@ -51,12 +51,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 self.funcionTecho = function (desde) {
                     var fecha = new Date(desde());
-                    if (fecha.getMonth() >= 8 && fecha.getMonth() <= 12) {
+                    var fechaHasta;
+                    if (fecha.getMonth() + 1 >= 8 && fecha.getMonth() + 1 <= 12) {
                         var anio = fecha.getFullYear() + 1;
-                        return anio + '-' + '07-31';
+                        fechaHasta = anio + '-' + '07-31';
                     } else {
-                        return fecha.getFullYear() + '-' + '07-31';
+                        fechaHasta = fecha.getFullYear() + '-' + '07-31';
                     }
+                    self.valorHasta(fechaHasta);
+                    return fechaHasta;
                 };
 
                 self.obtenerPorcentajesGrupales = function (idGrupo, diagnostico) {
