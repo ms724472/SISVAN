@@ -7,12 +7,23 @@
     <div class="oj-form-layout">
         <div class="oj-form">
             <oj-toolbar id='barra-consulta' aria-label='Barra de consulta' aria-controls='controlled' class="oj-toolbar-bottom-border">
-                <oj-label id="etiqueta-rangos" class="componente-barra" for="desde">Rango de fechas</oj-label>
+                <oj-label id="etiqueta-rangos" class="componente-barra" for="desde">Rango de fechas:</oj-label>
                 <oj-input-date id="desde" class="componente-barra" value={{valorDesde}}>
                 </oj-input-date>
                 <oj-input-date id="hasta" class="componente-barra" value={{valorHasta}} min="[[valorDesde]]" max="[[funcionTecho(valorDesde)]]">
                 </oj-input-date>
                 <oj-button id="btn-consulta-rangos"class="componente-barra" on-oj-action="[[actualizarDatos]]">Buscar</oj-button>
+                <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+                <oj-menu-button id="menuButton">
+                    Escuela
+                    <oj-menu id="menuEscuelas" slot="menu" style="display:none" on-oj-action="[[cambioEscuela]]">
+                        <!-- ko foreach: escuelas -->
+                        <oj-option data-bind="attr: {id: value, value: value}">
+                          <span data-bind="text: label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                      </oj-menu>
+                  </oj-menu-button>
             </oj-toolbar>
         </div>
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">

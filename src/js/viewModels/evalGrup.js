@@ -17,7 +17,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.porcentajesGrupos = ko.observable();
                 self.origenDatosGrupos = ko.observable();    
                 self.valorDesde = ko.observable();
-                self.valorHasta = ko.observable();            
+                self.valorHasta = ko.observable();    
+                self.escuelas = [];
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -106,6 +107,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 alert(ERROR_INTERNO_SERVIDOR);
                               }
                           } else {
+                            self.escuelas(respuestaJSON.escuelas);
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(respuestaJSON.escuelas));                            
                           }                                                        
                         } else {
