@@ -13,18 +13,14 @@
                                 aria-label='Barra de edición' 
                                 aria-controls='controlled' 
                                 class="oj-toolbar-bottom-border">
-                        <oj-button id='btn-dialogo-escuela' display='icons'>
-                            <span slot='startIcon' class='demo-icon-font' on-oj-action="[[crearNuevaEscuela]]"><b>+</b></span>
+                        <oj-button id='btn-agregar-escuela' display='icons' on-oj-action="[[crearNuevaEscuela]]">
+                            <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
                             Agregar escuela
                         </oj-button>
                         <oj-button id='btnEditarEscuela' display='icons'>
                             <span slot='startIcon' class='demo-icon-font demo-edit-icon-24'></span>
                             Editar escuela
-                        </oj-button>
-                        <oj-button id='btnEliminarEscuela' display='icons'>
-                            <span slot='startIcon' class='demo-icon-font demo-garbage-icon-24'></span>
-                            Eliminar escuela
-                        </oj-button>
+                        </oj-button>                        
                     </oj-toolbar>
                     <oj-table id="tablaEscuelas" 
                               aria-label='Datos del Alumno' 
@@ -51,18 +47,14 @@
                                 aria-label='Barra de edición' 
                                 aria-controls='controlled' 
                                 class="oj-toolbar-bottom-border">
-                        <oj-button id='btn-diaologo-grupo' display='icons'>
+                        <oj-button id='btn-agregar-grupo' display='icons'>
                             <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
                             Agregar grupo
                         </oj-button>
-                        <oj-button id='btnEditarEscuela' display='icons'>
+                        <oj-button id='btn-editar-grupo' display='icons'>
                             <span slot='startIcon' class='demo-icon-font demo-edit-icon-24'></span>
                             Editar grupo
-                        </oj-button>
-                        <oj-button id='btnEliminarEscuela' display='icons'>
-                            <span slot='startIcon' class='demo-icon-font demo-garbage-icon-24'></span>
-                            Eliminar grupo
-                        </oj-button>
+                        </oj-button>                        
                     </oj-toolbar>
                     <oj-table id="tablaGrupos" 
                               aria-label='Datos de los grupos' 
