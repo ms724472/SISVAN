@@ -230,10 +230,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
 
       self.obtenerInformacion();
 
-      $('document').ready(function(){
-        document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
-      });
-
       self.escuelaSeleccionada = function(event) {
         console.log(event.target.value);
       };
@@ -373,6 +369,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new AboutViewModel();
-  }
+   var vm = new AboutViewModel;
+
+   $(document).ready
+     (
+       function () {
+         ko.applyBindings(vm, document.getElementById('table'));
+         document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+       }
+     );
+ }
 );
