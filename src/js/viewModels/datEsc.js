@@ -29,7 +29,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.botonDialogoEscuela = ko.observable("Agregar");
       
       self.nombresColumnas = ko.observableArray([
-        { headerText: 'Clave de escuela:', field: 'clave_sep'},
+        { headerText: 'Clave de escuela', field: 'clave_sep'},
         { headerText: 'Nombre', field: 'nombre' },
         { headerText: 'Dirección', field: 'direccion' },
         { headerText: 'Colonia', field: 'colonia' },
@@ -259,6 +259,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         document.getElementById('dialogoEscuela').open();
       };
 
+      self.editarEscuela = function(event) {
+        self.tituloDialogoEscuela("Editar escuela");
+        self.botonDialogoEscuela("Guardar");
+        self.campoCCT(datosEscuelas.clave_sep);
+        self.campoNombre(datosEscuelas.nombre);
+        self.campoDireccion(datosEscuelas.direccion);
+        self.campoColonia(datosEscuelas.colonia);
+        self.campoCodigoPostal(datosEscuelas.codigo_postal.toString());
+        self.campoTelefono(datosEscuelas.telefono);
+        self.campoEstado(datosEscuelas.estado);
+        self.campoMunicipio(datosEscuelas.municipio);
+        document.getElementById('dialogoEscuela').open();
+      };
+
       self.limpiarDialogoEscuela = function(event) {
         self.campoCCT("");
         self.campoNombre("");
@@ -289,6 +303,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         if (self.botonDialogoEscuela() !== "Agregar") {
           servicio = "actualizarEscuela";
           metodo = "PUT";
+          datosEscuelas.id_escuela = datosEscuela.id_escuela;
         }
 
         var peticionProcesarEscuela = new XMLHttpRequest();
