@@ -262,14 +262,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.editarEscuela = function(event) {
         self.tituloDialogoEscuela("Editar escuela");
         self.botonDialogoEscuela("Guardar");
-        self.campoCCT(datosEscuelas.clave_sep);
-        self.campoNombre(datosEscuelas.nombre);
-        self.campoDireccion(datosEscuelas.direccion);
-        self.campoColonia(datosEscuelas.colonia);
-        self.campoCodigoPostal(datosEscuelas.codigo_postal.toString());
-        self.campoTelefono(datosEscuelas.telefono);
-        self.campoEstado(datosEscuelas.estado);
-        self.campoMunicipio(datosEscuelas.municipio);
+        self.campoCCT(datosEscuela.clave_sep);
+        self.campoNombre(datosEscuela.nombre);
+        self.campoDireccion(datosEscuela.direccion);
+        self.campoColonia(datosEscuela.colonia);
+        self.campoCodigoPostal(datosEscuela.codigo_postal.toString());
+        self.campoTelefono(datosEscuela.telefono);
+        self.campoEstado(datosEscuela.estado);
+        self.campoMunicipio(datosEscuela.municipio);
         document.getElementById('dialogoEscuela').open();
       };
 
@@ -303,7 +303,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         if (self.botonDialogoEscuela() !== "Agregar") {
           servicio = "actualizarEscuela";
           metodo = "PUT";
-          datosEscuelas.id_escuela = datosEscuela.id_escuela;
+          datosEscuelas.id_escuela = datosEscuela.id_escuela.toString();
         }
 
         var peticionProcesarEscuela = new XMLHttpRequest();
