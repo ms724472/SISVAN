@@ -5,9 +5,9 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraytabledatasource',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraytabledatasource',
 'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojselectcombobox'],
- function(oj, ko, $, Bootstrap, ArrayDataProvider) {
+ function(oj, ko, $, ArrayDataProvider) {
   
     function AboutViewModel() {
       var self = this;
@@ -230,6 +230,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydatap
 
       self.obtenerInformacion();
 
+      $('document').ready(function(){
+        document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+      });
+
       self.escuelaSeleccionada = function(event) {
         console.log(event.target.value);
       };
@@ -364,15 +368,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydatap
       };
     }
 
-    var vm = new AboutViewModel();
-  
-    Bootstrap.whenDocumentReady().then(
-      function () {
-        ko.applyBindings(vm, document.getElementById('container'));
-        document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
-      }
-    );
-
-
+    /*
+     * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
+     * each time the view is displayed.  Return an instance of the ViewModel if
+     * only one instance of the ViewModel is needed.
+     */
+    return new AboutViewModel();
   }
 );
