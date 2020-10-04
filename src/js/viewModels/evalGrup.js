@@ -41,8 +41,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                               } else {
                                 self.porcentajesEscuelas(new oj.ArrayDataProvider(respuestaJSON.datos));
                               }                              
-                              
-                              console.log(ERROR_INTERNO_SERVIDOR);
                             } else {
                                 alert(ERROR_INTERNO_SERVIDOR);
                             }
@@ -81,9 +79,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                   }
                               } else {
                                 self.porcentajesGrupos(new oj.ArrayDataProvider(respuestaJSON.datos));
-                              }                              
-                              
-                              console.log(ERROR_INTERNO_SERVIDOR);
+                              }                                                            
                             } else {
                                 alert(ERROR_INTERNO_SERVIDOR);
                             }
@@ -106,9 +102,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                               }
                           } else {
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(respuestaJSON.escuelas));                            
-                          }                              
-                          
-                          console.log(ERROR_INTERNO_SERVIDOR);
+                          }                                                        
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
                         }
@@ -169,6 +163,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     switch (event.detail.value) {
                         
                     }
+                };
+
+                self.actualizarDatos = function(event) {
+
                 };
 
                 self.generarGraficaEscuela = function () {
