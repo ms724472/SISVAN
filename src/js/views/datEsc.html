@@ -14,7 +14,7 @@
                                 aria-controls='controlled' 
                                 class="oj-toolbar-bottom-border">
                         <oj-button id='btnAgregarEscuela' display='icons'>
-                            <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
+                            <span slot='startIcon' class='demo-icon-font' on-oj-action="[[crearNuevaEscuela]]"><b>+</b></span>
                             Agregar escuela
                         </oj-button>
                         <oj-button id='btnEditarEscuela' display='icons'>
@@ -80,3 +80,56 @@
         </div>
     </div>
 </div>
+<oj-dialog style="display:none" id="dialogoEscuela" class="dialogoInserccionDatos" dialog-title="[[tituloDialogoEscuela]]" cancel-behavior="none">
+    <div slot="body">
+        <div class="oj-form-layout">
+            <div class="oj-form">
+                <div class="oj-flex">
+                    <oj-flex-item>                        
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-cct" >Clave Centro de Trabajo:</oj-label-inline>
+                            <oj-input-text required="true" id="campo-cct" value="{{campoCCT}}" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-nombre" >Nombre:</oj-label-inline>
+                            <oj-input-text required="true" id="campo-nombre" value="{{campoNombre}}" required></oj-input-text>                        
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-direccion" >Direccion:</oj-label-inline>
+                            <oj-input-text id="campo-direccion" value="{{campoDireccion}}" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-colonia" >Colonia:</oj-label-inline>
+                            <oj-input-text id="campo-colonia" value="{{campoColonia}}" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-codigo-postal" >Codigo Postal:</oj-label-inline>
+                            <oj-input-text id="campo-codigo-postal" value="{{campoCodigoPostal}}" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-telefono" >Telefono:</oj-label-inline>
+                            <oj-input-text id="campo-telefono" value="{{campoTelefono}}" required></oj-input-text>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-estado" >Estado:</oj-label-inline>
+                            <oj-select-one id="campo-estado" options="[[datosEstados]]" value="{{campoEstado}}" on-value-changed="[[estadoSeleccionado]]" required>
+                            </oj-select-one>
+                        </oj-form-layout>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label-inline for="campo-municipio" >Municipio:</oj-label-inline>
+                            <oj-select-one id="campo-municipio" options="[[datosMunicipios]]" value="{{campoMunicipio}}" required>
+                            </oj-select-one>
+                        </oj-form-layout>                        
+                    </oj-flex-item>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div slot="footer">
+        <oj-button id="btn-cerrar-dialogo-escuela" on-oj-action="[[cerrarDialogoEscuela]]">Cancelar</oj-button>
+        <oj-button id="btn-abrir-dialogo-escuela" on-oj-action="[[procesarDatosEscuela]]"><span>
+                <oj-bind-text value="[[botonDialogoEscuela]]"></oj-bind-text>
+            </span>
+        </oj-button>
+    </div>
+</oj-dialog>
