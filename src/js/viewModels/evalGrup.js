@@ -61,7 +61,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     }
                 };
 
-                self.obtenerPorcentajesGrupales = function (idGrupo) {
+                self.obtenerPorcentajesGrupales = function (idGrupo, diagnostico) {
                     var servicio = "escolares/obtenerPorcentajesGrupo/?id_grupo=" + idGrupo + 
                                                                       "&desde=" + self.valorDesde() + 
                                                                       "&hasta=" + self.valorHasta() + 
@@ -139,8 +139,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             var respuestaJSON = JSON.parse(this.responseText);
                             self.valorDesde(respuestaJSON.rangos[0].desde);
                             self.valorHasta(respuestaJSON.rangos[0].hasta);
-                            self.obtenerPorcentajesEscolares(1);
-                            self.obtenerPorcentajesGrupales(1);
+                            self.obtenerPorcentajesEscolares(1, "imc");
+                            self.obtenerPorcentajesGrupales(1, "imc");
                             self.obtenerTodosLosGrupos();
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
@@ -157,11 +157,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 self.generarGraficaEscuela = function () {
-                    self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value);
+                    self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value, "imc");
                 };
 
                 self.generarGraficaGrupo = function () {
-                    self.obtenerPorcentajesGrupales(document.getElementById('seleccionadorGrupo').value);
+                    self.obtenerPorcentajesGrupales(document.getElementById('seleccionadorGrupo').value, "imc");
                 };
 
                 /**

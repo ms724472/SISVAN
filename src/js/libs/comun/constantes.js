@@ -7,4 +7,4 @@
  ***************************** INFORMACION IMPORTANTE ******************************
  */
 
- export const ERROR_INTERNO_SERVIDOR = "Error interno del servidor, favor de contactar al administrador.";
+ const ERROR_INTERNO_SERVIDOR = "Error interno del servidor, favor de contactar al administrador.";
