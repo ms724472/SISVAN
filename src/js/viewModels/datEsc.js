@@ -5,9 +5,9 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraytabledatasource',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraytabledatasource',
 'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojselectcombobox'],
- function(oj, ko, $, ArrayDataProvider) {
+ function(oj, ko, $, Bootstrap, ArrayDataProvider) {
   
     function AboutViewModel() {
       var self = this;
@@ -364,11 +364,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       };
     }
 
-    /*
-     * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
-     * each time the view is displayed.  Return an instance of the ViewModel if
-     * only one instance of the ViewModel is needed.
-     */
-    return new AboutViewModel();
+    var vm = new AboutViewModel();
+  
+    Bootstrap.whenDocumentReady().then(
+      function () {
+        ko.applyBindings(vm, document.getElementById('container'));
+        document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+      }
+    );
+
+
   }
 );
