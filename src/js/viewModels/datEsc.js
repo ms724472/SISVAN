@@ -60,14 +60,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.datosEstados = new ArrayDataProvider(self.estados, {keyAttributes: 'value'});
 
       self.grados = [
-        {
-          value: 1,
-          value: 2,
-          value: 3,
-          value: 4,
-          value: 5,
-          value: 6
-        }
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+        { value: 4 },
+        { value: 5 },
+        { value: 6 }
       ];
 
       self.datosGrados = new ArrayDataProvider(self.grados, {keyAttributes: 'value'});
@@ -378,6 +376,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.crearNuevoGrupo = function(event) {
         self.tituloDialogoGrupo("Agregar nuevo grupo");
         self.botonDialogoGrupo("Agregar");
+        self.campoEscuela(datosEscuela.nombre);
         document.getElementById('dialogoGrupo').open();
       };
 
