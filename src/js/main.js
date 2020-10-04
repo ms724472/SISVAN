@@ -26,7 +26,8 @@ requirejs.config(
     'ojL10n': 'libs/oj/v2.2.0/ojL10n',
     'ojtranslations': 'libs/oj/v2.2.0/resources',
     'text': 'libs/require/text',
-    'signals': 'libs/js-signals/signals'
+    'signals': 'libs/js-signals/signals',
+    'comun' : 'libs/comun'
   }
   //endinjector
   ,
