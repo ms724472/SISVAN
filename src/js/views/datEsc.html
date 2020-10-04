@@ -30,7 +30,7 @@
                               dnd.reorder.columns='enabled'
                               selection-mode='{"row": "single"}'
                               on-selection-changed='[[escuelaSeleccionada]]'>
-                        <oj-paging-control id="paging" data="[[origenDatosEscuelas]]" page-size="5" slot="bottom">
+                        <oj-paging-control id="paginacion-escuelas" data="[[origenDatosEscuelas]]" page-size="5" slot="bottom">
                         </oj-paging-control>
                     </oj-table>
                 </div>
@@ -64,7 +64,7 @@
                               dnd.reorder.columns='enabled'
                               selection-mode='{"row": "single"}'
                               on-selection-changed='[[grupoSeleccionado]]'>
-                        <oj-paging-control id="paging" data="[[origenDatosGrupos]]" page-size="5" slot="bottom">
+                        <oj-paging-control id="paginacion-grupos" data="[[origenDatosGrupos]]" page-size="5" slot="bottom">
                         </oj-paging-control>
                     </oj-table>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="oj-flex">
                     <oj-flex-item>                        
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="campo-cct" >Clave Centro de Trabajo:</oj-label-inline>
+                            <oj-label-inline for="campo-cct" >Clave de escuela:</oj-label-inline>
                             <oj-input-text required="true" id="campo-cct" value="{{campoCCT}}" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">

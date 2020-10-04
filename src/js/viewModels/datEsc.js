@@ -28,6 +28,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.botonDialogoEscuela = ko.observable("Agregar");
       
       self.nombresColumnas = ko.observableArray([
+        { headerText: 'Clave de escuela:', field: 'clave_sep'},
         { headerText: 'Nombre', field: 'nombre' },
         { headerText: 'Dirección', field: 'direccion' },
         { headerText: 'Colonia', field: 'colonia' },
@@ -188,41 +189,46 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         }
       };
 
-      var peticionDatosEscuelas = new XMLHttpRequest();
-      peticionDatosEscuelas.open('GET', oj.gWSUrl() + "obtenerDatosEscuelas", false);
-      peticionDatosEscuelas.onreadystatechange = function () {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            var json = JSON.parse(this.responseText);
-            if (json.hasOwnProperty("error")) {
-              alert('No se encontro ningun dato, contacte al administrador.');
-              return;
-            } else {
-              self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, {idAttribute: 'id_escuela'})));
+      self.obtenerInformacion = function (event) {
+        var peticionDatosEscuelas = new XMLHttpRequest();
+        peticionDatosEscuelas.open('GET', oj.gWSUrl() + "obtenerDatosEscuelas", false);
+        peticionDatosEscuelas.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            if (this.status === 200) {
+              var json = JSON.parse(this.responseText);
+              if (json.hasOwnProperty("error")) {
+                alert('No se encontro ningun dato, contacte al administrador.');
+                return;
+              } else {
+                self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, { idAttribute: 'id_escuela' })));
+              }
             }
           }
-        }
-      };
+        };
 
-      peticionDatosEscuelas.send();
+        peticionDatosEscuelas.send();
 
-      var peticionDatosGrupos = new XMLHttpRequest();
-      peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/1", false);
-      peticionDatosGrupos.onreadystatechange = function () {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            var json = JSON.parse(this.responseText);
-            if (json.hasOwnProperty("error")) {
-              alert('No se encontro ningun dato, contacte al administrador.');
-              return;
-            } else {
-              self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.grupos, {idAttribute: 'id_grupo'})));
+        var peticionDatosGrupos = new XMLHttpRequest();
+        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/1", false);
+        peticionDatosGrupos.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            if (this.status === 200) {
+              var json = JSON.parse(this.responseText);
+              if (json.hasOwnProperty("error")) {
+                alert('No se encontro ningun dato, contacte al administrador.');
+                return;
+              } else {
+                self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.grupos, { idAttribute: 'id_grupo' })));
+              }
             }
           }
-        }
+        };
+
+        peticionDatosGrupos.send();
+
       };
 
-      peticionDatosGrupos.send();
+      self.obtenerInformacion();
 
       self.escuelaSeleccionada = function(event) {
         console.log(event.target.value);
