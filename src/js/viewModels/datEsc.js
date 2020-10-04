@@ -420,7 +420,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         if(self.botonDialogoGrupo() !== "Agregar") {
           servicio = "actualizarGrupo";
           metodo = "PUT";
-          datosGrupo.id_grupo = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado].id_grupo;
+          var id_grupo = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado].id_grupo;
+          datosGrupo.id_grupo = id_grupo.toString();
         } else {
           datosGrupo.id_escuela = datosEscuela.id_escuela.toString();
         }
