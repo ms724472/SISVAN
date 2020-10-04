@@ -137,8 +137,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     if (this.readyState === 4) {
                         if (this.status === 200) {
                             var respuestaJSON = JSON.parse(this.responseText);
-                            self.valorDesde(respuestaJSON.rangos[0].desde);
-                            self.valorHasta(respuestaJSON.rangos[0].hasta);
+                            var desde = respuestaJSON.rangos[0].desde;
+                            var hasta = respuestaJSON.rangos[0].hasta;                            
+
+                            if(desde === "" || hasta === "") {
+                                var fechaActual = new Date();
+                                if(fechaActual.getMonth() >= 7 && fechaActual.getMonth() <= 12) {
+                                    self.valorDesde(fechaActual.getFullYear() + "-08-01");
+                                    self.valorHasta((fechaActual.getFullYear() + 1) + "-07-31");
+                                } else {
+                                    self.valorDesde((fechaActual.getFullYear() - 1) + "-08-01");
+                                    self.valorHasta(fechaActual.getFullYear() + "-07-31");
+                                }
+                            } else{
+                                self.valorDesde(desde);
+                                self.valorHasta(hasta);   
+                            }
+                                                     
                             self.obtenerPorcentajesEscolares(1, "imc");
                             self.obtenerPorcentajesGrupales(1, "imc");
                             self.obtenerTodosLosGrupos();
