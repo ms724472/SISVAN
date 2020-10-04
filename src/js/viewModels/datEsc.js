@@ -395,8 +395,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
 
         var datosGrupo = {
           anio_ingreso: self.campoGrado() === 1 ? 
-                        anio_ingreso : 
-                        anio_ingreso - (self.campoGrado() - 1),
+                        anio_ingreso.toString() : 
+                        (anio_ingreso - (self.campoGrado() - 1)).toString(),
           letra: self.campoLetra()
         };
 
@@ -405,7 +405,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
           metodo = "PUT";
           datosGrupo.id_grupo = "";
         } else {
-          datosGrupo.id_escuela = datosEscuela.id_escuela;
+          datosGrupo.id_escuela = datosEscuela.id_escuela.toString();
         }
 
         var peticionProcesarGrupo = new XMLHttpRequest();
