@@ -189,6 +189,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         }
       };
 
+      var primerEscuela = 2;
+
       self.obtenerInformacion = function (event) {
         var peticionDatosEscuelas = new XMLHttpRequest();
         peticionDatosEscuelas.open('GET', oj.gWSUrl() + "obtenerDatosEscuelas", false);
@@ -200,6 +202,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
                 alert('No se encontro ningun dato, contacte al administrador.');
                 return;
               } else {
+                primerEscuela = json.escuelas[0].id_escuela;
                 self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, { idAttribute: 'id_escuela' })));
               }
             }
@@ -209,7 +212,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         peticionDatosEscuelas.send();
 
         var peticionDatosGrupos = new XMLHttpRequest();
-        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/1", false);
+        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + primerEscuela, false);
         peticionDatosGrupos.onreadystatechange = function () {
           if (this.readyState === 4) {
             if (this.status === 200) {
