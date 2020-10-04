@@ -4,8 +4,7 @@
  
  Author: Edgar Tiburcio (ms724472@iteso.mx).
  
- ***************************** IMPORTANT INFORMATION ******************************
+ ***************************** INFORMACION IMPORTANTE ******************************
  */
 
  export const ERROR_INTERNO_SERVIDOR = "Error interno del servidor, favor de contactar al administrador.";
- 
