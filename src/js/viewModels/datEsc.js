@@ -223,11 +223,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       });
 
       self.escuelaSeleccionada = function(event) {
-        var idEscuela = event.detail.value[0].startIndex.row;
-        datosEscuela = self.origenDatosEscuelas().dataSource.data[idEscuela];        
+        var filaSeleccionada = event.detail.value[0].startIndex.row;
+        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaSeleccionada];        
 
         var peticionDatosGrupos = new XMLHttpRequest();
-        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + idEscuela, false);
+        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + datosEscuela.id_escuela, false);
         peticionDatosGrupos.onreadystatechange = function () {
           if (this.readyState === 4) {
             if (this.status === 200) {
