@@ -6,17 +6,17 @@
     <h3 class="oj-header-border">Evaluaciones grupales</h3>
     <div class="oj-form-layout">
         <div class="oj-form">
-            <oj-toolbar id='barra-consulta' aria-label='Barra de consulta' aria-controls='controlled' class="oj-toolbar-bottom-border">
+            <oj-toolbar id='barra-consulta' aria-label='Barra de consulta' aria-controls='controlled'>
                 <oj-label id="etiqueta-rangos" class="componente-barra" for="desde">Rango de fechas:</oj-label>
                 <oj-input-date id="desde" class="componente-barra" value={{valorDesde}}>
                 </oj-input-date>
                 <oj-input-date id="hasta" class="componente-barra" value={{valorHasta}} min="[[valorDesde]]" max="[[funcionTecho(valorDesde)]]">
                 </oj-input-date>
-                <oj-button id="btn-consulta-rangos"class="componente-barra" on-oj-action="[[actualizarDatos]]">Buscar</oj-button>
+                <oj-button id="btn-consulta-rangos" class="componente-barra boton-barra" on-oj-action="[[actualizarDatos]]">Buscar</oj-button>
                 <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
-                <oj-menu-button id="menuButton">
+                <oj-menu-button id="btn-menu-escuelas" class="componente-barra boton-barra">
                     Escuela
-                    <oj-menu id="menuEscuelas" slot="menu" style="display:none" on-oj-action="[[cambioEscuela]]">
+                    <oj-menu id="menu-escuelas" slot="menu" style="display:none" on-oj-action="[[cambioEscuela]]">
                         <!-- ko foreach: escuelas -->
                         <oj-option data-bind="attr: {id: value, value: value}">
                           <span data-bind="text: label"></span>
@@ -24,6 +24,10 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
+                  <oj-button display='icons'>
+                    <span slot='startIcon' class="demo-grid-icon-16 demo-icon-font-24"></span>
+                    Descargar Excel
+                  </oj-button>
             </oj-toolbar>
         </div>
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">

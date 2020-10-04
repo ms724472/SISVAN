@@ -42,7 +42,7 @@
     padding-right: 5px;
 }
 
-#btn-consulta-rangos {
+.boton-barra {
     position: relative;  
     bottom: 2px;
 }
