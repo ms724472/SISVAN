@@ -28,6 +28,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.campoMunicipio = ko.observable();
       self.tituloDialogoEscuela = ko.observable("Agregar nueva escuela");
       self.botonDialogoEscuela = ko.observable("Agregar");
+      self.datosMunicipios = ko.observableArray();
+      self.tituloDialogoGrupo = ko.observable("Agregar nuevo grupo");
+      self.botonDialogoGrupo = ko.observable("Agregar");
+      self.campoEscuela = ko.observable();
+      self.campoGrado = ko.observable();
+      self.campoLetra = ko.observable();
       
       self.nombresColumnas = ko.observableArray([
         { headerText: 'Clave de escuela', field: 'clave_sep'},
@@ -50,10 +56,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.estados = [
         { value: 'Jalisco' }
       ];
-      
-      self.datosEstados = new ArrayDataProvider(self.estados, {keyAttributes: 'value'});
-      self.datosMunicipios = ko.observableArray();
 
+      self.datosEstados = new ArrayDataProvider(self.estados, {keyAttributes: 'value'});
+
+      self.grados = [
+        {
+          value: 1,
+          value: 2,
+          value: 3,
+          value: 4,
+          value: 5,
+          value: 6
+        }
+      ];
+
+      self.datosGrados = new ArrayDataProvider(self.grados, {keyAttributes: 'value'});
+      
       self.municipios = {
         Jalisco: [
           { value: 'Acatic' },
@@ -350,8 +368,74 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         self.obtenerInformacion();
       };
 
-      self.cerrarDialogoEscuela = function(event) {
-        self.limpiarDialogoEscuela();
+      self.limpiarDialogoGrupo = function(event) {
+        self.campoEscuela("");
+        self.campoGrado("");
+        self.campoLetra("");
+        document.getElementById('dialogoGrupo').close();
+      };
+
+      self.crearNuevoGrupo = function(event) {
+        self.tituloDialogoGrupo("Agregar nuevo grupo");
+        self.botonDialogoGrupo("Agregar");
+        document.getElementById('dialogoGrupo').open();
+      };
+
+      self.procesarDatosGrupos = function(event) {
+        var servicio = "agregarGrupo";
+        var metodo = "POST";
+        var fechaActual = new Date();
+        var mesActual = fechaActual.getMonth() + 1;
+        var anio_ingreso;
+
+        if(mesActual >= 8 && mesActual <= 12) {
+          anio_ingreso = fechaActual.getFullYear();          
+        } else {
+          anio_ingreso = fechaActual.getFullYear()-1;
+        }
+
+        var datosGrupo = {
+          anio_ingreso: self.campoGrado() === 1 ? 
+                        anio_ingreso : 
+                        anio_ingreso - (self.campoGrado() - 1),
+          letra: self.campoLetra()
+        };
+
+        if(self.botonDialogoGrupo() !== "Agregar") {
+          servicio = "actualizarGrupo";
+          metodo = "PUT";
+          datosGrupo.id_grupo = "";
+        } else {
+          datosGrupo.id_escuela = datosEscuela.id_escuela;
+        }
+
+        var peticionProcesarGrupo = new XMLHttpRequest();
+        peticionProcesarGrupo.open(metodo, oj.gWSUrl() + "escuelas/" + servicio, false);
+        peticionProcesarGrupo.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            if (this.status === 200) {
+              var respuestaJSON = JSON.parse(this.responseText);
+              if (respuestaJSON.hasOwnProperty("error")) {
+                alert('Error, por favor revisa tus datos.');
+              } else {
+                if (respuestaJSON.status === 'exito') {
+                  if (self.botonDialogoGrupo() === "Agregar") {
+                    alert('Grupo agregado correctamente.');
+                  } else {
+                    alert('Grupo actualizado correctamente.');
+                  }
+                } else {
+                  alert('Error, por favor revisa tus datos.');
+                }
+              }
+            } else {
+              alert("Error interno del servidor, favor de contactar al administrador.");
+            }
+          }
+        };
+        peticionProcesarGrupo.send(JSON.stringify(datosGrupo));
+        self.limpiarDialogoGrupo();
+        self.obtenerInformacion();
       };
 
       /**
