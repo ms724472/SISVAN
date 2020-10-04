@@ -391,7 +391,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         } else {
           var datosGrupos = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado];
           self.campoEscuela(datosEscuela.nombre);
-          self.campoGrado(datosGrupos.grado);
+          self.campoGrado(parseInt(datosGrupos.grado));
           self.campoLetra(datosGrupos.letra);
           self.tituloDialogoGrupo("Editar grupo");
           self.botonDialogoGrupo("Guardar");
