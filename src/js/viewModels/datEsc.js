@@ -317,6 +317,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
           servicio = "actualizarEscuela";
           metodo = "PUT";
           datosEscuelas.id_escuela = datosEscuela.id_escuela.toString();
+          datosEscuela = datosEscuelas;
         }
 
         var peticionProcesarEscuela = new XMLHttpRequest();
