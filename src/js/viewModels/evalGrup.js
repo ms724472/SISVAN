@@ -5,10 +5,10 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'comun/Constantes',
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible', 'ojs/ojaccordion'],
         function (oj, ko, $) {
-            function IncidentsViewModel() {
+            function ModeloEvaluacionesGrupales() {
                 var self = this;
                 var todosLosGrupos = {};
                 self.origenDatosEscuelas = ko.observable();
@@ -21,25 +21,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
-                self.obtenerPorcentajesEscolares = function (idEscuela) {
-                    $.ajax({type: "GET",
-                        contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesEscuela/?id_escuela=" + idEscuela + "&desde=" + self.valorDesde() + "&hasta=" + self.valorHasta(),
-                        dataType: "text",
-                        async: false,
-                        success: function (data) {
-                            json = $.parseJSON(data);
-                            if (json.hasOwnProperty("error")) {
-                                alert('No se encontro ningun dato, contacte al administrador.');
-                                return;
+                self.obtenerPorcentajesEscolares = function (idEscuela, diagnostico) {
+                    var servicio = "escolares/obtenerPorcentajesEscuela/?id_escuela=" + idEscuela + 
+                                                                        "&desde=" + self.valorDesde() + 
+                                                                        "&hasta=" + self.valorHasta() + 
+                                                                        "&diagnostico=" + diagnostico;
+                    var peticionPorcentajesEscolares = new XMLHttpRequest();
+                    peticionPorcentajesEscolares.open("GET", oj.gWSUrl() + servicio, false);
+                    peticionPorcentajesEscolares.onreadystatechange = function() {
+                        if (this.readyState === 4) {
+                            if (this.status === 200) {
+                              var respuestaJSON = JSON.parse(this.responseText);
+                              if (respuestaJSON.hasOwnProperty("error")) {
+                                  if(respuestaJSON.error === "No hay datos.") {
+                                    self.porcentajesEscuelas(new oj.ArrayDataProvider([{NoData:""}]));
+                                  } else {
+                                    alert(ERROR_INTERNO_SERVIDOR);
+                                  }
+                              } else {
+                                self.porcentajesEscuelas(new oj.ArrayDataProvider(respuestaJSON.datos));
+                              }                              
+                              
+                              console.log(ERROR_INTERNO_SERVIDOR);
                             } else {
-                                self.porcentajesEscuelas(new oj.ArrayDataProvider(json.datos));
+                                alert(ERROR_INTERNO_SERVIDOR);
                             }
                         }
-                    }).fail(function () {
-                        alert("Error en el servidor, favor de comunicarse con el administrador.");
-                        return;
-                    });
+                    };
+                    peticionPorcentajesEscolares.send();                    
                 };
 
                 self.funcionTecho = function (desde) {
@@ -53,44 +62,60 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 self.obtenerPorcentajesGrupales = function (idGrupo) {
-                    $.ajax({type: "GET",
-                        contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "escolares/obtenerPorcentajesGrupo/?id_grupo=" + idGrupo + "&desde=" + self.valorDesde() + "&hasta=" + self.valorHasta(),
-                        dataType: "text",
-                        async: false,
-                        success: function (data) {
-                            json = $.parseJSON(data);
-                            if (json.hasOwnProperty("error")) {
-                                alert('No se encontro ningun dato, contacte al administrador.');
-                                return;
+                    var servicio = "escolares/obtenerPorcentajesGrupo/?id_grupo=" + idGrupo + 
+                                                                      "&desde=" + self.valorDesde() + 
+                                                                      "&hasta=" + self.valorHasta() + 
+                                                                      "&diagnostico=" + diagnostico;
+                    
+                    var peticionPorcentajesGrupos = new XMLHttpRequest();
+                    peticionPorcentajesGrupos.open("GET", oj.gWSUrl() + servicio, false);
+                    peticionPorcentajesGrupos.onreadystatechange = function() {
+                        if (this.readyState === 4) {
+                            if (this.status === 200) {
+                              var respuestaJSON = JSON.parse(this.responseText);
+                              if (respuestaJSON.hasOwnProperty("error")) {
+                                  if(respuestaJSON.error === "No hay datos.") {
+                                    self.porcentajesGrupos(new oj.ArrayDataProvider([{NoData:""}]));
+                                  } else {
+                                    alert(ERROR_INTERNO_SERVIDOR);
+                                  }
+                              } else {
+                                self.porcentajesGrupos(new oj.ArrayDataProvider(respuestaJSON.datos));
+                              }                              
+                              
+                              console.log(ERROR_INTERNO_SERVIDOR);
                             } else {
-                                self.porcentajesGrupos(new oj.ArrayDataProvider(json.datos));
+                                alert(ERROR_INTERNO_SERVIDOR);
                             }
                         }
-                    }).fail(function () {
-                        alert("Error en el servidor, favor de comunicarse con el administrador.");
-                        return;
-                    });
+                    };
+                    peticionPorcentajesGrupos.send();
                 };
 
-                $.ajax({type: "GET",
-                    contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "obtenerEscuelas",
-                    dataType: "text",
-                    async: false,
-                    success: function (data) {
-                        json = $.parseJSON(data);
-                        if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ninguna escuela');
-                            return;
+                var peticionListaEscuelas = new XMLHttpRequest();
+                peticionListaEscuelas.open("GET", oj.gWSUrl() + "obtenerEscuelas", false);
+                peticionListaEscuelas.onreadystatechange = function() {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                          var respuestaJSON = JSON.parse(this.responseText);
+                          if (respuestaJSON.hasOwnProperty("error")) {
+                              if(respuestaJSON.error === "No hay datos.") {
+                                alert('No se encontro ninguna escuela');
+                              } else {
+                                alert(ERROR_INTERNO_SERVIDOR);
+                              }
+                          } else {
+                            self.origenDatosEscuelas(new oj.ArrayDataProvider(respuestaJSON.escuelas));                            
+                          }                              
+                          
+                          console.log(ERROR_INTERNO_SERVIDOR);
                         } else {
-                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                            alert(ERROR_INTERNO_SERVIDOR);
                         }
                     }
-                }).fail(function () {
-                    alert("Error en el servidor, favor de comunicarse con el administrador.");
-                    return;
-                });  
+                };
+
+                peticionListaEscuelas.send(); 
 
                 self.obtenerTodosLosGrupos = function() {
                     var peticionGrupos = new XMLHttpRequest();
@@ -198,6 +223,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new IncidentsViewModel();
+            return new ModeloEvaluacionesGrupales();
         }
 );
