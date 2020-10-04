@@ -251,10 +251,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         }
       });
 
-      self.escuelaSeleccionada = function(event) {
-        filaEscSeleccionada = event.detail.value[0].startIndex.row;
-        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];        
-
+      self.obtenerGrupos = function(event) {
         var peticionDatosGrupos = new XMLHttpRequest();
         peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + datosEscuela.id_escuela, false);
         peticionDatosGrupos.onreadystatechange = function () {
@@ -276,6 +273,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         };
 
         peticionDatosGrupos.send();
+      };
+
+      self.escuelaSeleccionada = function(event) {
+        filaEscSeleccionada = event.detail.value[0].startIndex.row;
+        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];        
+        self.obtenerGrupos();        
       };
 
       self.grupoSeleccionado = function(event) {
@@ -394,9 +397,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         }
 
         var datosGrupo = {
-          anio_ingreso: self.campoGrado() === 1 ? 
-                        anio_ingreso.toString() : 
-                        (anio_ingreso - (self.campoGrado() - 1)).toString(),
+          anio_ingreso: (anio_ingreso - (self.campoGrado() - 1)).toString(),
           letra: self.campoLetra()
         };
 
@@ -434,7 +435,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         };
         peticionProcesarGrupo.send(JSON.stringify(datosGrupo));
         self.limpiarDialogoGrupo();
-        self.obtenerInformacion();
+        self.obtenerGrupos();
       };
 
       /**
