@@ -50,14 +50,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 self.funcionTecho = function (desde) {
-                    var fecha = new Date(desde());
+                    var fecha = new Date(desde() + "T12:00:00");
                     var fechaHasta;
+
                     if (fecha.getMonth() >= 7 && fecha.getMonth() <= 11) {
                         var anio = fecha.getFullYear() + 1;
                         fechaHasta = anio + '-' + '07-31';
                     } else {
                         fechaHasta = fecha.getFullYear() + '-' + '07-31';
                     }
+                    
                     self.valorHasta(fechaHasta);
                     return fechaHasta;
                 };
@@ -139,7 +141,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                             if(desde === "" || hasta === "") {
                                 var fechaActual = new Date();
-                                if(fechaActual.getMonth() >= 7 && fechaActual.getMonth() <= 11) {
+                                if(fechaActual.getMonth() >= 7 && fechaActual.getMonth() <= 11) {                          
                                     self.valorDesde(fechaActual.getFullYear() + "-08-01");
                                     self.valorHasta((fechaActual.getFullYear() + 1) + "-07-31");
                                 } else {
