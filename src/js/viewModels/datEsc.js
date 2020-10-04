@@ -12,6 +12,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
     function AboutViewModel() {
       var self = this;
       var datosEscuela;
+      var filaEscSeleccionada = 0;
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -204,7 +205,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
                 var tablaEscuelas = document.getElementById("tablaEscuelas");
                 self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, { idAttribute: 'id_escuela' })));
                 if(tablaEscuelas !== undefined && tablaEscuelas !== null) {
-                  tablaEscuelas.selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+                  var jsonEscSeleccionada = [{
+                    startIndex: { row: filaEscSeleccionada },
+                    endIndex: { row: filaEscSeleccionada },
+                    startKey: { row: filaEscSeleccionada+1 },
+                    endKey: { row: filaEscSeleccionada+1 }
+                  }];
+                  tablaEscuelas.selection = jsonEscSeleccionada;
                 }
               }
             }
@@ -218,13 +225,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
 
       $('document').ready(function(){
         if(self.origenDatosEscuelas().dataSource.totalSize() > 0) {
-          document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+          var jsonEscSeleccionada = [{
+            startIndex: { row: filaEscSeleccionada },
+            endIndex: { row: filaEscSeleccionada },
+            startKey: { row: filaEscSeleccionada+1 },
+            endKey: { row: filaEscSeleccionada+1 }
+          }];
+          document.getElementById("tablaEscuelas").selection = jsonEscSeleccionada;
         }
       });
 
       self.escuelaSeleccionada = function(event) {
-        var filaSeleccionada = event.detail.value[0].startIndex.row;
-        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaSeleccionada];        
+        filaEscSeleccionada = event.detail.value[0].startIndex.row;
+        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];        
 
         var peticionDatosGrupos = new XMLHttpRequest();
         peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + datosEscuela.id_escuela, false);
