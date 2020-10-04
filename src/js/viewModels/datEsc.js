@@ -13,6 +13,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       var self = this;
       var datosEscuela;
       var filaEscSeleccionada = 0;
+      var filaGrpSeleccionado = -1;
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -277,12 +278,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
 
       self.escuelaSeleccionada = function(event) {
         filaEscSeleccionada = event.detail.value[0].startIndex.row;
-        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];        
+        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];    
+        filaGrpSeleccionado = -1;
         self.obtenerGrupos();        
       };
 
       self.grupoSeleccionado = function(event) {
-        console.log(event.target.value);
+        filaGrpSeleccionado = event.detail.value[0].startIndex.row;
       };
 
       self.crearNuevaEscuela = function(event) {
@@ -383,6 +385,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         document.getElementById('dialogoGrupo').open();
       };
 
+      self.editarGrupo = function(event) {
+        if(filaGrpSeleccionado === -1) {
+          alert("Seleccione un grupo para editar.");        
+        } else {
+          var datosGrupos = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado];
+          self.campoEscuela(datosEscuela.nombre);
+          self.campoGrado(datosGrupos.grado);
+          self.campoLetra(datosGrupos.letra);
+          self.tituloDialogoGrupo("Editar grupo");
+          self.botonDialogoGrupo("Guardar");
+          document.getElementById('dialogoGrupo').open();
+        }       
+      };
+
       self.procesarDatosGrupos = function(event) {
         var servicio = "agregarGrupo";
         var metodo = "POST";
@@ -404,7 +420,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         if(self.botonDialogoGrupo() !== "Agregar") {
           servicio = "actualizarGrupo";
           metodo = "PUT";
-          datosGrupo.id_grupo = "";
+          datosGrupo.id_grupo = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado].id_grupo;
         } else {
           datosGrupo.id_escuela = datosEscuela.id_escuela.toString();
         }
