@@ -303,6 +303,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
 
         peticionProcesarEscuela.send(JSON.stringify(datosEscuelas));
         self.limpiarDialogoEscuela();
+        self.obtenerInformacion();
       };
 
       self.cerrarDialogoEscuela = function(event) {
