@@ -11,6 +11,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
   
     function AboutViewModel() {
       var self = this;
+      var datosEscuela;
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -189,8 +190,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         }
       };
 
-      var primerEscuela = 2;
-
       self.obtenerInformacion = function (event) {
         var peticionDatosEscuelas = new XMLHttpRequest();
         peticionDatosEscuelas.open('GET', oj.gWSUrl() + "obtenerDatosEscuelas", false);
@@ -202,17 +201,33 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
                 alert('No se encontro ningun dato, contacte al administrador.');
                 return;
               } else {
-                primerEscuela = json.escuelas[0].id_escuela;
+                var tablaEscuelas = document.getElementById("tablaEscuelas");
                 self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, { idAttribute: 'id_escuela' })));
+                if(tablaEscuelas !== undefined && tablaEscuelas !== null) {
+                  tablaEscuelas.selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+                }
               }
             }
           }
         };
 
-        peticionDatosEscuelas.send();
+        peticionDatosEscuelas.send();        
+      };
+
+      self.obtenerInformacion();
+
+      $('document').ready(function(){
+        if(self.origenDatosEscuelas().dataSource.totalSize() > 0) {
+          document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
+        }
+      });
+
+      self.escuelaSeleccionada = function(event) {
+        var idEscuela = event.detail.value[0].startIndex.row;
+        datosEscuela = self.origenDatosEscuelas().dataSource.data[idEscuela];        
 
         var peticionDatosGrupos = new XMLHttpRequest();
-        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + primerEscuela, false);
+        peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + idEscuela, false);
         peticionDatosGrupos.onreadystatechange = function () {
           if (this.readyState === 4) {
             if (this.status === 200) {
@@ -228,19 +243,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         };
 
         peticionDatosGrupos.send();
-
-      };
-
-      self.obtenerInformacion();
-
-      $('document').ready(function(){
-        if(self.origenDatosEscuelas().dataSource.totalSize() > 0) {
-          document.getElementById("tablaEscuelas").selection = JSON.parse('[{"startIndex":{"row":0},"endIndex":{"row":0},"startKey":{"row":1},"endKey":{"row":1}}]');
-        }
-      });
-
-      self.escuelaSeleccionada = function(event) {
-        console.log(event.target.value);
       };
 
       self.grupoSeleccionado = function(event) {
