@@ -107,7 +107,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 alert(ERROR_INTERNO_SERVIDOR);
                               }
                           } else {
-                            self.escuelas(respuestaJSON.escuelas);
+                            self.escuelas = respuestaJSON.escuelas;
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(respuestaJSON.escuelas));                            
                           }                                                        
                         } else {
