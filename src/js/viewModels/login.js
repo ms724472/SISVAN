@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
              * like the JET Cookbook examples.  ojModule handles applying bindings for its
              * associated view.
              */
-            function LoginContentViewModel() {
+            function ModeloInicioSesion() {
                 var self = this;
                 self.username = ko.observable("ms724472@iteso.mx");
                 self.password = ko.observable("welcome1");
@@ -107,5 +107,5 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
              * This instance example will be used as a singleton whenever this module is referenced.
              * Please see the 'ViewModel's Lifecycle' section of the ojModule doc for more info.
              */
-            return new LoginContentViewModel();
+            return new ModeloInicioSesion();
         });

@@ -9,7 +9,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
 'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojselectcombobox'],
  function(oj, ko, $, ArrayDataProvider) {
   
-    function AboutViewModel() {
+    function ModelosDatosEscolares() {
       var self = this;
       var datosEscuela;
       var filaEscSeleccionada = 0;
@@ -514,6 +514,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new AboutViewModel();
+    return new ModelosDatosEscolares();
   }
 );

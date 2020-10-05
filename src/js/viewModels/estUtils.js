@@ -8,7 +8,7 @@
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber',
     'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojaccordion'],
         function (oj, ko, $) {
-            function CustomerViewModel() {
+            function ModeloEstadisticasOMS() {
                 var self = this;
                 self.origenDatosZNinas = ko.observable();
                 self.origenDatosZNinos = ko.observable();
@@ -121,6 +121,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
              * each time the view is displayed.  Return an instance of the ViewModel if
              * only one instance of the ViewModel is needed.
              */
-            return new CustomerViewModel();
+            return new ModeloEstadisticasOMS();
         }
 );
