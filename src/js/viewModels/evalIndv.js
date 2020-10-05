@@ -9,7 +9,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
     'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
     'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion'],
     function (oj, ko, $) {
-        function IncidentsViewModel() {
+        function ModeloEvaluacionIndividual() {
             var self = this;
 
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
@@ -704,6 +704,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
          * each time the view is displayed.  Return an instance of the ViewModel if
          * only one instance of the ViewModel is needed.
          */
-        return new IncidentsViewModel();
+        return new ModeloEvaluacionIndividual();
     }
 );

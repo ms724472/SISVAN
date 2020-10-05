@@ -177,7 +177,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 peticionRangos.send();
 
                 self.cambioEscuela = function(event) {
-                    self.tituloEscuela("Escuela Primaria: ")
                     nombreEscuelaSeleccionada = event.target.innerText;
                     escuelaSeleccionada = event.target.value;
                     grupoSeleccionado = "";
