@@ -6,7 +6,7 @@
  * Your incidents ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'libs/comun/constantes', 'ojs/ojtoolbar',
-    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible', 'ojs/ojaccordion'],
+    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojdialog'],
         function (oj, ko, $) {
             function ModeloEvaluacionesGrupales() {
                 var self = this;
@@ -219,6 +219,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     if(panelesColapsables.length === 0) {
                         alert("Favor de abrir una de las evaluaciones para generar el reporte.");
                     } else {
+                        document.getElementById("dialogoCargando").open(); 
+
                         var cuerpoPeticion = {
                             alto: 350,
                             ancho: 500,
@@ -244,11 +246,43 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 } else {
                                     alert(ERROR_INTERNO_SERVIDOR);
                                 }
+                                document.getElementById("dialogoCargando").close();
                             }
                         };
                         peticionPDF.send(JSON.stringify(cuerpoPeticion));
                     }
                 };
+
+                self.descargarExcel = function(event) {
+                    document.getElementById("dialogoCargando").open();
+                    var servicio = "/escolares/generarExcelGrupal" + 
+                                   "?id_escuela=" + escuelaSeleccionada +
+                                   "&desde=" + self.valorDesde() +
+                                   "&hasta=" + self.valorHasta();
+
+                    var peticionExcel = new XMLHttpRequest();
+                    peticionExcel.open("GET", oj.gWSUrl() + servicio, true);
+                    peticionExcel.responseType = 'arraybuffer';
+                    peticionExcel.onreadystatechange = function () {
+                        if (this.readyState === 4) {
+                            if (this.status === 200) {
+                                var link = document.createElement("a");
+                                var blob = new Blob([this.response], { type: "application/vnd.ms-excel" });
+                                var xlsxUrl = URL.createObjectURL(blob);
+                                link.href = xlsxUrl;
+                                link.style = "visibility:hidden";
+                                link.download = "Antropometria.xlsx";
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                            } else {
+                                alert(ERROR_INTERNO_SERVIDOR);
+                            }
+                            document.getElementById("dialogoCargando").close();
+                        }
+                    };
+                    peticionExcel.send(JSON.stringify(cuerpoPeticion));
+                }
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be

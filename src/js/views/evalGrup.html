@@ -49,7 +49,7 @@
                     Generar graficas
                   </oj-button>
                   <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
-                  <oj-button>
+                  <oj-button on-oj-action="[[descargarExcel]]">
                     <img slot="startIcon"
                         src="css/images/excel.png"
                         alt="bulleted list image"
@@ -117,3 +117,10 @@
         </div>
     </div>
 </div>
+<oj-dialog style="display:none" id="dialogoCargando" cancel-behavior="none" dialog-title="Agregando datos...">
+    <div slot="body">
+        <p>Descarga en proceso, por favor espere...</p>
+        <oj-progress class="oj-progress-bar-embedded" id="progressbar" value="-1"/>
+        <p/>
+    </div>
+</oj-dialog>
