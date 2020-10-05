@@ -173,7 +173,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 peticionRangos.send();
 
                 self.cambioEscuela = function(event) {
-                    console.log(event);
+                    if(todosLosGrupos.hasOwnProperty(event.target.value)) {
+                        self.grupos = todosLosGrupos[event.target.value];
+                    } else {
+                        self.grupos = [];
+                    }
                 };
 
                 self.actualizarDatos = function(event) {
