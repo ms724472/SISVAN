@@ -62,7 +62,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                         'home': {label: 'Principal', isDefault: true},
                         'evalIndv': {label: 'Evaluaciones individuales'},
                         'evalGrup': {label: 'Evaluaciones grupales'},
-                        'estUtils': {label: 'Estadisticas útiles'},
+                        'estUtils': {label: 'Estadisticas OMS'},
                         'datEsc': {label: 'Datos escolares'}
                     });
 
