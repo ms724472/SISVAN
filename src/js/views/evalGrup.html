@@ -24,9 +24,9 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
-                  <oj-menu-button id="btn-menu-grupos" class="componente-barra boton-barra" on-oj-action="[[cambioGrupo]]">
+                  <oj-menu-button id="btn-menu-grupos" class="componente-barra boton-barra">
                     Grupo
-                    <oj-menu id="menu-grupos" slot="menu" style="display:none">
+                    <oj-menu id="menu-grupos" slot="menu" style="display:none" on-oj-action="[[cambioGrupo]]">
                         <!-- ko foreach: grupos -->
                         <oj-option data-bind="attr: {id: value, value: value}">
                           <span data-bind="text: label"></span>
@@ -34,9 +34,9 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
-                  <oj-menu-button id="btn-menu-diagnosticos" class="componente-barra boton-barra" on-oj-action="[[cambioDiagnostico]]">
+                  <oj-menu-button id="btn-menu-diagnosticos" class="componente-barra boton-barra">
                     Diagnostico
-                    <oj-menu id="menu-diagnosticos" slot="menu" style="display:none">
+                    <oj-menu id="menu-diagnosticos" slot="menu" style="display:none" on-oj-action="[[cambioDiagnostico]]">
                         <!-- ko foreach: diagnosticos -->
                         <oj-option data-bind="attr: {id: value, value: value}">
                           <span data-bind="text: label"></span>
