@@ -192,7 +192,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 self.cambioDiagnostico = function(event) {
                     diagnosticoSeleccionado = event.target.value;
-                    self.tituloDiagnostico(" " + event.target.innerText);
+                    self.tituloDiagnostico(event.target.innerText);
                 };
 
                 self.actualizarDatos = function(event) {
