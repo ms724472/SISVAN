@@ -53,7 +53,16 @@
                     <img slot="startIcon"
                         src="css/images/excel.png"
                         alt="bulleted list image"
-                        onmouseover="console.log('test')"
+                        onmouseover="this.src='css/images/excel-hover.png'" 
+                        onmouseout="this.src='css/images/excel.png'"
+                        width="26" height="26" style="margin-right: 7px; margin-left: 7px;"/>
+                  </oj-button>
+                  <oj-button>
+                    <img slot="startIcon"
+                        src="css/images/pdf.png"
+                        alt="bulleted list image"
+                        onmouseover="this.src='css/images/pdf-hover.png'" 
+                        onmouseout="this.src='css/images/pdf.png'"
                         width="26" height="26" style="margin-right: 7px; margin-left: 7px;"/>
                   </oj-button>
             </oj-toolbar>
