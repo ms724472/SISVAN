@@ -19,7 +19,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.valorDesde = ko.observable();
                 self.valorHasta = ko.observable();    
                 self.escuelas = [];
-                self.grupos = [];
+                self.grupos = ko.observableArray();;
                 self.diagnosticos = [
                     { value: "imc", label: "IMC" },
                     { value: "talla", label: "Talla" },
@@ -131,7 +131,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         if (this.readyState === 4) {
                             if (this.status === 200) {
                                 todosLosGrupos = JSON.parse(this.responseText);
-                                self.grupos = todosLosGrupos[1];
+                                self.grupos(todosLosGrupos[1]);
                             }
                         }
                     };
@@ -174,9 +174,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 self.cambioEscuela = function(event) {
                     if(todosLosGrupos.hasOwnProperty(event.target.value)) {
-                        self.grupos = todosLosGrupos[event.target.value];
+                        self.grupos(todosLosGrupos[event.target.value]);
                     } else {
-                        self.grupos = [];
+                        self.grupos([]);
                     }
                 };
 
