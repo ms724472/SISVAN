@@ -11,11 +11,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             function ModeloEvaluacionesGrupales() {
                 var self = this;
                 var todosLosGrupos = {};
-                self.origenDatosEscuelas = ko.observable();
-                self.escuelaSeleccionada = ko.observable();
+                var escuelaSeleccionada;
+                var nombreEscuelaSeleccionada;
+                var grupoSeleccionado;
+                var etiquetaGrupoSeleccionado;
+                var diagnosticoSeleccionado;
+                self.tituloDiagnostico = ko.observable(" IMC");
                 self.porcentajesEscuelas = ko.observable();
-                self.porcentajesGrupos = ko.observable();
-                self.origenDatosGrupos = ko.observable();    
+                self.porcentajesGrupos = ko.observable();   
                 self.valorDesde = ko.observable();
                 self.valorHasta = ko.observable();    
                 self.escuelas = [];
@@ -114,7 +117,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                               }
                           } else {
                             self.escuelas = respuestaJSON.escuelas;
-                            self.origenDatosEscuelas(new oj.ArrayDataProvider(respuestaJSON.escuelas));                            
                           }                                                        
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
@@ -173,23 +175,33 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 peticionRangos.send();
 
                 self.cambioEscuela = function(event) {
-                    if(todosLosGrupos.hasOwnProperty(event.target.value)) {
+                    nombreEscuelaSeleccionada = event.target.innerText;
+                    escuelaSeleccionada = event.target.value;
+                    grupoSeleccionado = "";
+                    if(todosLosGrupos.hasOwnProperty(event.target.value)) {                        
                         self.grupos(todosLosGrupos[event.target.value]);
                     } else {
                         self.grupos([]);
                     }
                 };
 
+                self.cambioGrupo = function(event) {
+                    etiquetaGrupoSeleccionado = event.target.innerText;
+                    grupoSeleccionado = event.target.value;                    
+                };
+
+                self.cambioDiagnostico = function(event) {
+                    diagnosticoSeleccionado = event.target.value;
+                    self.tituloDiagnostico(" " + event.target.innerText);
+                };
+
                 self.actualizarDatos = function(event) {
 
                 };
 
-                self.generarGraficaEscuela = function () {
-                    self.obtenerPorcentajesEscolares(document.getElementById('seleccionadorEscuela').value, "imc");
-                };
-
-                self.generarGraficaGrupo = function () {
-                    self.obtenerPorcentajesGrupales(document.getElementById('seleccionadorGrupo').value, "imc");
+                self.actualizarGraficos = function(event) {
+                    self.obtenerPorcentajesEscolares(escuelaSeleccionada, "imc");
+                    self.obtenerPorcentajesGrupales(grupoSeleccionado, "imc");
                 };
 
                 /**

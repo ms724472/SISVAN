@@ -24,7 +24,7 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
-                  <oj-menu-button id="btn-menu-grupos" class="componente-barra boton-barra">
+                  <oj-menu-button id="btn-menu-grupos" class="componente-barra boton-barra" on-oj-action="[[cambioGrupo]]">
                     Grupo
                     <oj-menu id="menu-grupos" slot="menu" style="display:none">
                         <!-- ko foreach: grupos -->
@@ -34,7 +34,7 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
-                  <oj-menu-button id="btn-menu-diagnosticos" class="componente-barra boton-barra">
+                  <oj-menu-button id="btn-menu-diagnosticos" class="componente-barra boton-barra" on-oj-action="[[cambioDiagnostico]]">
                     Diagnostico
                     <oj-menu id="menu-diagnosticos" slot="menu" style="display:none">
                         <!-- ko foreach: diagnosticos -->
@@ -44,7 +44,7 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
-                  <oj-button display='icons'>
+                  <oj-button display='icons' on-oj-action="[[actualizarGraficos]]">
                     <span slot='startIcon' class="demo-chart-icon-24 demo-icon-font-24"></span>
                     Generar graficas
                   </oj-button>
@@ -70,7 +70,7 @@
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
             <oj-accordion>
                 <oj-collapsible id="colapsable-escolar" expanded="true">
-                    <h3 slot="header">Evaluación escolar</h3>
+                    <h3 slot="header">Evaluación escolar por <span data-bind="text: tituloDiagnostico"></span></h3>
                     <div id='chart-container'>
                         <oj-chart id="graficaEscuela"
                                   type="pie" 
@@ -91,7 +91,7 @@
                     </div>
                 </oj-collapsible>
                 <oj-collapsible id="colapsable-grupal">
-                    <h3 slot="header">Evaluación grupal</h3>
+                    <h3 slot="header">Evaluación grupal por <span data-bind="text: tituloDiagnostico"></span></h3>
                     <div id='chart-container'>
                         <oj-chart id="graficaGrupo"
                                   type="pie" 
