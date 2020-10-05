@@ -19,6 +19,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.valorDesde = ko.observable();
                 self.valorHasta = ko.observable();    
                 self.escuelas = [];
+                self.grupos = [];
+                self.diagnosticos = [
+                    { value: "imc", label: "IMC" },
+                    { value: "talla", label: "Talla" },
+                    { value: "peso", label: "Peso" }
+                ];
 
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
@@ -125,7 +131,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         if (this.readyState === 4) {
                             if (this.status === 200) {
                                 todosLosGrupos = JSON.parse(this.responseText);
-                                self.origenDatosGrupos(new oj.ArrayDataProvider(todosLosGrupos[1], { keyAttributes: 'value' }));
+                                self.grupos = todosLosGrupos[1];
                             }
                         }
                     };
@@ -166,10 +172,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                 peticionRangos.send();
 
-                self.cambioEscuela = event => {
-                    switch (event.detail.value) {
-                        
-                    }
+                self.cambioEscuela = function(event) {
+                    console.log(event);
                 };
 
                 self.actualizarDatos = function(event) {

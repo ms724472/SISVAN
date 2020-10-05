@@ -24,9 +24,29 @@
                         <!-- /ko -->
                       </oj-menu>
                   </oj-menu-button>
+                  <oj-menu-button id="btn-menu-grupos" class="componente-barra boton-barra">
+                    Grupo
+                    <oj-menu id="menu-grupos" slot="menu" style="display:none">
+                        <!-- ko foreach: grupos -->
+                        <oj-option data-bind="attr: {id: value, value: value}">
+                          <span data-bind="text: label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                      </oj-menu>
+                  </oj-menu-button>
+                  <oj-menu-button id="btn-menu-diagnosticos" class="componente-barra boton-barra">
+                    Diagnostico
+                    <oj-menu id="menu-diagnosticos" slot="menu" style="display:none">
+                        <!-- ko foreach: diagnosticos -->
+                        <oj-option data-bind="attr: {id: value, value: value}">
+                          <span data-bind="text: label"></span>
+                        </oj-option>
+                        <!-- /ko -->
+                      </oj-menu>
+                  </oj-menu-button>
                   <oj-button display='icons'>
-                    <span slot='startIcon' class="demo-grid-icon-16 demo-icon-font-24"></span>
-                    Descargar Excel
+                    <span slot='startIcon' class="demo-chart-icon-16 demo-icon-font-24"></span>
+                    Generar graficas
                   </oj-button>
             </oj-toolbar>
         </div>
@@ -34,11 +54,6 @@
             <oj-accordion>
                 <oj-collapsible id="colapsable-escolar" expanded="true">
                     <h3 slot="header">Evaluación escolar</h3>
-                    <oj-label-inline for="seleccionadorEscuela">Selecciona una escuela:</oj-label-inline>
-                    <oj-select-one style="width: 500px;" id="seleccionadorEscuela" options="[[origenDatosEscuelas]]" value="{{escuelaSeleccionada}}"></oj-select-one> 
-                    <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaEscuela]]">Generar grafica</oj-button>
-                    <oj-button style="padding-left: 5px;" id="descargarPDFEscuelas" onclick="return descargarPDF('graficaEscuela', 'Porcentajes por Escuela')">Exportar PDF</oj-button>
-                    <oj-button style="padding-left: 5px;" id="descargarExcelEscuelas">Exportar Excel</oj-button>
                     <div id='chart-container'>
                         <oj-chart id="graficaEscuela"
                                   type="pie" 
@@ -60,12 +75,6 @@
                 </oj-collapsible>
                 <oj-collapsible id="colapsable-grupal">
                     <h3 slot="header">Evaluación grupal</h3>
-                    <oj-label-inline for="seleccionadorEscuela">Selecciona un grupo:</oj-label-inline>
-                    <oj-select-one style="width: 500px;" id="seleccionadorEscuelaGrupo" on-value-changed="[[cambioEscuela]]" options="[[origenDatosEscuelas]]"></oj-select-one> 
-                    <oj-select-one style="padding-left: 5px; width: 150px;" id="seleccionadorGrupo" options="[[origenDatosGrupos]]"></oj-select-one> 
-                    <oj-button style="padding-left: 5px;" id="generarGraficaEscuela" on-oj-action="[[generarGraficaGrupo]]">Generar grafica</oj-button>
-                    <oj-button style="padding-left: 5px;" id="descargarPDFGrupos" onclick="return descargarPDF('graficaGrupo', 'Porcentajes por Grupo')">Exportar PDF</oj-button>
-                    <oj-button style="padding-left: 5px;" id="descargarExcelGrupos">Exportar Excel</oj-button>
                     <div id='chart-container'>
                         <oj-chart id="graficaGrupo"
                                   type="pie" 
