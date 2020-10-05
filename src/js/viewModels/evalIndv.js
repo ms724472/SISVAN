@@ -680,7 +680,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
                         }
-                        document.getElementById("dialogoCargando").open();
+                        document.getElementById("dialogoCargando").close();
                     }
                 };
 
