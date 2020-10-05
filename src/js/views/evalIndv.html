@@ -61,8 +61,13 @@
                     <oj-button id="editarAlumno" on-oj-action="[[editarAlumno]]">Editar alumno</oj-button>
                     <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">Agregar medici&oacute;n</oj-button>
                     <oj-button id="editarMedicion" on-oj-action="[[editarMedicion]]">Editar medici&oacute;n</oj-button>
-                    <oj-button id="descargarInfo" on-oj-action="[[descargarInfo]]" display='icons'>
-                        <span slot='startIcon' class="demo-download-icon-24 demo-icon-font-24"></span>
+                    <oj-button id="descargarInfo" on-oj-action="[[descargarInfo]]">
+                        <img slot="startIcon"
+                        src="css/images/excel.png"
+                        alt="bulleted list image"
+                        onmouseover="this.src='css/images/excel-hover.png'" 
+                        onmouseout="this.src='css/images/excel.png'"
+                        width="26" height="26" style="margin-right: 7px; margin-left: 7px;"/>
                     </oj-button>
                 </oj-flex-item>
             </div>

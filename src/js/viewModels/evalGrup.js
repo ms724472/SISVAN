@@ -138,7 +138,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         }
                     };
                     peticionGrupos.send();
-                }              
+                };              
 
                 var peticionRangos = new XMLHttpRequest();
                 peticionRangos.open("GET", oj.gWSUrl() + "obtenerRangos", false);
@@ -198,6 +198,42 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 self.actualizarGraficos = function(event) {
                     self.obtenerPorcentajesEscolares(escuelaSeleccionada, diagnosticoSeleccionado);
                     self.obtenerPorcentajesGrupales(grupoSeleccionado, diagnosticoSeleccionado);
+                };
+
+                self.descargarPDF = function(event) {
+                    var panelesColapsables = document.getElementsByClassName("oj-expanded");
+                    if(panelesColapsables.length === 0) {
+                        alert("Favor de abrir una de las evaluaciones para generar el reporte.");
+                    } else {
+                        var cuerpoPeticion = {
+                            alto: 350,
+                            ancho: 500,
+                            svg: panelesColapsables[0].getElementsByTagName("svg")[0].outerHTML,
+                            tipo: panelesColapsables[0].outerText.includes("escolar") ? "escuela" : "grupo"
+                        };
+
+                        var peticionPDF = new XMLHttpRequest();
+                        peticionPDF.open("POST", oj.gWSUrl + "generarPDF", true);
+                        peticionPDF.responseType = 'arraybuffer';
+                        peticionPDF.onreadystatechange = function() {
+                            if (this.readyState === 4) {
+                                if (this.status === 200) {
+                                    var link = document.createElement("a");
+                                    var blob = new Blob([this.response], { type: "application/pdf" });
+                                    var pdfUrl = URL.createObjectURL(blob);
+                                    link.href = pdfUrl;
+                                    link.style = "visibility:hidden";
+                                    link.download = "Reporte.pdf";
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                } else {
+                                    alert(ERROR_INTERNO_SERVIDOR);
+                                }
+                            }
+                        };
+                        peticionPDF.send(JSON.stringify(cuerpoPeticion));
+                    }
                 };
 
                 /**
