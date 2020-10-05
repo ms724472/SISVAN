@@ -12,10 +12,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 var self = this;
                 var todosLosGrupos = {};
                 var escuelaSeleccionada;
-                var nombreEscuelaSeleccionada;
                 var grupoSeleccionado;
-                var etiquetaGrupoSeleccionado;
                 var diagnosticoSeleccionado;
+                self.tituloEscuela = ko.observable();
+                self.tituloGrupo = ko.observable();
                 self.tituloDiagnostico = ko.observable(" IMC");
                 self.porcentajesEscuelas = ko.observable();
                 self.porcentajesGrupos = ko.observable();   
@@ -175,7 +175,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 peticionRangos.send();
 
                 self.cambioEscuela = function(event) {
-                    nombreEscuelaSeleccionada = event.target.innerText;
+                    self.tituloEscuela("Escuela Primaria: " + event.target.innerText);
                     escuelaSeleccionada = event.target.value;
                     grupoSeleccionado = "";
                     if(todosLosGrupos.hasOwnProperty(event.target.value)) {                        
@@ -186,7 +186,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 self.cambioGrupo = function(event) {
-                    etiquetaGrupoSeleccionado = event.target.innerText;
+                    self.tituloGrupo(self.tituloEscuela() + "\nGrupo: " + event.target.innerText);
                     grupoSeleccionado = event.target.value;                    
                 };
 
@@ -213,7 +213,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         };
 
                         var peticionPDF = new XMLHttpRequest();
-                        peticionPDF.open("POST", oj.gWSUrl + "generarPDF", true);
+                        peticionPDF.open("POST", oj.gWSUrl() + "generarPDF", true);
                         peticionPDF.responseType = 'arraybuffer';
                         peticionPDF.onreadystatechange = function() {
                             if (this.readyState === 4) {
