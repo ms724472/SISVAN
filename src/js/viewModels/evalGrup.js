@@ -195,13 +195,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     self.tituloDiagnostico(event.target.innerText);
                 };
 
-                self.actualizarDatos = function(event) {
-
-                };
-
                 self.actualizarGraficos = function(event) {
-                    self.obtenerPorcentajesEscolares(escuelaSeleccionada, "imc");
-                    self.obtenerPorcentajesGrupales(grupoSeleccionado, "imc");
+                    self.obtenerPorcentajesEscolares(escuelaSeleccionada, diagnosticoSeleccionado);
+                    self.obtenerPorcentajesGrupales(grupoSeleccionado, diagnosticoSeleccionado);
                 };
 
                 /**
