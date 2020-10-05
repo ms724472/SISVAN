@@ -6,7 +6,7 @@
  * Your incidents ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarraytabledatasource', 'ojs/ojdialog',
-    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox',
+    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojselectcombobox' , 'libs/comun/constantes',
     'ojs/ojdatetimepicker', 'ojs/ojtimezonedata', 'ojs/ojcollapsible', 'ojs/ojprogress', 'ojs/ojaccordion'],
     function (oj, ko, $) {
         function ModeloEvaluacionIndividual() {
@@ -645,8 +645,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             this.descargarInfo = function () {
+                if(self.alumnoActual() === "") {
+                    alert("Seleccione un alumno para descargar el archivo de Excel.");
+                    return;
+                }
+
+                document.getElementById("dialogoCargando").open();
                 var cuerpoPeticion = {
-                    id_alumno : document.getElementById("idAlumno").value,
+                    id_alumno : self.alumnoActual().toString(),
                     ancho : document.getElementsByTagName("svg")[0].clientWidth,
                     alto :  document.getElementsByTagName("svg")[0].clientHeight,
                     grafico_imc : document.getElementsByTagName("svg")[0].outerHTML,
@@ -654,24 +660,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     grafico_peso : document.getElementsByTagName("svg")[4].outerHTML
                 };
 
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", oj.gWSUrl() + "alumnos/generarExcel", true);
-                xhr.responseType = 'arraybuffer';
+                var peticionExcel = new XMLHttpRequest();
+                peticionExcel.open("POST", oj.gWSUrl() + "alumnos/generarExcel", true);
+                peticionExcel.responseType = 'arraybuffer';
 
-                xhr.onload = function (event) {
-                    var link = document.createElement("a");
-                    var arrayBuffer = xhr.response;
-                    var blob = new Blob([arrayBuffer], { type: "application/vnd.ms-excel" });
-                    var xlsxUrl = URL.createObjectURL(blob);
-                    link.href = xlsxUrl;
-                    link.style = "visibility:hidden";
-                    link.download = "Reporte.xlsx";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                peticionExcel.onreadystatechange = function (event) {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var link = document.createElement("a");
+                            var arrayBuffer = this.response;
+                            var blob = new Blob([arrayBuffer], { type: "application/vnd.ms-excel" });
+                            var xlsxUrl = URL.createObjectURL(blob);
+                            link.href = xlsxUrl;
+                            link.style = "visibility:hidden";
+                            link.download = "Reporte.xlsx";
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        } else {
+                            alert(ERROR_INTERNO_SERVIDOR);
+                        }
+                        document.getElementById("dialogoCargando").open();
+                    }
                 };
 
-                xhr.send(JSON.stringify(cuerpoPeticion));
+                peticionExcel.send(JSON.stringify(cuerpoPeticion));
             };
 
             /**

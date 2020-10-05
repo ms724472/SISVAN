@@ -254,8 +254,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 self.descargarExcel = function(event) {
+                    if(escuelaSeleccionada === "") {
+                        alert("Seleccione una escuela para descargar el archivo de Excel.");
+                        return;
+                    }
+                    
                     document.getElementById("dialogoCargando").open();
-                    var servicio = "/escolares/generarExcelGrupal" + 
+                    var servicio = "escolares/generarExcelGrupal" + 
                                    "?id_escuela=" + escuelaSeleccionada +
                                    "&desde=" + self.valorDesde() +
                                    "&hasta=" + self.valorHasta();
@@ -281,7 +286,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             document.getElementById("dialogoCargando").close();
                         }
                     };
-                    peticionExcel.send(JSON.stringify(cuerpoPeticion));
+                    peticionExcel.send(JSON.stringify());
                 }
 
                 /**
