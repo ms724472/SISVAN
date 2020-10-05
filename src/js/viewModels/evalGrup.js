@@ -11,11 +11,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             function ModeloEvaluacionesGrupales() {
                 var self = this;
                 var todosLosGrupos = {};
-                var escuelaSeleccionada;
+                var escuelaSeleccionada = "";
+                var nombreEscuelaSeleccionada = "";
                 var grupoSeleccionado;
-                var diagnosticoSeleccionado;
-                self.tituloEscuela = ko.observable();
-                self.tituloGrupo = ko.observable();
+                var etiquetaGrupoSeleccionado;
+                var diagnosticoSeleccionado;                
                 self.tituloDiagnostico = ko.observable(" IMC");
                 self.porcentajesEscuelas = ko.observable();
                 self.porcentajesGrupos = ko.observable();   
@@ -133,7 +133,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         if (this.readyState === 4) {
                             if (this.status === 200) {
                                 todosLosGrupos = JSON.parse(this.responseText);
-                                self.grupos(todosLosGrupos[1]);
+                                self.grupos(todosLosGrupos[self.escuelas[0].value]);
                             }
                         }
                     };
@@ -162,10 +162,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 self.valorDesde(desde);
                                 self.valorHasta(hasta);   
                             }
-                                                     
-                            self.obtenerPorcentajesEscolares(1, "imc");
-                            self.obtenerPorcentajesGrupales(1, "imc");
-                            self.obtenerTodosLosGrupos();
+
+                            self.obtenerTodosLosGrupos();      
+                            self.obtenerPorcentajesEscolares(todosLosGrupos[self.escuelas[0].value][0].value, "imc");
+                            self.obtenerPorcentajesGrupales(todosLosGrupos[self.escuelas[0].value][0].value, "imc");  
+                            nombreEscuelaSeleccionada = self.escuelas[0].label;
+                            etiquetaGrupoSeleccionado = todosLosGrupos[self.escuelas[0].value][0].label;                       
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
@@ -175,7 +177,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 peticionRangos.send();
 
                 self.cambioEscuela = function(event) {
-                    self.tituloEscuela("Escuela Primaria: " + event.target.innerText);
+                    self.tituloEscuela("Escuela Primaria: ")
+                    nombreEscuelaSeleccionada = event.target.innerText;
                     escuelaSeleccionada = event.target.value;
                     grupoSeleccionado = "";
                     if(todosLosGrupos.hasOwnProperty(event.target.value)) {                        
@@ -186,9 +189,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 self.cambioGrupo = function(event) {
-                    self.tituloGrupo(self.tituloEscuela() + "\nGrupo: " + event.target.innerText);
+                    etiquetaGrupoSeleccionado = event.target.innerText;
                     grupoSeleccionado = event.target.value;                    
                 };
+
+                self.tituloEscuela = ko.pureComputed(function () {
+                    return {
+                        title: "Escuela Primaria: " + nombreEscuelaSeleccionada
+                    };
+                });
+    
+                self.tituloGrupo = ko.pureComputed(function () {
+                    return {
+                        title: "Escuela Primaria: " + nombreEscuelaSeleccionada + "\nGrupo: " + etiquetaGrupoSeleccionado
+                    };
+                });
 
                 self.cambioDiagnostico = function(event) {
                     diagnosticoSeleccionado = event.target.value;

@@ -133,7 +133,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 };
             });
 
-
             var datos = '{"NoData":""}';
             datos = JSON.parse("[" + datos + "]");
             self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
