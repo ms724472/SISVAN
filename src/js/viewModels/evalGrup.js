@@ -192,6 +192,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     self.obtenerPorcentajesGrupales(document.getElementById('seleccionadorGrupo').value, "imc");
                 };
 
+                function test() {
+                    console.log("Works!")
+                };
+
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
                  * used for the View transition.  The application can put data fetch logic
