@@ -229,17 +229,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                         };
 
                         var peticionPDF = new XMLHttpRequest();
-                        peticionPDF.open("POST", oj.gWSUrl() + "generarPDF", true);
+                        peticionPDF.open("POST", oj.gWSUrl() + "generarImagen", true);
                         peticionPDF.responseType = 'arraybuffer';
                         peticionPDF.onreadystatechange = function() {
                             if (this.readyState === 4) {
                                 if (this.status === 200) {
                                     var link = document.createElement("a");
-                                    var blob = new Blob([this.response], { type: "application/pdf" });
+                                    var blob = new Blob([this.response], { type: "image/png" });
                                     var pdfUrl = URL.createObjectURL(blob);
                                     link.href = pdfUrl;
                                     link.style = "visibility:hidden";
-                                    link.download = "Reporte.pdf";
+                                    link.download = "Grafico.png";
                                     document.body.appendChild(link);
                                     link.click();
                                     document.body.removeChild(link);
