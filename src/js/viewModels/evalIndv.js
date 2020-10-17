@@ -426,6 +426,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 } else if(self.medicionSeleccionada()[0].startIndex === undefined) {
                     alert("Seleccione una medición.");
                     return;
+                } else if(datosAlumnoActual) {
+                    alert("No es posible editar una medición de un alumno egresado.")
                 } else if(JSON.stringify(self.origenDatosMediciones().data).includes("Sin datos")) {
                     alert("No hay mediciones para editar.");
                     return;
@@ -559,8 +561,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.agregarMedicion = function () {
-                if(Object.keys(datosAlumnoActual).length === 0){
+                if (Object.keys(datosAlumnoActual).length === 0) {
                     alert("Para agregar mediciones es necesario seleccionar un alumno.");
+                } else if (datosAlumnoActual.grado === "EGRESADO") {
+                    alert("Cambia el grupo del alumno a uno no egresado, para agregar mediciones.")
                 } else {
                     if (Object.keys(grupos).length > 0) {
                         self.botonFormularioMedicion("Agregar");
