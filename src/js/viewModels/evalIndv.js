@@ -427,7 +427,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert("Seleccione una medición.");
                     return;
                 } else if(datosAlumnoActual) {
-                    alert("No es posible editar una medición de un alumno egresado.")
+                    alert("No es posible editar una medición de un alumno egresado.");
+                    return;
                 } else if(JSON.stringify(self.origenDatosMediciones().data).includes("Sin datos")) {
                     alert("No hay mediciones para editar.");
                     return;
