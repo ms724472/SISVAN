@@ -660,9 +660,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     id_alumno : self.alumnoActual().toString(),
                     ancho : document.getElementsByTagName("svg")[0].clientWidth,
                     alto :  document.getElementsByTagName("svg")[0].clientHeight,
-                    grafico_imc : document.getElementsByTagName("svg")[0].outerHTML,
-                    grafico_talla : document.getElementsByTagName("svg")[2].outerHTML,
-                    grafico_peso : document.getElementsByTagName("svg")[4].outerHTML
+                    grafico_imc: document.getElementById("graficoIMCExcel").getElementsByTagName("svg")[0].outerHTML,
+                    grafico_talla: document.getElementById("graficoTallaExcel").getElementsByTagName("svg")[0].outerHTML,
+                    grafico_peso: document.getElementById("graficoPesoExcel").getElementsByTagName("svg")[0].outerHTML
                 };
 
                 var peticionExcel = new XMLHttpRequest();

@@ -6,7 +6,7 @@
     <!-- Estos graficos estan ocultos a la vista con el objetivo de poder realizar la exportacion de los
     mismos en el archivo de Excel dado que la rederizacion de Javascript no permite que funcionen correctamente
     en el acordeon-->
-    <oj-chart id="graficoIMC" type="line" data="[[datosIMC]]" animation-on-display="auto" animation-on-data-change="auto"
+    <oj-chart id="graficoIMCExcel" type="line" data="[[datosIMC]]" animation-on-display="auto" animation-on-data-change="auto"
         orientation="[[orientationValue]]" x-axis="[[tituloIMC]]" legend.position="top" hover-behavior="dim"
         style="position: absolute; top: 0px; right: 0px;visibility: hidden;z-index: -1;">
         <template slot="itemTemplate" data-oj-as="item">
@@ -19,7 +19,7 @@
             </oj-chart-series>
         </template>
     </oj-chart>
-    <oj-chart type="line" data="[[datosEstatura]]" animation-on-display="auto" legend.position="top"
+    <oj-chart id="graficoTallaExcel" type="line" data="[[datosEstatura]]" animation-on-display="auto" legend.position="top"
         animation-on-data-change="auto" x-axis="[[tituloTalla]]" orientation="[[orientationValue]]" hover-behavior="dim"
         style="position: absolute; top: 0px; right: 0px;visibility: hidden;z-index: -1;">
         <template slot="itemTemplate" data-oj-as="item">
@@ -32,7 +32,7 @@
             </oj-chart-series>
         </template>
     </oj-chart>
-    <oj-chart type="line" data="[[dataProvider]]" animation-on-display="auto" legend.position="top"
+    <oj-chart id="graficoPesoExcel" type="line" data="[[dataProvider]]" animation-on-display="auto" legend.position="top"
         animation-on-data-change="auto" x-axis="[[tituloPeso]]" orientation="[[orientationValue]]" hover-behavior="dim"
         style="position: absolute; top: 0px; right: 0px;visibility: hidden;z-index: -1;">
         <template slot="itemTemplate" data-oj-as="item">
