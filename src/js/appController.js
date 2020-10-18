@@ -87,7 +87,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                                 self.router.configure({
                                     'home': {label: 'Principal', isDefault: true},
                                     'evalIndv': {label: 'Evaluaciones individuales'},
-                                    'estUtils': {label: 'Estadisticas OMS'},
+                                    'estUtils': {label: 'Estadísticas OMS'},
                                     'datEsc': {label: 'Datos escolares'}
                                 });
                                 // Navigation setup
@@ -96,7 +96,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-home-icon-24'},
                                     {name: 'Evaluaciones individuales', id: 'evalIndv',
                                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-person-icon-24'},
-                                    {name: 'Estadisticas OMS', id: 'estUtils',
+                                    {name: 'Estadísticas OMS', id: 'estUtils',
                                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
                                     {name: 'Datos escolares', id: 'datEsc',
                                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}

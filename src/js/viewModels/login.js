@@ -62,7 +62,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                         'home': {label: 'Principal', isDefault: true},
                         'evalIndv': {label: 'Evaluaciones individuales'},
                         'evalGrup': {label: 'Evaluaciones grupales'},
-                        'estUtils': {label: 'Estadisticas OMS'},
+                        'estUtils': {label: 'Estadísticas OMS'},
                         'datEsc': {label: 'Datos escolares'}
                     });
 
@@ -74,7 +74,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojmodel', 'oj
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-person-icon-24'},
                         {name: 'Evaluaciones grupales', id: 'evalGrup',
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'},
-                        {name: 'Estadisticas útiles', id: 'estUtils',
+                        {name: 'Estadísticas OMS', id: 'estUtils',
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
                         {name: 'Datos escolares', id: 'datEsc',
                             iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}
