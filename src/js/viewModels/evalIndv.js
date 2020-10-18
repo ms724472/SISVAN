@@ -14,7 +14,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             var grupos = {};
             self.origenDatosEscuelas = ko.observable();            
             self.origenDatosGrupos = ko.observable();
-            self.nuevoEscuelaAlumno = ko.observable(1);
+            self.nuevoEscuelaAlumno = ko.observable();
 
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
             // Please reference the ojModule jsDoc for additionaly available methods.
@@ -65,7 +65,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 } else {
                                     grupos = jsonResponse;
                                     self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[Object.keys(grupos)[0]], { keyAttributes: 'value' }));
-                                    self.nuevoEscuelaAlumno(parseInt(Object.keys(grupos)[0]));
+                                    self.nuevoEscuelaAlumno('');
                                 }
                             }
                         }
