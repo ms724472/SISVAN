@@ -16,7 +16,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosGrupos = ko.observable();
             self.nuevoEscuelaAlumno = ko.observable();
 
-            self.obtenerEscuelas = function() {
+            // Below are a subset of the ViewModel methods invoked by the ojModule binding
+            // Please reference the ojModule jsDoc for additionaly available methods.
+
+            /**
+             * Optional ViewModel method invoked when this ViewModel is about to be
+             * used for the View transition.  The application can put data fetch logic
+             * here that can return a Promise which will delay the handleAttached function
+             * call below until the Promise is resolved.
+             * @param {Object} info - An object with the following key-value pairs:
+             * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
+             * @param {Function} info.valueAccessor - The binding's value accessor.
+             * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
+             * the promise is resolved
+             */
+            self.handleActivated = function (info) {
                 $.ajax({
                     type: "GET",
                     contentType: "text/plain; charset=utf-8",
@@ -36,9 +50,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     alert("Error en el servidor, favor de comunicarse con el administrador.");
                     return;
                 });
-            }
 
-            self.obtenerTodosLosGrupos = function() {
                 var peticionGrupos = new XMLHttpRequest();
                 peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/hoy", false);
                 peticionGrupos.onreadystatechange = function () {
@@ -53,7 +65,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 } else {
                                     grupos = jsonResponse;
                                     self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[Object.keys(grupos)[0]], { keyAttributes: 'value' }));
-                                    self.nuevoEscuelaAlumno(Object.keys(grupos)[0]);
+                                    self.nuevoEscuelaAlumno(parseInt(Object.keys(grupos)[0]));
                                 }
                             }
                         }
@@ -61,26 +73,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 };
     
                 peticionGrupos.send();
-            }            
-
-            // Below are a subset of the ViewModel methods invoked by the ojModule binding
-            // Please reference the ojModule jsDoc for additionaly available methods.
-
-            /**
-             * Optional ViewModel method invoked when this ViewModel is about to be
-             * used for the View transition.  The application can put data fetch logic
-             * here that can return a Promise which will delay the handleAttached function
-             * call below until the Promise is resolved.
-             * @param {Object} info - An object with the following key-value pairs:
-             * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-             * @param {Function} info.valueAccessor - The binding's value accessor.
-             * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
-             * the promise is resolved
-             */
-            self.handleActivated = function (info) {
-                // Implement if needed
-                self.obtenerEscuelas();
-                self.obtenerTodosLosGrupos();
             };
 
             /**
@@ -423,7 +415,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.escuelaSeleccionada = function (event) {
                 var id_escuela = event['detail'].value.toString();
                 if (id_escuela !== "" && Object.keys(grupos).length > 0) {
-                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[id_escuela], { keyAttributes: 'value' }));
+                    if(grupos.hasOwnProperty(id_escuela)) {
+                        self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[id_escuela], { keyAttributes: 'value' }));
+                    } else {
+                        self.nuevoGrupoAlumno('');        
+                        self.origenDatosGrupos(new oj.ArrayDataProvider([{NoData:""}]));
+                    }
                 }
             };
 
