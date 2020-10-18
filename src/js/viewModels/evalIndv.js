@@ -11,6 +11,57 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
     function (oj, ko, $) {
         function ModeloEvaluacionIndividual() {
             var self = this;
+            var grupos = {};
+            self.origenDatosEscuelas = ko.observable();            
+            self.origenDatosGrupos = ko.observable();
+            self.nuevoEscuelaAlumno = ko.observable();
+
+            self.obtenerEscuelas = function() {
+                $.ajax({
+                    type: "GET",
+                    contentType: "text/plain; charset=utf-8",
+                    url: oj.gWSUrl() + "obtenerEscuelas",
+                    dataType: "text",
+                    async: false,
+                    success: function (data) {
+                        json = JSON.parse(data);
+                        if (json.hasOwnProperty("error")) {
+                            alert('No se encontro ninguna escuela');
+                            return;
+                        } else {
+                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                        }
+                    }
+                }).fail(function () {
+                    alert("Error en el servidor, favor de comunicarse con el administrador.");
+                    return;
+                });
+            }
+
+            self.obtenerTodosLosGrupos = function() {
+                var peticionGrupos = new XMLHttpRequest();
+                peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/hoy", false);
+                peticionGrupos.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var jsonResponse = JSON.parse(this.responseText);
+                            if (jsonResponse.hasOwnProperty("error")) {
+                                alert('Error al inicializar el modulo, por favor contacta al administrador.');
+                            } else {
+                                if (Object.keys(jsonResponse).length < 1) {
+                                    alert("Debe agregar un grupo para agregar nuevos alumnos o mediciones.")
+                                } else {
+                                    grupos = jsonResponse;
+                                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[Object.keys(grupos)[0]], { keyAttributes: 'value' }));
+                                    self.nuevoEscuelaAlumno(Object.keys(grupos)[0]);
+                                }
+                            }
+                        }
+                    }
+                };
+    
+                peticionGrupos.send();
+            }            
 
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
             // Please reference the ojModule jsDoc for additionaly available methods.
@@ -28,6 +79,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
              */
             self.handleActivated = function (info) {
                 // Implement if needed
+                self.obtenerEscuelas();
+                self.obtenerTodosLosGrupos();
             };
 
             /**
@@ -47,9 +100,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.datosEstatura = ko.observable();
             self.datosIMC = ko.observable();
             self.orientationValue = ko.observable();
-            self.origenDatosEscuelas = ko.observable();
-            self.origenDatosGrupos = ko.observable()
-            self.nuevoEscuelaAlumno = ko.observable();
             self.nuevoGrupoAlumno = ko.observable();
             self.alumnoActual = ko.observable('');
             self.escuelaDelAlumno = ko.observable();
@@ -64,8 +114,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.botonFormularioMedicion = ko.observable("Agregar");
             self.medicionSeleccionada = ko.observable();
 
-            var datosAlumnoActual = {};
-            var grupos = {};
+            var datosAlumnoActual = {};            
 
             function ChartModel() {
                 /* toggle button variables */
@@ -138,48 +187,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.origenDatosAlumnos(new oj.ArrayTableDataSource(datos));
             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
             self.origenDatosMediciones(new oj.ArrayTableDataSource(datos));
-            self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));
-
-            $.ajax({
-                type: "GET",
-                contentType: "text/plain; charset=utf-8",
-                url: oj.gWSUrl() + "obtenerEscuelas",
-                dataType: "text",
-                async: false,
-                success: function (data) {
-                    json = $.parseJSON(data);
-                    if (json.hasOwnProperty("error")) {
-                        alert('No se encontro ninguna escuela');
-                        return;
-                    } else {
-                        self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
-                    }
-                }
-            }).fail(function () {
-                alert("Error en el servidor, favor de comunicarse con el administrador.");
-                return;
-            });
-
-            var peticionGrupos = new XMLHttpRequest();
-            peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/hoy", false);
-            peticionGrupos.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        var jsonResponse = JSON.parse(this.responseText);
-                        if (jsonResponse.hasOwnProperty("error")) {
-                            alert('No al inicializar el modulo, por favor contacta al administrador.');
-                        } else {
-                            if (Object.keys(jsonResponse).length == 0) {
-                                alert("Te recomendamos agregar un grupo para agregar nuevos alumnos o mediciones.")
-                            } else {
-                                grupos = jsonResponse;
-                            }
-                        }
-                    }
-                }
-            };
-
-            peticionGrupos.send();
+            self.origenDatosEscuelas(new oj.ArrayTableDataSource(datos));                        
 
             self.validadorNumerico = ko.computed(function () {
                 return [{

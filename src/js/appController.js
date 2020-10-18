@@ -87,7 +87,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                                 self.router.configure({
                                     'home': {label: 'Principal', isDefault: true},
                                     'evalIndv': {label: 'Evaluaciones individuales'},
-                                    'estUtils': {label: 'Estadisticas útiles'},
+                                    'estUtils': {label: 'Estadisticas OMS'},
                                     'datEsc': {label: 'Datos escolares'}
                                 });
                                 // Navigation setup
