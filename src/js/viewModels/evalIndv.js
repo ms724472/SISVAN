@@ -599,16 +599,44 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.crearNuevaMedicion = function () {
+                var campoFecha = document.getElementById("nuevoIdAlumno");
+                var campoPeso = document.getElementById("nuevaMasaMedicion");
+                var campoTalla = document.getElementById("nuevaEstaturaMedicion");
+                var campoPerimetro = document.getElementById("nuevaPerimetroCuelloMedicion");
+                var campoCintura = document.getElementById("nuevaCinturaMedicion");
+                var campoTriceps = document.getElementById("nuevaTricepsMedicion");
+                var campoSubescapular = document.getElementById("nuevaSubescapulaMedicion");
+                var campoPliegue = document.getElementById("nuevaPliegueCuelloMedicion");
+                var campoGrupo = document.getElementById("nuevoGrupoMedicion");
+
+                campoFecha.validate();
+                campoPeso.validate();
+                campoTalla.validate();
+                campoPerimetro.validate();
+                campoCintura.validate();
+                campoTriceps.validate();
+                campoSubescapular.validate();
+                campoPliegue.validate();
+                campoGrupo.validate();
+                
+                if (campoFecha.valid === 'invalidShown' || campoPeso.valid === 'invalidShown' ||
+                    campoTalla.valid === 'invalidShown' || campoPerimetro.valid === 'invalidShown' ||
+                    campoCintura.valid === 'invalidShown' || campoTriceps.valid === 'invalidShown' ||
+                    campoSubescapular.valid === 'invalidShown' || campoPliegue.valid === 'invalidShown' ||
+                    campoGrupo.valid === 'invalidShown') {
+                    return;
+                }
+
                 document.getElementById('dialogoCargando').open();
                 var idAlumno = document.getElementById("idAlumno").value;
                 var fecha = self.fechaNuevaMedicion();
-                var masa = document.getElementById("nuevaMasaMedicion").value;
-                var estatura = document.getElementById("nuevaEstaturaMedicion").value;
-                var perimetro_cuello = document.getElementById("nuevaPerimetroCuelloMedicion").value;
-                var cintura = document.getElementById("nuevaCinturaMedicion").value;
-                var triceps = document.getElementById("nuevaTricepsMedicion").value;
-                var subescapula = document.getElementById("nuevaSubescapulaMedicion").value;
-                var pliegue_cuello = document.getElementById("nuevaPliegueCuelloMedicion").value;
+                var masa = campoPeso.value;
+                var estatura = campoTalla.value;
+                var perimetro_cuello = campoPerimetro.value;
+                var cintura = campoCintura.value;
+                var triceps = campoTriceps.value;
+                var subescapula = campoSubescapular.value;
+                var pliegue_cuello = campoPliegue.value;
                 var bodyRequest = {
                     id_alumno: idAlumno.toString(),
                     id_grupo: self.nuevoGrupoMedicion().toString(),
