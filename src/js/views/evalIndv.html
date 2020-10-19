@@ -85,6 +85,7 @@
                 <oj-table id='tablaDatosMediciones'
                           aria-label='Histórico de mediciones'
                           data='[[origenDatosMediciones]]'
+                          as='celda'
                           columns='{{columnasMediciones}}'
                           columns-default='{"template": "plantillaCelda",
                                             "headerTemplate": "plantillaEncabezado"}'
@@ -93,16 +94,16 @@
                           style='width: 100%;'
                           dnd.reorder.columns='enabled'>
                     <template slot="plantillaCelda">
-                        <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                        <oj-bind-text value="[[celda.data]]"></oj-bind-text>
                     </template>
                     <template slot="plantillaTallaZ">
-                        <oj-bind-text data-bind="style: { color: cell.data < -6 || cell.data > 6 ? 'red' : 'black' }, text: cell.data"></oj-bind-text>
+                        <oj-bind-text data-bind="style: { color: celda.data < -6 || celda.data > 6 ? 'red' : 'black' }, text: celda.data"></oj-bind-text>
                     </template>
                     <template slot="plantillaIMCZ">
-                        <oj-bind-text data-bind="style: { color: cell.data < -5 || cell.data > 5 ? 'red' : 'black' }, text: cell.data"></oj-bind-text>
+                        <oj-bind-text data-bind="style: { color: celda.data < -5 || celda.data > 5 ? 'red' : 'black' }, text: celda.data"></oj-bind-text>
                     </template>
                     <template slot="plantillaIMC">
-                        <oj-bind-text data-bind="style: { color: cell.data < 10 || cell.data > 58 ? 'red' : 'black' }, text: cell.data"></oj-bind-text>
+                        <oj-bind-text data-bind="style: { color: celda.data < 10 || celda.data > 58 ? 'red' : 'black' }, text: celda.data"></oj-bind-text>
                     </template>
                     <template slot="plantillaEncabezado" data-oj-as="header">
                         <oj-bind-text value="[[header.data]]"></oj-bind-text>
