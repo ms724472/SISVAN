@@ -203,6 +203,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 }];
             });
 
+            self.validadorEstatura = ko.computed(function () {
+                return [{
+                    type: 'regExp',
+                    options: {
+                        pattern: '1[0-9]{2}(\\.[0-9]+)?',
+                        messageSummary: 'Valor invalido',
+                        messageDetail: 'Corrija el campo, debe ser en cm.'
+                    }
+                }];
+            });
+
             self.validadorTexto = ko.computed(function () {
                 return [{
                     type: 'regExp',
