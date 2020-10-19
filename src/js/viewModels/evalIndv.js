@@ -40,7 +40,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     success: function (data) {
                         json = JSON.parse(data);
                         if (json.hasOwnProperty("error")) {
-                            alert('No se encontro ninguna escuela');
+                            alert('No se encontró ninguna escuela');
                             return;
                         } else {
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
@@ -142,7 +142,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 { headerText: 'Per. Cuello', field: 'perimetro_cuello', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'Cintura', field: 'cintura', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'Triceps', field: 'triceps', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
-                { headerText: 'Subescapula', field: 'subescapula', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
+                { headerText: 'Subescapular', field: 'subescapula', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'Pli. Cuello', field: 'pliegue_cuello', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' }
             ]);
 
@@ -158,19 +158,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.tituloIMC = ko.pureComputed(function () {
                 return {
-                    title: "Historico IMC"
+                    title: "Histórico IMC"
                 };
             });
 
             self.tituloTalla = ko.pureComputed(function () {
                 return {
-                    title: "Historico Talla"
+                    title: "Histórico Talla"
                 };
             });
 
             self.tituloPeso = ko.pureComputed(function () {
                 return {
-                    title: "Historico Peso"
+                    title: "Histórico Peso"
                 };
             });
 
@@ -241,7 +241,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
-                            alert('Identificador de alumno no valido, por favor revisa tus datos.');
+                            alert('Identificador de alumno no válido, por favor revisa tus datos.');
                             return;
                         } else {
                             self.origenDatosAlumnos(new oj.ArrayTableDataSource(json.datos));
@@ -382,7 +382,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
-                            alert('No se encontro ningun alumno');
+                            alert('No se encontró ningún alumno');
                             return;
                         } else if (json.error === "No hay datos.") {
                             self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
@@ -428,10 +428,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 if(Object.keys(datosAlumnoActual).length === 0){
                     alert("Para editar es necesario seleccionar un alumno.");
                     return;
-                } else if(self.medicionSeleccionada()[0].startIndex === undefined) {
+                } else if(self.medicionSeleccionada()[0] === undefined) {
                     alert("Seleccione una medición.");
                     return;
-                } else if(datosAlumnoActual) {
+                } else if(datosAlumnoActual.grado === "EGRESADO") {
                     alert("No es posible editar una medición de un alumno egresado.");
                     return;
                 } else if(JSON.stringify(self.origenDatosMediciones().data).includes("Sin datos")) {
@@ -559,11 +559,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var tabla = document.getElementById('tablaNombres');
                 var datos = '{"No se encontraron resultados":""}';
                 datos = JSON.parse("[" + datos + "]");
-                document.getElementById('idAlumno').value = tabla.currentRow.rowKey[0];
-                document.getElementById('nombreABuscar').value = '';
-                self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
-                self.obtenerInfo();
-                document.getElementById('dialogoBuscarAlumno').close();
+                if(tabla.currentRow !== undefined && tabla.currentRow !== null && tabla.currentRow.rowKey[0] !== "") {
+                    document.getElementById('idAlumno').value = tabla.currentRow.rowKey[0];
+                    document.getElementById('nombreABuscar').value = '';
+                    self.origenDatosNombres(new oj.ArrayTableDataSource(datos));
+                    self.obtenerInfo();
+                    document.getElementById('dialogoBuscarAlumno').close();
+                } else {
+                    alert("Seleccione un alumno, por favor.");            
+                }                
             };
 
             self.agregarMedicion = function () {
