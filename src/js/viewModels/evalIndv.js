@@ -599,7 +599,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             };
 
             self.crearNuevaMedicion = function () {
-                var campoFecha = document.getElementById("nuevoIdAlumno");
+                var campoFecha = document.getElementById("nuevaFMedicion");
                 var campoPeso = document.getElementById("nuevaMasaMedicion");
                 var campoTalla = document.getElementById("nuevaEstaturaMedicion");
                 var campoPerimetro = document.getElementById("nuevaPerimetroCuelloMedicion");
