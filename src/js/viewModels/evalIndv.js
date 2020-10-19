@@ -132,13 +132,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 { headerText: 'Grupo', field: 'grupo', sortable: 'disabled' },
                 { headerText: 'Peso', field: 'masa', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'DxPeso', field: 'diagnostico_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
-                { headerText: 'zPeso', field: 'z_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
+                { headerText: 'zPeso', field: 'z_peso', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;'},
                 { headerText: 'Talla', field: 'estatura', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'DxTalla', field: 'diagnostico_talla', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
-                { headerText: 'zTalla', field: 'z_talla', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
-                { headerText: 'IMC', field: 'imc', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
+                { headerText: 'zTalla', field: 'z_talla', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;', 'template': 'plantillaTallaZ' },
+                { headerText: 'IMC', field: 'imc', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;', 'template': 'plantillaIMC' },
                 { headerText: 'DxIMC', field: 'diagnostico_imc', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
-                { headerText: 'zIMC', field: 'z_imc', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
+                { headerText: 'zIMC', field: 'z_imc', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;', 'template': 'plantillaIMCZ' },
                 { headerText: 'Per. Cuello', field: 'perimetro_cuello', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'Cintura', field: 'cintura', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
                 { headerText: 'Triceps', field: 'triceps', style: 'text-align: right;', sortable: 'disabled', headerStyle: 'text-align: right;' },
@@ -186,7 +186,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                         pattern: '[0-9]+',
-                        messageSummary: 'Valor invalido',
+                        messageSummary: 'Valor inválido',
                         messageDetail: 'Corrija el campo.'
                     }
                 }];
@@ -197,7 +197,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                         pattern: '[0-9]+(\\.[0-9]+)?',
-                        messageSummary: 'Valor invalido',
+                        messageSummary: 'Valor inválido',
                         messageDetail: 'Corrija el campo.'
                     }
                 }];
@@ -208,8 +208,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                         pattern: '1[0-9]{2}(\\.[0-9]+)?',
-                        messageSummary: 'Valor invalido',
-                        messageDetail: 'Corrija el campo, debe ser en cm.'
+                        messageSummary: 'Valor inválido',
+                        messageDetail: 'Debe ser en cm.'
                     }
                 }];
             });
@@ -219,7 +219,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                         pattern: '[\\w\\s]+',
-                        messageSummary: 'Valor invalido',
+                        messageSummary: 'Valor inválido',
                         messageDetail: 'Corrija el campo.'
                     }
                 }];
@@ -230,7 +230,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                         pattern: '.+',
-                        messageSummary: 'Valor invalido',
+                        messageSummary: 'Valor inválido',
                         messageDetail: 'Corrija el campo.'
                     }
                 }];
@@ -241,7 +241,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     type: 'regExp',
                     options: {
                         pattern: '[0-6] [A-Z]',
-                        messageSummary: 'Grupo invalido',
+                        messageSummary: 'Grupo inválido',
                         messageDetail: 'Corrija el campo.'
                     }
                 }];
