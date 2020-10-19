@@ -250,39 +250,51 @@
                     <oj-flex-item>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaFMedicion" >Fecha medici&oacute;n:</oj-label-inline>
-                            <oj-input-date required="true" id="nuevaFMedicion" value="{{fechaNuevaMedicion}}" converter=[[convertidorFechas]]/>
+                            <oj-input-date required="true" id="nuevaFMedicion" value="{{fechaNuevaMedicion}}" converter=[[convertidorFechas]] validators="[[validadorFechas]]" required
+                            translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'/>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaMasaMedicion" >Peso:</oj-label-inline>
-                            <oj-input-text required="true" id="nuevaMasaMedicion" required></oj-input-text>
+                            <oj-input-text required="true" id="nuevaMasaMedicion" validators="[[validadorMedicion]]" required 
+                            translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaEstaturaMedicion" >Talla:</oj-label-inline>
-                            <oj-input-text required="true" id="nuevaEstaturaMedicion" required></oj-input-text>                        
+                            <oj-input-text required="true" id="nuevaEstaturaMedicion" validators="[[validadorMedicion]]" required
+                            translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>                        
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevaPerimetroCuelloMedicion" >Perimetro del Cuello:</oj-label-inline>
-                            <oj-input-text id="nuevaPerimetroCuelloMedicion" required></oj-input-text>
+                            <oj-label-inline for="nuevaPerimetroCuelloMedicion">Perimetro del Cuello:</oj-label-inline>
+                            <oj-input-text id="nuevaPerimetroCuelloMedicion" validators="[[validadorMedicion]]"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaCinturaMedicion" >Cintura:</oj-label-inline>
-                            <oj-input-text id="nuevaCinturaMedicion" required></oj-input-text>
+                            <oj-input-text id="nuevaCinturaMedicion" validators="[[validadorMedicion]]"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaTricepsMedicion" >Triceps:</oj-label-inline>
-                            <oj-input-text id="nuevaTricepsMedicion" required></oj-input-text>
+                            <oj-input-text id="nuevaTricepsMedicion" validators="[[validadorMedicion]]"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevaSubescapulaMedicion" >Subescapula:</oj-label-inline>
-                            <oj-input-text id="nuevaSubescapulaMedicion" required></oj-input-text>
+                            <oj-label-inline for="nuevaSubescapulaMedicion" >Subescapular:</oj-label-inline>
+                            <oj-input-text id="nuevaSubescapulaMedicion" validators="[[validadorMedicion]]"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevaPliegueCuelloMedicion" >Pliegue del cuello:</oj-label-inline>
-                            <oj-input-text id="nuevaPliegueCuelloMedicion" required></oj-input-text>
+                            <oj-input-text id="nuevaPliegueCuelloMedicion" validators="[[validadorMedicion]]"></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label-inline for="nuevoGrupoAlumno" >Grupo:</oj-label-inline>
-                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoMedicion}}" required>
+                            <oj-select-one id="nuevoGrupoAlumno" options="[[origenDatosGrupos]]" value="{{nuevoGrupoMedicion}}" validators="[[validadorGrupos]]" required>
                             </oj-select-one>
                         </oj-form-layout>
                     </oj-flex-item>

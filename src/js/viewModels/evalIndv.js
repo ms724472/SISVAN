@@ -192,6 +192,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 }];
             });
 
+            self.validadorMedicion = ko.computed(function () {
+                return [{
+                    type: 'regExp',
+                    options: {
+                        pattern: '[0-9]+(\\.[0-9]+)?',
+                        messageSummary: 'Valor invalido',
+                        messageDetail: 'Corrija el campo.'
+                    }
+                }];
+            });
+
             self.validadorTexto = ko.computed(function () {
                 return [{
                     type: 'regExp',
@@ -428,7 +439,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 if(Object.keys(datosAlumnoActual).length === 0){
                     alert("Para editar es necesario seleccionar un alumno.");
                     return;
-                } else if(self.medicionSeleccionada()[0] === undefined) {
+                } else if(self.medicionSeleccionada() === undefined || self.medicionSeleccionada()[0] === undefined) {
                     alert("Seleccione una medición.");
                     return;
                 } else if(datosAlumnoActual.grado === "EGRESADO") {
@@ -511,9 +522,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var fecha_nac = campoFechaNac.value;
                 var bodyRequest = {
                     id_alumno: idAlumno,
-                    nombre: nombre,
-                    apellido_p: apellido_p,
-                    apellido_m: apellido_m,
+                    nombre: nombre.toUpperCase(),
+                    apellido_p: apellido_p.toUpperCase(),
+                    apellido_m: apellido_m.toUpperCase(),
                     sexo: sexo,
                     fecha_nac: fecha_nac,
                     id_grupo: self.nuevoGrupoAlumno().toString()
