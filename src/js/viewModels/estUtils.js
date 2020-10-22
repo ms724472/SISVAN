@@ -22,7 +22,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
 
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/Femenino",
+                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/femenino",
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -41,7 +41,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
 
                     $.ajax({type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/Masculino",
+                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/masculino",
                         dataType: "text",
                         async: false,
                         success: function (data) {
