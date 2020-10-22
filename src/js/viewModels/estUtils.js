@@ -5,7 +5,7 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber', 'ojs/ojselectcombobox',
     'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojaccordion'],
         function (oj, ko, $) {
             function ModeloEstadisticasOMS() {
@@ -13,16 +13,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                 self.origenDatosZNinas = ko.observable();
                 self.origenDatosZNinos = ko.observable();
                 self.orientationValue = ko.observable();
+                self.tipoIndice = ko.observable("peso");
                 // Below are a subset of the ViewModel methods invoked by the ojModule binding
                 // Please reference the ojModule jsDoc for additionaly available methods.
 
-                function ChartModel() {
-                    /* toggle button variables */
-                    this.orientationValue = ko.observable('vertical');
+                this.orientationValue = ko.observable('vertical');
 
-                    $.ajax({type: "GET",
+                self.obtenerEstadisticas = function () {
+                    $.ajax({
+                        type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/femenino",
+                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZ/" + self.tipoIndice() + "/femenino",
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -31,7 +32,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                                 alert('Error de autenticación, por favor revisa tus datos.');
                                 return;
                             } else {
-                                self.origenDatosZNinas(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                                self.origenDatosZNinas(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
                             }
                         }
                     }).fail(function () {
@@ -39,9 +40,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                         return;
                     });
 
-                    $.ajax({type: "GET",
+                    $.ajax({
+                        type: "GET",
                         contentType: "text/plain; charset=utf-8",
-                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZMasa/masculino",
+                        url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZ/" + self.tipoIndice() + "/masculino",
                         dataType: "text",
                         async: false,
                         success: function (data) {
@@ -50,16 +52,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                                 alert('Error de autenticación, por favor revisa tus datos.');
                                 return;
                             } else {
-                                self.origenDatosZNinos(new oj.ArrayDataProvider(json.mediciones, {keyAttributes: 'id'}));
+                                self.origenDatosZNinos(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
                             }
                         }
                     }).fail(function () {
                         alert("Error en el servidor, favor de comunicarse con el administrador.");
                         return;
                     });
-                }
+                };
 
-                var chartModel = new ChartModel();
+                self.obtenerEstadisticas();
+
+                self.tipoSeleccionado = function() {
+                    self.obtenerEstadisticas();
+                };
 
                 /**
                  * Optional ViewModel method invoked when this ViewModel is about to be
