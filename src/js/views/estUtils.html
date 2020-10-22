@@ -8,7 +8,7 @@
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
             <oj-accordion>
                 <oj-collapsible expanded="true">
-                    <h3 slot="header">Indices Z masa para ni&ntilde;as</h3>
+                    <h3 slot="header">&Iacute;ndices Z masa para ni&ntilde;as</h3>
                     <oj-chart id="lineChart" 
                               type="line" 
                               data="[[origenDatosZNinas]]" 
@@ -33,7 +33,7 @@
                     </oj-chart>
                 </oj-collapsible>
                 <oj-collapsible>
-                    <h3 slot="header">Indices Z masa para ni&ntilde;os</h3>
+                    <h3 slot="header">&Iacute;ndices Z masa para ni&ntilde;os</h3>
                     <oj-chart id="lineChart" 
                               type="line" 
                               data="[[origenDatosZNinos]]" 
@@ -45,6 +45,15 @@
                         <template slot="itemTemplate" data-oj-as="item">
                             <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie]]">
                             </oj-chart-item>
+                        </template>
+                        <template slot="seriesTemplate" data-oj-as="series">
+                            <oj-chart-series 
+                                color="[[series.id.includes('3') ? '#000000': 
+                                         series.id.includes('2') ? '#990000': 
+                                         series.id.includes('1') ? '#FF9933': 
+                                         series.id.includes('0') ? '#006600':
+                                         null]]">
+                            </oj-chart-series>
                         </template>
                     </oj-chart>
                 </oj-collapsible>
