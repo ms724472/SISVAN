@@ -20,12 +20,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                 this.orientationValue = ko.observable('vertical');
 
                 self.obtenerEstadisticas = function () {
+                    document.getElementById("dialogoCargando").open(); 
                     $.ajax({
                         type: "GET",
                         contentType: "text/plain; charset=utf-8",
                         url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZ/" + self.tipoIndice() + "/femenino",
                         dataType: "text",
-                        async: false,
+                        async: true,
                         success: function (data) {
                             json = $.parseJSON(data);
                             if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
@@ -45,7 +46,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                         contentType: "text/plain; charset=utf-8",
                         url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZ/" + self.tipoIndice() + "/masculino",
                         dataType: "text",
-                        async: false,
+                        async: true,
                         success: function (data) {
                             json = $.parseJSON(data);
                             if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
@@ -54,8 +55,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                             } else {
                                 self.origenDatosZNinos(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
                             }
+                            document.getElementById("dialogoCargando").close(); 
                         }
                     }).fail(function () {
+                        document.getElementById("dialogoCargando").close(); 
                         alert("Error en el servidor, favor de comunicarse con el administrador.");
                         return;
                     });

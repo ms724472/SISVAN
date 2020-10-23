@@ -3,12 +3,16 @@
  The Universal Permissive License (UPL), Version 1.0
 -->
 <div class="oj-panel oj-margin">
-    <h3 class="oj-header-border">Estadisticas OMS</h3>
-    <oj-select-one id="seleccion-tipo-indice" value="{{tipoIndice}}" on-value-changed="[[tipoSeleccionado]]">
-        <oj-option value="peso">Peso</oj-option>
-        <oj-option value="talla">Talla</oj-option>
-        <oj-option value="imc">IMC</oj-option>
-    </oj-select-one>
+    <h3 id="encabezado-oms" class="oj-header-border">
+        <span id="titulo-oms">Estadisticas OMS</span>
+        <div id="selector-oms">
+            <oj-select-one id="seleccion-tipo-indice" value="{{tipoIndice}}" on-value-changed="[[tipoSeleccionado]]">
+                <oj-option value="peso">Peso</oj-option>
+                <oj-option value="talla">Talla</oj-option>
+                <oj-option value="imc">IMC</oj-option>
+            </oj-select-one>
+        </div>        
+    </h3>
     <div class="oj-form-layout">
         <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline" align="center">
             <oj-accordion>
@@ -70,3 +74,10 @@
         </div>
     </div>
 </div>
+<oj-dialog style="display:none" id="dialogoCargando" cancel-behavior="none" dialog-title="Cargando...">
+    <div slot="body">
+        <p>Cargando...</p>
+        <oj-progress class="oj-progress-bar-embedded" id="progressbar" value="-1"/>
+        <p/>
+    </div>
+</oj-dialog>

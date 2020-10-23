@@ -169,3 +169,17 @@ body{
     content:url("images/tablas_nutricionales.png");
     width: 200px;
 }
+
+#encabezado-oms {
+    position: relative;
+    width: 100%;
+}
+
+#titulo-oms, #selector-oms {
+    width: 50%;
+    display: inline-block;
+}
+
+#selector-oms {
+    text-align: end;
+}
