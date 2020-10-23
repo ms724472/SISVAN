@@ -6,7 +6,7 @@
  * Your customer ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber', 'ojs/ojselectcombobox',
-    'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojaccordion'],
+    'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojaccordion', 'ojs/ojdialog'],
         function (oj, ko, $) {
             function ModeloEstadisticasOMS() {
                 var self = this;
@@ -28,7 +28,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                         contentType: "text/plain; charset=utf-8",
                         url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZ/" + self.tipoIndice() + "/femenino",
                         dataType: "text",
-                        async: true,
+                        async: modeloCargado,
                         success: function (data) {
                             json = $.parseJSON(data);
                             if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {
@@ -48,7 +48,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                         contentType: "text/plain; charset=utf-8",
                         url: oj.gWSUrl() + "estadisticas/obtenerPuntajesZ/" + self.tipoIndice() + "/masculino",
                         dataType: "text",
-                        async: true,
+                        async: modeloCargado,
                         success: function (data) {
                             json = $.parseJSON(data);
                             if (json.hasOwnProperty("error") && json.error !== "No hay datos.") {

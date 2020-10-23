@@ -176,10 +176,11 @@ body{
 }
 
 #titulo-oms, #selector-oms {
-    width: 50%;
+    width: 49%;
     display: inline-block;
 }
 
 #selector-oms {
     text-align: end;
+    width: 50%;
 }
