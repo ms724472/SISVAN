@@ -57,10 +57,22 @@
                     <oj-button id="buscarAlumno" on-oj-action="[[obtenerInfo]]">Buscar</oj-button>
                 </oj-flex-item>
                 <oj-flex-item>
-                    <oj-button id="agregarAlumno" on-oj-action="[[agregarAlumno]]">Agregar alumno</oj-button>
-                    <oj-button id="editarAlumno" on-oj-action="[[editarAlumno]]">Editar alumno</oj-button>
-                    <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">Agregar medici&oacute;n</oj-button>
-                    <oj-button id="editarMedicion" on-oj-action="[[editarMedicion]]">Editar medici&oacute;n</oj-button>
+                    <oj-button id="agregarAlumno" on-oj-action="[[agregarAlumno]]">
+                        <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
+                        Agregar alumno
+                    </oj-button>
+                    <oj-button id="editarAlumno" on-oj-action="[[editarAlumno]]">
+                        <span slot='startIcon' class='demo-icon-font demo-edit-icon-24'></span>
+                        Editar alumno
+                    </oj-button>
+                    <oj-button id="agregarMedicion" on-oj-action="[[agregarMedicion]]">
+                        <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
+                        Agregar medici&oacute;n
+                    </oj-button>
+                    <oj-button id="editarMedicion" on-oj-action="[[editarMedicion]]">
+                        <span slot='startIcon' class='demo-icon-font demo-edit-icon-24'></span>
+                        Editar medici&oacute;n
+                    </oj-button>
                     <oj-button id="descargarInfo" on-oj-action="[[descargarInfo]]">
                         <img slot="startIcon"
                         src="css/images/excel.png"
