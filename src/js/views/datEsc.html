@@ -13,11 +13,11 @@
                                 aria-label='Barra de edición' 
                                 aria-controls='controlled' 
                                 class="oj-toolbar-bottom-border">
-                        <oj-button id='btn-agregar-escuela' display='icons' on-oj-action="[[crearNuevaEscuela]]">
+                        <oj-button id='btn-agregar-escuela'on-oj-action="[[crearNuevaEscuela]]">
                             <span slot='startIcon' class='demo-icon-font'><b>+</b></span>
                             Agregar escuela
                         </oj-button>
-                        <oj-button id='btnEditarEscuela' display='icons' on-oj-action="[[editarEscuela]]">
+                        <oj-button id='btnEditarEscuela' on-oj-action="[[editarEscuela]]">
                             <span slot='startIcon' class='demo-icon-font demo-edit-icon-24'></span>
                             Editar escuela
                         </oj-button>                        
@@ -99,16 +99,16 @@
                             <oj-input-text id="campo-codigo-postal" value="{{campoCodigoPostal}}" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label for="campo-telefono">Telefono:</oj-label>
+                            <oj-label for="campo-telefono" show-required>Telefono:</oj-label>
                             <oj-input-text id="campo-telefono" value="{{campoTelefono}}" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label for="campo-estado" >Estado:</oj-label>
+                            <oj-label for="campo-estado" show-required>Estado:</oj-label>
                             <oj-select-one id="campo-estado" options="[[datosEstados]]" value="{{campoEstado}}" on-value-changed="[[estadoSeleccionado]]" required>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label for="campo-municipio" >Municipio:</oj-label>
+                            <oj-label for="campo-municipio" show-required>Municipio:</oj-label>
                             <oj-select-one id="campo-municipio" options="[[datosMunicipios]]" value="{{campoMunicipio}}" required>
                             </oj-select-one>
                         </oj-form-layout>                        
