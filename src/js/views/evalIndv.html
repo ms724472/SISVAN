@@ -202,7 +202,7 @@
                                   "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoNombreAlumno" show-required>Nombre(s):</oj-label-inline>
+                            <oj-label for="nuevoNombreAlumno" show-required>Nombre(s):</oj-label>
                             <oj-input-text id="nuevoNombreAlumno" validators="[[validadorTexto]]" 
                             required translations='{
                                 "required": {
@@ -210,7 +210,7 @@
                                   "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoApellidoPAlumno" show-required>Apellido Paterno:</oj-label-inline>
+                            <oj-label for="nuevoApellidoPAlumno" show-required>Apellido Paterno:</oj-label>
                             <oj-input-text id="nuevoApellidoPAlumno" validators="[[validadorTexto]]" 
                             required translations='{
                                 "required": {
@@ -218,7 +218,7 @@
                                   "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoApellidoMAlumno" show-required>Apellido Materno:</oj-label-inline>
+                            <oj-label for="nuevoApellidoMAlumno" show-required>Apellido Materno:</oj-label>
                             <oj-input-text id="nuevoApellidoMAlumno" validators="[[validadorTexto]]" 
                             required translations='{
                                 "required": {
@@ -226,14 +226,14 @@
                                   "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoSexoAlumno" show-required>Sexo:</oj-label-inline>
+                            <oj-label for="nuevoSexoAlumno" show-required>Sexo:</oj-label>
                             <oj-select-one id="nuevoSexoAlumno" value="{{nuevoSexoAlumno}}" required>
                                 <oj-option value="femenino">FEMENINO</oj-option>
                                 <oj-option value="masculino">MASCULINO</oj-option>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoFNacimientoAlumno" show-required>Fecha nacimiento:</oj-label-inline>
+                            <oj-label for="nuevoFNacimientoAlumno" show-required>Fecha nacimiento:</oj-label>
                             <oj-input-date id="nuevoFNacimientoAlumno" value="{{nuevaFechaNac}}" converter=[[convertidorFechas]] validators="[[validadorFechas]]" 
                             required translations='{
                                 "required": {
@@ -241,12 +241,12 @@
                                   "messageDetail": "No puede estar vacio."}}'/>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoEscuelaAlumno" show-required>Escuela:</oj-label-inline>
+                            <oj-label for="nuevoEscuelaAlumno" show-required>Escuela:</oj-label>
                             <oj-select-one id="nuevoEscuelaAlumno" options="[[origenDatosEscuelas]]" value="{{nuevoEscuelaAlumno}}" on-value-changed="[[escuelaSeleccionada]]" required>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="nuevoGrupoMedicion" show-required>Grupo:</oj-label-inline>
+                            <oj-label for="nuevoGrupoMedicion" show-required>Grupo:</oj-label>
                             <oj-select-one id="nuevoGrupoMedicion" options="[[origenDatosGrupos]]" value="{{nuevoGrupoAlumno}}" validators="[[validadorGrupos]]" 
                             required translations='{
                                 "required": {

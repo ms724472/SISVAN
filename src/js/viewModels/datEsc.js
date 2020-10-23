@@ -72,7 +72,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.datosGrados = new ArrayDataProvider(self.grados, {keyAttributes: 'value'});
       
       self.municipios = {
-        Jalisco: [
+        JALISCO: [
           { value: 'ACATIC' },
           { value: 'ACATLAN DE JUAREZ' },
           { value: 'AHUALULCO DE MERCADO' },
