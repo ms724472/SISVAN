@@ -6,7 +6,7 @@
  * Your incidents ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselectcombobox', 'libs/comun/constantes', 'ojs/ojtoolbar',
-    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojdialog'],
+    'ojs/ojtable', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojknockout', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojdialog', 'ojs/ojprogress'],
         function (oj, ko, $) {
             function ModeloEvaluacionesGrupales() {
                 var self = this;

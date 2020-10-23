@@ -5,7 +5,7 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber', 'ojs/ojselectcombobox',
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinputnumber', 'ojs/ojselectcombobox', 'ojs/ojprogress',
     'ojs/ojinputtext', 'ojs/ojcollapsible', 'ojs/ojarraydataprovider', 'ojs/ojchart', 'ojs/ojaccordion', 'ojs/ojdialog'],
         function (oj, ko, $) {
             function ModeloEstadisticasOMS() {
