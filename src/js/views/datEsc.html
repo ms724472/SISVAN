@@ -132,16 +132,16 @@
                 <div class="oj-flex">
                     <oj-flex-item>                        
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="campo-escuela" >Escuela:</oj-label-inline>
+                            <oj-label for="campo-escuela"  show-required>Escuela:</oj-label>
                             <oj-input-text required="true" id="campo-escuela" value="{{campoEscuela}}" disabled="true" required></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="campo-grado" >Grado:</oj-label-inline>                       
+                            <oj-label for="campo-grado"  show-required>Grado:</oj-label>                       
                             <oj-select-one id="campo-grado" options="[[datosGrados]]" value="{{campoGrado}}" required>
                             </oj-select-one>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
-                            <oj-label-inline for="campo-letra" >Letra:</oj-label-inline>
+                            <oj-label for="campo-letra" show-required>Letra:</oj-label>
                             <oj-input-text id="campo-letra" value="{{campoLetra}}"></oj-input-text>
                         </oj-form-layout>                                           
                     </oj-flex-item>
