@@ -19,8 +19,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
 
                 this.orientationValue = ko.observable('vertical');
 
-                self.obtenerEstadisticas = function () {
-                    document.getElementById("dialogoCargando").open(); 
+                self.obtenerEstadisticas = function (modeloCargado) {
+                    if(modeloCargado) {
+                        document.getElementById("dialogoCargando").open(); 
+                    }
                     $.ajax({
                         type: "GET",
                         contentType: "text/plain; charset=utf-8",
@@ -55,19 +57,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojinput
                             } else {
                                 self.origenDatosZNinos(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
                             }
-                            document.getElementById("dialogoCargando").close(); 
+                            if(modeloCargado) {
+                                document.getElementById("dialogoCargando").close(); 
+                            } 
                         }
                     }).fail(function () {
-                        document.getElementById("dialogoCargando").close(); 
+                        if(modeloCargado) {
+                            document.getElementById("dialogoCargando").close(); 
+                        } 
                         alert("Error en el servidor, favor de comunicarse con el administrador.");
                         return;
                     });
                 };
 
-                self.obtenerEstadisticas();
+                self.obtenerEstadisticas(false);
 
                 self.tipoSeleccionado = function() {
-                    self.obtenerEstadisticas();
+                    self.obtenerEstadisticas(true);
                 };
 
                 /**
