@@ -25,7 +25,8 @@
                               animation-on-data-change="auto" 
                               orientation="[[orientationValue]]"
                               hover-behavior="dim"
-                              style="max-width:500px;width:100%;height:350px;display: inline-block;">
+                              style="max-width:500px;width:100%;height:350px;display: inline-block;"
+                              style-defaults.line-type="curved">
                         <template slot="itemTemplate" data-oj-as="item">
                             <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie.replace('sd', '').includes('_neg') ? 
                                                                                                                      '-' + item.data.serie.replace('sd', '').replace('_neg','') : 
@@ -52,7 +53,8 @@
                               animation-on-data-change="auto" 
                               orientation="[[orientationValue]]"
                               hover-behavior="dim"
-                              style="max-width:500px;width:100%;height:350px;display: inline-block;">
+                              style="max-width:500px;width:100%;height:350px;display: inline-block;"
+                              style-defaults.line-type="curved">
                         <template slot="itemTemplate" data-oj-as="item">
                             <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie.replace('sd', '').includes('_neg') ? 
                                                                                                                      '-' + item.data.serie.replace('sd', '').replace('_neg','') : 
