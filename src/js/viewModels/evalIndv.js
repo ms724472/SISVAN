@@ -308,7 +308,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 $.ajax({
                     type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoMasa/" + self.alumnoActual(),
+                    url: oj.gWSUrl() + "alumnos/obtenerHistorico/peso/" + self.alumnoActual(),
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -333,7 +333,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 $.ajax({
                     type: "GET",
                     contentType: "text/plain; charset=utf-8",
-                    url: oj.gWSUrl() + "alumnos/obtenerHistoricoEstatura/" + self.alumnoActual(),
+                    url: oj.gWSUrl() + "alumnos/obtenerHistorico/talla/" + self.alumnoActual(),
                     dataType: "text",
                     async: false,
                     success: function (data) {
@@ -355,7 +355,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     return;
                 });
 
-                peticionHistoticoIMC.open("GET", oj.gWSUrl() + "alumnos/obtenerHistoricoIMC/" + self.alumnoActual(), false);
+                peticionHistoticoIMC.open("GET", oj.gWSUrl() + "alumnos/obtenerHistorico/imc/" + self.alumnoActual(), false);
                 peticionHistoticoIMC.onreadystatechange = function () {
                     if (this.readyState === 4) {
                         if (this.status === 200) {
