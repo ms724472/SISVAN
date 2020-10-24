@@ -149,8 +149,12 @@
                             </template>
                             <template slot="seriesTemplate" data-oj-as="series">
                                 <oj-chart-series 
-                                    color="[[series.id === 'sd0' ? '#006600': null]]"
-                                    marker-shape="square"
+                                color="[[series.id.includes('3') ? '#000000': 
+                                        series.id.includes('2') ? '#990000': 
+                                        series.id.includes('1') ? '#FF9933': 
+                                        series.id.includes('0') ? '#006600':
+                                        null]]"
+                                    marker-shape="[[series.id === 'imc' ? 'square': 'none']]"
                                     marker-displayed="on">
                                 </oj-chart-series>
                             </template>
