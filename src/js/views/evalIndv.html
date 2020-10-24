@@ -153,9 +153,10 @@
                                         series.id.includes('2') ? '#990000': 
                                         series.id.includes('1') ? '#FF9933': 
                                         series.id.includes('0') ? '#006600':
-                                        null]]"
-                                    marker-shape="[[series.id === 'imc' ? 'square': 'none']]"
-                                    marker-displayed="on">
+                                        '#237BB1']]"
+                                    marker-shape="[[series.id === 'imc' ? 'human': 'none']]"
+                                    marker-displayed="on"
+                                    line-width="-1">
                                 </oj-chart-series>
                             </template>
                         </oj-chart>
