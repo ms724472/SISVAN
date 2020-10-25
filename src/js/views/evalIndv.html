@@ -6,63 +6,7 @@
     <!-- Estos graficos estan ocultos a la vista con el objetivo de poder realizar la exportacion de los
     mismos en el archivo de Excel dado que la rederizacion de Javascript no permite que funcionen correctamente
     en el acordeon-->
-    <oj-chart id="graficoIMCExcel" type="line" data="[[datosIMC]]" animation-on-display="auto" animation-on-data-change="auto"
-        orientation="[[orientationValue]]" x-axis="[[tituloIMC]]" legend.rendered="off" hover-behavior="dim"
-        style="position: absolute; top: 0px; right: 0px;visibility: hidden;z-index: -1;" style-defaults.line-type="curved">
-        <template slot="itemTemplate" data-oj-as="item">
-            <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie]]">
-            </oj-chart-item>
-        </template>
-        <template slot="seriesTemplate" data-oj-as="series">
-            <oj-chart-series 
-                                color="[[series.id.includes('3') ? '#000000': 
-                                        series.id.includes('2') ? '#990000': 
-                                        series.id.includes('1') ? '#FF9933': 
-                                        series.id.includes('0') ? '#006600':
-                                        '#237BB1']]"
-                                    marker-shape="[[series.id === 'imc' ? 'human': 'none']]"
-                                    marker-displayed="on"
-                                    line-width="-1">
-        </template>
-    </oj-chart>
-    <oj-chart id="graficoTallaExcel" type="line" data="[[datosEstatura]]" animation-on-display="auto" legend.rendered="off"
-        animation-on-data-change="auto" x-axis="[[tituloTalla]]" orientation="[[orientationValue]]" hover-behavior="dim"
-        style="position: absolute; top: 0px; right: 0px;visibility: hidden;z-index: -1;" style-defaults.line-type="curved">
-        <template slot="itemTemplate" data-oj-as="item">
-            <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie]]">
-            </oj-chart-item>
-        </template>
-        <template slot="seriesTemplate" data-oj-as="series">
-            <oj-chart-series 
-                                color="[[series.id.includes('3') ? '#000000': 
-                                        series.id.includes('2') ? '#990000': 
-                                        series.id.includes('1') ? '#FF9933': 
-                                        series.id.includes('0') ? '#006600':
-                                        '#237BB1']]"
-                                    marker-shape="[[series.id === 'talla' ? 'human': 'none']]"
-                                    marker-displayed="on"
-                                    line-width="-1">
-        </template>
-    </oj-chart>
-    <oj-chart id="graficoPesoExcel" type="line" data="[[dataProvider]]" animation-on-display="auto" legend.rendered="off"
-        animation-on-data-change="auto" x-axis="[[tituloPeso]]" orientation="[[orientationValue]]" hover-behavior="dim"
-        style="position: absolute; top: 0px; right: 0px;visibility: hidden;z-index: -1;" style-defaults.line-type="curved">
-        <template slot="itemTemplate" data-oj-as="item">
-            <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]" series-id="[[item.data.serie]]">
-            </oj-chart-item>
-        </template>
-        <template slot="seriesTemplate" data-oj-as="series">
-            <oj-chart-series 
-                                color="[[series.id.includes('3') ? '#000000': 
-                                        series.id.includes('2') ? '#990000': 
-                                        series.id.includes('1') ? '#FF9933': 
-                                        series.id.includes('0') ? '#006600':
-                                        '#237BB1']]"
-                                    marker-shape="[[series.id === 'peso' ? 'human': 'none']]"
-                                    marker-displayed="on"
-                                    line-width="-1">
-        </template>
-    </oj-chart>
+    
     <!--Fin de los graficos ocultos-->
     <h3 class="oj-header-border">Evaluación del alumno</h3>
     <div class="oj-form-layout">
@@ -154,7 +98,8 @@
                                   type="line" 
                                   data="[[datosIMC]]" 
                                   animation-on-display="auto"
-                                  animation-on-data-change="auto" 
+                                  animation-on-data-change="auto"
+                                  translations.label-no-data="Sin datos..." 
                                   orientation="[[orientationValue]]"
                                   x-axis="[[tituloIMC]]"
                                   hover-behavior="dim"

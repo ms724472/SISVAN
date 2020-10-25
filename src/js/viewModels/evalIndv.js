@@ -248,6 +248,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             });
 
             self.obtenerInfo = function () {
+                document.getElementById('dialogoCargando').open();
                 var peticionHistoticoIMC = new XMLHttpRequest();
                 datos = '{"NoData":""}';
                 datos = JSON.parse("[" + datos + "]");
@@ -259,7 +260,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/obtenerDatos/" + self.alumnoActual(),
                     dataType: "text",
-                    async: false,
+                    async: true,
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
@@ -284,20 +285,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/obtenerMediciones/" + self.alumnoActual(),
                     dataType: "text",
-                    async: false,
+                    async: true,
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
                             if (json.error === "No hay datos.") {
                                 self.origenDatosMediciones(new oj.ArrayTableDataSource([{ "Sin datos": "" }]));
-                                document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
+                                document.getElementById('colapsableGraficoMediciones').expanded = 'true';
                             } else {
                                 alert('No es posible obtener los datos, por favor contacta al administrador.');
                             }
                             return;
                         } else {
                             self.origenDatosMediciones(new oj.ArrayTableDataSource(json.mediciones));
-                            document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
+                            document.getElementById('colapsableGraficoMediciones').expanded = 'true';
                         }
                     }
                 }).fail(function () {
@@ -310,7 +311,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/obtenerHistorico/peso/" + self.alumnoActual(),
                     dataType: "text",
-                    async: false,
+                    async: true,
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
@@ -335,7 +336,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     contentType: "text/plain; charset=utf-8",
                     url: oj.gWSUrl() + "alumnos/obtenerHistorico/talla/" + self.alumnoActual(),
                     dataType: "text",
-                    async: false,
+                    async: true,
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
@@ -355,7 +356,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     return;
                 });
 
-                peticionHistoticoIMC.open("GET", oj.gWSUrl() + "alumnos/obtenerHistorico/imc/" + self.alumnoActual(), false);
+                peticionHistoticoIMC.open("GET", oj.gWSUrl() + "alumnos/obtenerHistorico/imc/" + self.alumnoActual(), true);
                 peticionHistoticoIMC.onreadystatechange = function () {
                     if (this.readyState === 4) {
                         if (this.status === 200) {
@@ -374,6 +375,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         } else {
                             alert("Error en el servidor, favor de comunicarse con el administrador.");
                         }
+                        document.getElementById('dialogoCargando').close();
+                        document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                     }
                 };
                 peticionHistoticoIMC.send();
