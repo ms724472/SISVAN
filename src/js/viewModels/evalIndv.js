@@ -376,7 +376,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             alert("Error en el servidor, favor de comunicarse con el administrador.");
                         }
                         document.getElementById('dialogoCargando').close();
-                        document.getElementById('colapsableHistoricoMediciones').expanded = 'true';
                     }
                 };
                 peticionHistoticoIMC.send();
@@ -722,9 +721,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     id_alumno : self.alumnoActual().toString(),
                     ancho : document.getElementsByTagName("svg")[0].clientWidth,
                     alto :  document.getElementsByTagName("svg")[0].clientHeight,
-                    grafico_imc: document.getElementById("graficoIMCExcel").getElementsByTagName("svg")[0].outerHTML,
-                    grafico_talla: document.getElementById("graficoTallaExcel").getElementsByTagName("svg")[0].outerHTML,
-                    grafico_peso: document.getElementById("graficoPesoExcel").getElementsByTagName("svg")[0].outerHTML
+                    grafico_imc: document.getElementById("graficoIMC").getElementsByTagName("svg")[0].outerHTML,
+                    grafico_talla: document.getElementById("graficoTalla").getElementsByTagName("svg")[0].outerHTML,
+                    grafico_peso: document.getElementById("graficoPeso").getElementsByTagName("svg")[0].outerHTML
                 };
 
                 var peticionExcel = new XMLHttpRequest();
