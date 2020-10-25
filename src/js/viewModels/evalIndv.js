@@ -323,7 +323,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.dataProvider(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
-                            document.getElementById("graficoPeso").refresh();
                         }
                     }
                 }).fail(function () {
@@ -348,7 +347,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             self.datosEstatura(new oj.ArrayDataProvider(json.mediciones, { keyAttributes: 'id' }));
-                            document.getElementById("graficoTalla").refresh();
                         }
                     }
                 }).fail(function () {
@@ -370,7 +368,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 return;
                             } else {
                                 self.datosIMC(new oj.ArrayDataProvider(jsonResponse.mediciones, { keyAttributes: 'id' }));
-                                document.getElementById("graficoIMC").refresh();
                             }
                         } else {
                             alert("Error en el servidor, favor de comunicarse con el administrador.");
