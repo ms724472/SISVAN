@@ -499,7 +499,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var compFechaNac = datosAlumnoActual.fecha_nac.split("/");
                 self.nuevaFechaNac(compFechaNac[2] + "-" + compFechaNac[1] + "-" + compFechaNac[0]);
                 self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);
-                document.getElementById("nuevoGrupoAlumno").value = datosAlumnoActual.id_grupo;
+                self.nuevoGrupoAlumno(datosAlumnoActual.id_grupo);
                 document.getElementById('dialogoNuevoAlumno').open();
             };
 
@@ -714,10 +714,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 }
 
                 document.getElementById("dialogoCargando").open();
+                var ancho = document.getElementsByTagName("svg")[0].clientWidth;
+                var alto = document.getElementsByTagName("svg")[0].clientHeight;
                 var cuerpoPeticion = {
                     id_alumno : self.alumnoActual().toString(),
-                    ancho : document.getElementsByTagName("svg")[0].clientWidth,
-                    alto :  document.getElementsByTagName("svg")[0].clientHeight,
+                    ancho : ancho === 0 ? 387 : ancho,
+                    alto :  alto === 0 ? 350: alto,
                     grafico_imc: document.getElementById("graficoIMC").getElementsByTagName("svg")[0].outerHTML,
                     grafico_talla: document.getElementById("graficoTalla").getElementsByTagName("svg")[0].outerHTML,
                     grafico_peso: document.getElementById("graficoPeso").getElementsByTagName("svg")[0].outerHTML
