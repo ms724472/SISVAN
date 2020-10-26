@@ -105,6 +105,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.tituloMedicion = ko.observable("Agregar nueva medición");
             self.botonFormularioMedicion = ko.observable("Agregar");
             self.medicionSeleccionada = ko.observable();
+            self.colorIndicador = ko.observable("#237BB1");
 
             var datosAlumnoActual = {};            
 
@@ -273,6 +274,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             if (json.datos[0].grado !== "EGRESADO") {
                                 self.nuevoGrupoMedicion(json.datos[0].id_grupo);
                             }
+                            
+                            self.colorIndicador(json.datos[0].sexo === "femenino" ? "#E4007C" : "#237BB1"); 
                         }
                     }
                 }).fail(function () {
