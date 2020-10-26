@@ -94,7 +94,7 @@
                                   data="[[datosIMC]]" 
                                   animation-on-display="auto"
                                   animation-on-data-change="auto"
-                                  translations.label-no-data="Sin datos..." 
+                                  translations.label-no-data="Sin datos." 
                                   orientation="[[orientationValue]]"
                                   x-axis="[[tituloIMC]]"
                                   hover-behavior="dim"
@@ -121,9 +121,17 @@
                         </oj-chart>
                     </oj-flex-item>                    
                     <oj-flex-item style="width: 33%;text-align: center;">
-                        <oj-chart id="graficoTalla" type="line" data="[[datosEstatura]]" animation-on-display="auto" legend.rendered="off"
-                            animation-on-data-change="auto" x-axis="[[tituloTalla]]" orientation="[[orientationValue]]" hover-behavior="dim"
-                            style="max-width:500px;width:100%;height:350px;display: inline-block;" style-defaults.line-type="curved">
+                        <oj-chart id="graficoTalla" 
+                                  type="line" data="[[datosEstatura]]" 
+                                  animation-on-display="auto" 
+                                  legend.rendered="off"
+                                  animation-on-data-change="auto" 
+                                  x-axis="[[tituloTalla]]" 
+                                  orientation="[[orientationValue]]" 
+                                  hover-behavior="dim"
+                                  style="max-width:500px;width:100%;height:350px;display: inline-block;" 
+                                  style-defaults.line-type="curved" 
+                                  translations.label-no-data="Sin datos.">
                             <template slot="itemTemplate" data-oj-as="item">
                                 <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]"
                                     series-id="[[item.data.serie]]">
@@ -145,9 +153,18 @@
                         </oj-chart>
                     </oj-flex-item>
                     <oj-flex-item style="width: 33%;text-align: center;">
-                        <oj-chart id="graficoPeso" type="line" data="[[dataProvider]]" animation-on-display="auto" legend.rendered="off"
-                            animation-on-data-change="auto" x-axis="[[tituloPeso]]" orientation="[[orientationValue]]" hover-behavior="dim"
-                            style="max-width:500px;width:100%;height:350px;display: inline-block;" style-defaults.line-type="curved">
+                        <oj-chart id="graficoPeso" 
+                                  type="line" 
+                                  data="[[dataProvider]]" 
+                                  animation-on-display="auto" 
+                                  legend.rendered="off"
+                                  animation-on-data-change="auto" 
+                                  x-axis="[[tituloPeso]]" 
+                                  orientation="[[orientationValue]]" 
+                                  hover-behavior="dim"
+                                  style="max-width:500px;width:100%;height:350px;display: inline-block;" 
+                                  style-defaults.line-type="curved" 
+                                  translations.label-no-data="Sin datos.">
                             <template slot="itemTemplate" data-oj-as="item">
                                 <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.mes] ]]"
                                     series-id="[[item.data.serie]]">
