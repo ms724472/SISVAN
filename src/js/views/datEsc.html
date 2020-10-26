@@ -80,27 +80,51 @@
                     <oj-flex-item>                        
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-cct" show-required>Clave de escuela:</oj-label>
-                            <oj-input-text required="true" id="campo-cct" value="{{campoCCT}}" required></oj-input-text>
+                            <oj-input-text required="true" id="campo-cct" value="{{campoCCT}}" validators="[[validadorCCT]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-nombre" show-required>Nombre:</oj-label>
-                            <oj-input-text required="true" id="campo-nombre" value="{{campoNombre}}" required></oj-input-text>                        
+                            <oj-input-text required="true" id="campo-nombre" value="{{campoNombre}}" validators="[[validadorNombre]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>                        
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-direccion" show-required>Direccion:</oj-label>
-                            <oj-input-text id="campo-direccion" value="{{campoDireccion}}" required></oj-input-text>
+                            <oj-input-text id="campo-direccion" value="{{campoDireccion}}" validators="[[validadorGeo]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-colonia" show-required>Colonia:</oj-label>
-                            <oj-input-text id="campo-colonia" value="{{campoColonia}}" required></oj-input-text>
+                            <oj-input-text id="campo-colonia" value="{{campoColonia}}" validators="[[validadorGeo]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-codigo-postal" show-required>Codigo Postal:</oj-label>
-                            <oj-input-text id="campo-codigo-postal" value="{{campoCodigoPostal}}" required></oj-input-text>
+                            <oj-input-text id="campo-codigo-postal" value="{{campoCodigoPostal}}" validators="[[validadorPostal]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-telefono" show-required>Telefono:</oj-label>
-                            <oj-input-text id="campo-telefono" value="{{campoTelefono}}" required></oj-input-text>
+                            <oj-input-text id="campo-telefono" value="{{campoTelefono}}" validators="[[validadorTelefonico]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-estado" show-required>Estado:</oj-label>
@@ -142,7 +166,11 @@
                         </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-letra" show-required>Letra:</oj-label>
-                            <oj-input-text id="campo-letra" value="{{campoLetra}}"></oj-input-text>
+                            <oj-input-text id="campo-letra" value="{{campoLetra}}" validators="[[validadorLetra]]" 
+                            required translations='{
+                                "required": {
+                                  "messageSummary": "Valor requerido.",  
+                                  "messageDetail": "No puede estar vacio."}}'></oj-input-text>
                         </oj-form-layout>                                           
                     </oj-flex-item>
                 </div>

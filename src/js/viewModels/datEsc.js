@@ -6,9 +6,9 @@
  * Your about ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojmenu', 'ojs/ojtable', 'ojs/ojarraytabledatasource',
-'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojselectcombobox'],
- function(oj, ko, $, ArrayDataProvider) {
-  
+  'ojs/ojpagingtabledatasource', 'ojs/ojpagingcontrol', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojselectcombobox'],
+  function (oj, ko, $, ArrayDataProvider) {
+
     function ModelosDatosEscolares() {
       var self = this;
       var datosEscuela;
@@ -35,9 +35,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.campoEscuela = ko.observable();
       self.campoGrado = ko.observable();
       self.campoLetra = ko.observable();
-      
+
       self.nombresColumnas = ko.observableArray([
-        { headerText: 'Clave de escuela', field: 'clave_sep'},
+        { headerText: 'Clave de escuela', field: 'clave_sep' },
         { headerText: 'Nombre', field: 'nombre' },
         { headerText: 'Dirección', field: 'direccion' },
         { headerText: 'Colonia', field: 'colonia' },
@@ -58,7 +58,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         { value: 'JALISCO' }
       ];
 
-      self.datosEstados = new ArrayDataProvider(self.estados, {keyAttributes: 'value'});
+      self.datosEstados = new ArrayDataProvider(self.estados, { keyAttributes: 'value' });
 
       self.grados = [
         { value: 1 },
@@ -69,8 +69,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         { value: 6 }
       ];
 
-      self.datosGrados = new ArrayDataProvider(self.grados, {keyAttributes: 'value'});
-      
+      self.datosGrados = new ArrayDataProvider(self.grados, { keyAttributes: 'value' });
+
       self.municipios = {
         JALISCO: [
           { value: 'ACATIC' },
@@ -201,10 +201,76 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         ]
       };
 
+      self.validadorTelefonico = ko.computed(function () {
+        return [{
+          type: 'regExp',
+          options: {
+            pattern: '[0-9]{10}',
+            messageSummary: 'Valor inválido',
+            messageDetail: 'Deben ser 10 dígitos.'
+          }
+        }];
+      });
+
+      self.validadorPostal = ko.computed(function () {
+        return [{
+          type: 'regExp',
+          options: {
+            pattern: '[0-9]{5}',
+            messageSummary: 'Valor inválido',
+            messageDetail: 'Deben ser 5 dígitos.'
+          }
+        }];
+      });
+
+      self.validadorGeo = ko.computed(function () {
+        return [{
+          type: 'regExp',
+          options: {
+            pattern: '[A-Za-z, \\.0-9-]+',
+            messageSummary: 'Valor inválido',
+            messageDetail: 'Solo se permiten letras, números, punto, coma y espacio.'
+          }
+        }];
+      });
+
+      self.validadorNombre = ko.computed(function () {
+        return [{
+          type: 'regExp',
+          options: {
+            pattern: '[A-Za-z \\.0-9]+',
+            messageSummary: 'Valor inválido',
+            messageDetail: 'Solo se permiten letras, números, punto y espacio.'
+          }
+        }];
+      });
+
+      self.validadorCCT = ko.computed(function () {
+        return [{
+          type: 'regExp',
+          options: {
+            pattern: '[A-Z0-9]+',
+            messageSummary: 'Valor inválido',
+            messageDetail: 'Corrija el campo.'
+          }
+        }];
+      });
+
+      self.validadorLetra = ko.computed(function () {
+        return [{
+          type: 'regExp',
+          options: {
+            pattern: '[A-Z]{1}',
+            messageSummary: 'Valor inválido',
+            messageDetail: 'Corrija el campo.'
+          }
+        }];
+      });
+
       self.estadoSeleccionado = function (event) {
         var estado = event['detail'].value;
         if (estado !== "" && self.municipios.hasOwnProperty(estado) && Object.keys(self.municipios[estado]).length > 0) {
-          self.datosMunicipios(new ArrayDataProvider(self.municipios[estado], {keyAttributes: 'value'}));
+          self.datosMunicipios(new ArrayDataProvider(self.municipios[estado], { keyAttributes: 'value' }));
         }
       };
 
@@ -221,12 +287,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
               } else {
                 var tablaEscuelas = document.getElementById("tablaEscuelas");
                 self.origenDatosEscuelas(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.escuelas, { idAttribute: 'id_escuela' })));
-                if(tablaEscuelas !== undefined && tablaEscuelas !== null) {
+                if (tablaEscuelas !== undefined && tablaEscuelas !== null) {
                   var jsonEscSeleccionada = [{
                     startIndex: { row: filaEscSeleccionada },
                     endIndex: { row: filaEscSeleccionada },
-                    startKey: { row: filaEscSeleccionada+1 },
-                    endKey: { row: filaEscSeleccionada+1 }
+                    startKey: { row: filaEscSeleccionada + 1 },
+                    endKey: { row: filaEscSeleccionada + 1 }
                   }];
                   tablaEscuelas.selection = jsonEscSeleccionada;
                 }
@@ -235,24 +301,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
           }
         };
 
-        peticionDatosEscuelas.send();        
+        peticionDatosEscuelas.send();
       };
 
       self.obtenerInformacion();
 
-      $('document').ready(function(){
-        if(self.origenDatosEscuelas().dataSource.totalSize() > 0) {
+      $('document').ready(function () {
+        if (self.origenDatosEscuelas().dataSource.totalSize() > 0) {
           var jsonEscSeleccionada = [{
             startIndex: { row: filaEscSeleccionada },
             endIndex: { row: filaEscSeleccionada },
-            startKey: { row: filaEscSeleccionada+1 },
-            endKey: { row: filaEscSeleccionada+1 }
+            startKey: { row: filaEscSeleccionada + 1 },
+            endKey: { row: filaEscSeleccionada + 1 }
           }];
           document.getElementById("tablaEscuelas").selection = jsonEscSeleccionada;
         }
       });
 
-      self.obtenerGrupos = function(event) {
+      self.obtenerGrupos = function (event) {
         var peticionDatosGrupos = new XMLHttpRequest();
         peticionDatosGrupos.open('GET', oj.gWSUrl() + "obtenerDatosGrupos/" + datosEscuela.id_escuela, false);
         peticionDatosGrupos.onreadystatechange = function () {
@@ -260,11 +326,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
             if (this.status === 200) {
               var json = JSON.parse(this.responseText);
               if (json.hasOwnProperty("error")) {
-                if(json.error === "No hay datos.") {
-                  self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource([{NoData:""}])));
+                if (json.error === "No hay datos.") {
+                  self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource([{ NoData: "" }])));
                 } else {
                   alert('No se encontro ningun dato, contacte al administrador.');
-                }                
+                }
                 return;
               } else {
                 self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource(json.grupos, { idAttribute: 'id_grupo' })));
@@ -276,24 +342,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         peticionDatosGrupos.send();
       };
 
-      self.escuelaSeleccionada = function(event) {
+      self.escuelaSeleccionada = function (event) {
         filaEscSeleccionada = event.detail.value[0].startIndex.row;
-        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];    
+        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];
         filaGrpSeleccionado = -1;
-        self.obtenerGrupos();        
+        self.obtenerGrupos();
       };
 
-      self.grupoSeleccionado = function(event) {
+      self.grupoSeleccionado = function (event) {
         filaGrpSeleccionado = event.detail.value[0].startIndex.row;
       };
 
-      self.crearNuevaEscuela = function(event) {
+      self.crearNuevaEscuela = function (event) {
         self.tituloDialogoEscuela("Agregar nueva escuela");
         self.botonDialogoEscuela("Agregar");
         document.getElementById('dialogoEscuela').open();
       };
 
-      self.editarEscuela = function(event) {
+      self.editarEscuela = function (event) {
         self.tituloDialogoEscuela("Editar escuela");
         self.botonDialogoEscuela("Guardar");
         self.campoCCT(datosEscuela.clave_sep);
@@ -307,7 +373,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         document.getElementById('dialogoEscuela').open();
       };
 
-      self.limpiarDialogoEscuela = function(event) {
+      self.limpiarDialogoEscuela = function (event) {
         self.campoCCT("");
         self.campoNombre("");
         self.campoDireccion("");
@@ -320,6 +386,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       };
 
       self.procesarDatosEscuela = function (event) {
+        var campoCCT = document.getElementById("campo-cct");
+        var campoNombre = document.getElementById("campo-nombre");
+        var campoDireccion = document.getElementById("campo-direccion");
+        var campoColonia = document.getElementById("campo-colonia");
+        var campoCPostal = document.getElementById("campo-codigo-postal");
+        var campoTelefono = document.getElementById("campo-telefono");
+
+        campoCCT.validate();
+        campoNombre.validate();
+        campoDireccion.validate();
+        campoColonia.validate();
+        campoCPostal.validate();
+        campoTelefono.validate();
+        if (campoCCT.valid === 'invalidShown' || campoNombre.valid === 'invalidShown' ||
+          campoDireccion.valid === 'invalidShown' || campoColonia.valid === 'invalidShown' ||
+          campoCPostal.valid === 'invalidShown' || campoTelefono.valid === 'invalidShown') {
+          return;
+        }
+
         var datosEscuelas = {
           clave_sep: self.campoCCT().toUpperCase(),
           nombre: self.campoNombre().toUpperCase(),
@@ -371,23 +456,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         self.obtenerInformacion();
       };
 
-      self.limpiarDialogoGrupo = function(event) {
+      self.limpiarDialogoGrupo = function (event) {
         self.campoEscuela("");
         self.campoGrado("");
         self.campoLetra("");
         document.getElementById('dialogoGrupo').close();
       };
 
-      self.crearNuevoGrupo = function(event) {
+      self.crearNuevoGrupo = function (event) {
         self.tituloDialogoGrupo("Agregar nuevo grupo");
         self.botonDialogoGrupo("Agregar");
         self.campoEscuela(datosEscuela.nombre);
         document.getElementById('dialogoGrupo').open();
       };
 
-      self.editarGrupo = function(event) {
-        if(filaGrpSeleccionado === -1) {
-          alert("Seleccione un grupo para editar.");        
+      self.editarGrupo = function (event) {
+        if (filaGrpSeleccionado === -1) {
+          alert("Seleccione un grupo para editar.");
         } else {
           var datosGrupos = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado];
           self.campoEscuela(datosEscuela.nombre);
@@ -396,20 +481,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
           self.tituloDialogoGrupo("Editar grupo");
           self.botonDialogoGrupo("Guardar");
           document.getElementById('dialogoGrupo').open();
-        }       
+        }
       };
 
-      self.procesarDatosGrupos = function(event) {
+      self.procesarDatosGrupos = function (event) {
+        var campoLetra = document.getElementById("campo-letra");
+
+        campoLetra.validate();
+
+        if (campoLetra.valid === 'invalidShown') {
+          return;
+        }
+
         var servicio = "agregarGrupo";
         var metodo = "POST";
         var fechaActual = new Date();
         var mesActual = fechaActual.getMonth() + 1;
         var anio_ingreso;
 
-        if(mesActual >= 8 && mesActual <= 12) {
-          anio_ingreso = fechaActual.getFullYear();          
+        if (mesActual >= 8 && mesActual <= 12) {
+          anio_ingreso = fechaActual.getFullYear();
         } else {
-          anio_ingreso = fechaActual.getFullYear()-1;
+          anio_ingreso = fechaActual.getFullYear() - 1;
         }
 
         var datosGrupo = {
@@ -417,7 +510,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
           letra: self.campoLetra()
         };
 
-        if(self.botonDialogoGrupo() !== "Agregar") {
+        if (self.botonDialogoGrupo() !== "Agregar") {
           servicio = "actualizarGrupo";
           metodo = "PUT";
           var id_grupo = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado].id_grupo;
@@ -466,7 +559,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
        * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
        * the promise is resolved
        */
-      self.handleActivated = function(info) {
+      self.handleActivated = function (info) {
         // Implement if needed
       };
 
@@ -479,7 +572,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
        * @param {Function} info.valueAccessor - The binding's value accessor.
        * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
        */
-      self.handleAttached = function(info) {
+      self.handleAttached = function (info) {
         // Implement if needed
       };
 
@@ -492,7 +585,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
        * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
        * @param {Function} info.valueAccessor - The binding's value accessor.
        */
-      self.handleBindingsApplied = function(info) {
+      self.handleBindingsApplied = function (info) {
         // Implement if needed
       };
 
@@ -504,7 +597,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
        * @param {Function} info.valueAccessor - The binding's value accessor.
        * @param {Array} info.cachedNodes - An Array containing cached nodes for the View if the cache is enabled.
        */
-      self.handleDetached = function(info) {
+      self.handleDetached = function (info) {
         // Implement if needed
       };
     }
