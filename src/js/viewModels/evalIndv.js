@@ -275,7 +275,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 self.nuevoGrupoMedicion(json.datos[0].id_grupo);
                             }
                             
-                            self.colorIndicador(json.datos[0].sexo === "femenino" ? "#E4007C" : "#237BB1"); 
+                            self.colorIndicador(json.datos[0].sexo === "FEMENINO" ? "#E4007C" : "#237BB1"); 
                         }
                     }
                 }).fail(function () {
