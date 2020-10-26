@@ -54,7 +54,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 }
                             } else {
                                 self.porcentajesEscuelas(new oj.ArrayDataProvider(respuestaJSON.datos));
-                                self.tituloGraficoEscolar("PRIMARIA: " + nombreEscuelaSeleccionada);
+                                self.tituloGraficoEscolar("PRIMARIA " + nombreEscuelaSeleccionada);
                             }
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
@@ -99,7 +99,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 }
                             } else {
                                 self.porcentajesGrupos(new oj.ArrayDataProvider(respuestaJSON.datos));
-                                self.tituloGraficoGrupal("PRIMARIA " + nombreEscuelaSeleccionada + " GRUPO: " + etiquetaGrupoSeleccionado);
+                                self.tituloGraficoGrupal("PRIMARIA " + nombreEscuelaSeleccionada + " GRUPO " + etiquetaGrupoSeleccionado);
                             }
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
