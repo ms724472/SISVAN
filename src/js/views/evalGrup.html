@@ -35,7 +35,7 @@
                       </oj-menu>
                   </oj-menu-button>
                   <oj-menu-button id="btn-menu-diagnosticos" class="componente-barra boton-barra">
-                    Diagnostico
+                    Diagnóstico
                     <oj-menu id="menu-diagnosticos" slot="menu" style="display:none" on-oj-action="[[cambioDiagnostico]]">
                         <!-- ko foreach: diagnosticos -->
                         <oj-option data-bind="attr: {id: value, value: value}">
@@ -81,7 +81,7 @@
                                   style="max-width:500px;width:100%;height:350px;"
                                   x-axis="[[tituloEscuela]]"
                                   translations.label-no-data="Sin datos."
-                                  translations.label-series="Diagnostico"
+                                  translations.label-series="Diagnóstico"
                                   translations.label-value="No. alumnos"
                                   legend.title="[[tituloGraficoEscolar]]"
                                   legend.title-halign="center"
@@ -109,7 +109,7 @@
                                   style="max-width:500px;width:100%;height:350px;"
                                   x-axis="[[tituloGrupo]]"
                                   translations.label-no-data="Sin datos."
-                                  translations.label-series="Diagnostico"
+                                  translations.label-series="Diagnóstico"
                                   translations.label-value="No. alumnos"
                                   legend.title="[[tituloGraficoGrupal]]"
                                   legend.title-halign="center"
