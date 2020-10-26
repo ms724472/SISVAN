@@ -23,7 +23,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             self.valorHasta = ko.observable();
             self.escuelas = [];
             self.grupos = ko.observableArray();
-            self.estiloGraficos = ko.observable({"fontSize":"20px"});
+            self.estiloGraficos = ko.observable({"fontSize":"15px"});
             self.tituloGraficoEscolar = ko.observable();
             self.tituloGraficoGrupal = ko.observable();
 
@@ -35,7 +35,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
             // Please reference the ojModule jsDoc for additionaly available methods.
-            self.obtenerPorcentajesEscolares = function (idEscuela, nombreEscuela, diagnostico) {
+            self.obtenerPorcentajesEscolares = function (idEscuela, diagnostico) {
                 var servicio = "escolares/obtenerPorcentajesEscuela/?id_escuela=" + idEscuela +
                     "&desde=" + self.valorDesde() +
                     "&hasta=" + self.valorHasta() +
@@ -99,7 +99,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 }
                             } else {
                                 self.porcentajesGrupos(new oj.ArrayDataProvider(respuestaJSON.datos));
-                                self.tituloGraficoGrupal("PRIMARIA: " + nombreEscuelaSeleccionada + " GRUPO: " + etiquetaGrupoSeleccionado);
+                                self.tituloGraficoGrupal("PRIMARIA " + nombreEscuelaSeleccionada + " GRUPO: " + etiquetaGrupoSeleccionado);
                             }
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
