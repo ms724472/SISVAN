@@ -22,7 +22,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             self.valorDesde = ko.observable();
             self.valorHasta = ko.observable();
             self.escuelas = [];
-            self.grupos = ko.observableArray();;
+            self.grupos = ko.observableArray();
+            self.estiloGraficos = ko.observable({"fontSize":"20px"});
+            self.tituloGraficoEscolar = ko.observable();
+            self.tituloGraficoGrupal = ko.observable();
+
             self.diagnosticos = [
                 { value: "imc", label: "IMC" },
                 { value: "talla", label: "Talla" },
@@ -31,7 +35,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
             // Please reference the ojModule jsDoc for additionaly available methods.
-            self.obtenerPorcentajesEscolares = function (idEscuela, diagnostico) {
+            self.obtenerPorcentajesEscolares = function (idEscuela, nombreEscuela, diagnostico) {
                 var servicio = "escolares/obtenerPorcentajesEscuela/?id_escuela=" + idEscuela +
                     "&desde=" + self.valorDesde() +
                     "&hasta=" + self.valorHasta() +
@@ -44,12 +48,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             var respuestaJSON = JSON.parse(this.responseText);
                             if (respuestaJSON.hasOwnProperty("error")) {
                                 if (respuestaJSON.error === "No hay datos.") {
-                                    self.porcentajesEscuelas(new oj.ArrayDataProvider([{ NoData: "" }]));
+                                    self.porcentajesEscuelas(new oj.ArrayDataProvider([{ NoData: "" }]));                                    
                                 } else {
                                     alert(ERROR_INTERNO_SERVIDOR);
                                 }
                             } else {
                                 self.porcentajesEscuelas(new oj.ArrayDataProvider(respuestaJSON.datos));
+                                self.tituloGraficoEscolar("PRIMARIA: " + nombreEscuelaSeleccionada);
                             }
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
@@ -94,6 +99,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 }
                             } else {
                                 self.porcentajesGrupos(new oj.ArrayDataProvider(respuestaJSON.datos));
+                                self.tituloGraficoGrupal("PRIMARIA: " + nombreEscuelaSeleccionada + " GRUPO: " + etiquetaGrupoSeleccionado);
                             }
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
@@ -168,10 +174,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
 
                             self.obtenerLasEscuelas();
                             self.obtenerTodosLosGrupos();
-                            self.obtenerPorcentajesEscolares(todosLosGrupos[self.escuelas[0].value][0].value, "imc");
-                            self.obtenerPorcentajesGrupales(todosLosGrupos[self.escuelas[0].value][0].value, "imc");
                             nombreEscuelaSeleccionada = self.escuelas[0].label;
-                            etiquetaGrupoSeleccionado = todosLosGrupos[self.escuelas[0].value][0].label;
+                            self.obtenerPorcentajesEscolares(todosLosGrupos[self.escuelas[0].value][0].value, "imc");
+                            etiquetaGrupoSeleccionado = todosLosGrupos[self.escuelas[0].value][0].label;  
+                            self.obtenerPorcentajesGrupales(todosLosGrupos[self.escuelas[0].value][0].value, "imc");                                              
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }

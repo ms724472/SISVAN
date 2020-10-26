@@ -80,7 +80,11 @@
                                   hover-behavior="dim"
                                   style="max-width:500px;width:100%;height:350px;"
                                   x-axis="[[tituloEscuela]]"
-                                  translations.label-no-data="Sin datos.">
+                                  translations.label-no-data="Sin datos."
+                                  legend.title="[[tituloGraficoEscolar]]"
+                                  legend.title-halign="center"
+                                  legend.title-style="[[estiloGraficos]]"
+                                  legend.position="bottom">
                             <template slot='itemTemplate' data-oj-as='item'>
                                 <oj-chart-item 
                                     value='[[item.data.valor]]'
@@ -102,7 +106,11 @@
                                   hover-behavior="dim"
                                   style="max-width:500px;width:100%;height:350px;"
                                   x-axis="[[tituloGrupo]]"
-                                  translations.label-no-data="Sin datos.">
+                                  translations.label-no-data="Sin datos."
+                                  legend.title="[[tituloGraficoGrupal]]"
+                                  legend.title-halign="center"
+                                  legend.title-style="[[estiloGraficos]]"
+                                  legend.position="bottom">
                             <template slot='itemTemplate' data-oj-as='item'>
                                 <oj-chart-item 
                                     value='[[item.data.valor]]'
