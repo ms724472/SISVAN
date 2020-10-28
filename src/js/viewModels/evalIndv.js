@@ -64,8 +64,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                     alert("Debe agregar un grupo para agregar nuevos alumnos o mediciones.")
                                 } else {
                                     grupos = jsonResponse;
-                                    self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[Object.keys(grupos)[0]], { keyAttributes: 'value' }));
-                                    self.nuevoEscuelaAlumno('');
+                                    var gruposEscuela = $.extend([], grupos[Object.keys(grupos)[0]]);
+                                    gruposEscuela.splice(0, 0, {value:-1,label:"No seleccionado"});
+                                    self.origenDatosGrupos(new oj.ArrayDataProvider(gruposEscuela, { keyAttributes: 'value' }));
+                                    self.nuevoEscuelaAlumno(-1);
                                 }
                             }
                         }
@@ -239,11 +241,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
 
             self.validadorGrupos = ko.computed(function () {
                 return [{
-                    type: 'regExp',
+                    type: 'numberRange', 
                     options: {
-                        pattern: '[0-6] [A-Z]',
-                        messageSummary: 'Grupo inválido',
-                        messageDetail: 'Corrija el campo.'
+                      min: 1, 
+                      messageSummary: 'Grupo invalido',
+                      messageDetail: 'Seleccione un grupo.'
                     }
                 }];
             });
