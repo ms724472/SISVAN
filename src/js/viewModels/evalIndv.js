@@ -439,12 +439,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.escuelaSeleccionada = function (event) {
                 var id_escuela = event['detail'].value.toString();
                 if (id_escuela !== "" && Object.keys(grupos).length > 0) {
+                    var gruposEscuela;
                     if(grupos.hasOwnProperty(id_escuela)) {
-                        self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[id_escuela], { keyAttributes: 'value' }));
+                        gruposEscuela = $.extend([], grupos[id_escuela]);
+                        gruposEscuela.splice(0, 0, {value:-1,label:"No seleccionado"});
                     } else {
-                        self.nuevoGrupoAlumno('');        
-                        self.origenDatosGrupos(new oj.ArrayDataProvider([{NoData:""}]));
+                        gruposEscuela = [{value:-1,label:"No seleccionado"}];
                     }
+                    self.origenDatosGrupos(new oj.ArrayDataProvider(gruposEscuela, { keyAttributes: 'value' }));
+                    self.nuevoGrupoAlumno(-1);            
                 }
             };
 
