@@ -269,6 +269,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     success: function (data) {
                         json = $.parseJSON(data);
                         if (json.hasOwnProperty("error")) {
+                            document.getElementById('dialogoCargando').close();
                             alert('Identificador de alumno no válido, por favor revisa tus datos.');
                             return;
                         } else {
