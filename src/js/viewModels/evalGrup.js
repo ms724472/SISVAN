@@ -26,6 +26,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             self.estiloGraficos = ko.observable({"fontSize":"15px"});
             self.tituloGraficoEscolar = ko.observable();
             self.tituloGraficoGrupal = ko.observable();
+            self.orientationValue = ko.observable('vertical');
+            self.origenDatosHistorico = ko.observable();
 
             self.diagnosticos = [
                 { value: "imc", label: "IMC" },
@@ -109,6 +111,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 peticionPorcentajesGrupos.send();
             };
 
+            self.obtenerHistoricoEscolar = function(idEscuela, diagnostico) {
+                var servicio = "escolares/obtenerHistoricoEscuela/" + diagnostico + "/" + idEscuela;
+
+                var peticionHistoricoEscolares = new XMLHttpRequest();
+                peticionHistoricoEscolares.open("GET", oj.gWSUrl() + servicio, false);
+                peticionHistoricoEscolares.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var respuestaJSON = JSON.parse(this.responseText);
+                            if (respuestaJSON.hasOwnProperty("error")) {
+                                if (respuestaJSON.error === "No hay datos.") {
+                                    self.origenDatosHistorico(new oj.ArrayDataProvider([{ NoData: "" }]));
+                                } else {
+                                    alert(ERROR_INTERNO_SERVIDOR);
+                                }
+                            } else {
+                                self.origenDatosHistorico(new oj.ArrayDataProvider(respuestaJSON.mediciones, { keyAttributes: 'id' }));
+                            }
+                        } else {
+                            alert(ERROR_INTERNO_SERVIDOR);
+                        }
+                    }
+                };
+                peticionHistoricoEscolares.send();
+            }
+
             self.obtenerLasEscuelas = function () {
                 var peticionListaEscuelas = new XMLHttpRequest();
                 peticionListaEscuelas.open("GET", oj.gWSUrl() + "obtenerEscuelas", false);
@@ -177,7 +205,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             nombreEscuelaSeleccionada = self.escuelas[0].label;
                             self.obtenerPorcentajesEscolares(todosLosGrupos[self.escuelas[0].value][0].value, "imc");
                             etiquetaGrupoSeleccionado = todosLosGrupos[self.escuelas[0].value][0].label;  
-                            self.obtenerPorcentajesGrupales(todosLosGrupos[self.escuelas[0].value][0].value, "imc");                                              
+                            self.obtenerPorcentajesGrupales(todosLosGrupos[self.escuelas[0].value][0].value, "imc");    
+                            self.obtenerHistoricoEscolar(todosLosGrupos[self.escuelas[0].value][0].value, "imc");                                        
                         } else {
                             alert("Error cargando ultimas mediciones, favor de contactar al administrador.")
                         }
@@ -223,6 +252,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             self.actualizarGraficos = function (event) {
                 self.obtenerPorcentajesEscolares(escuelaSeleccionada, diagnosticoSeleccionado);
                 self.obtenerPorcentajesGrupales(grupoSeleccionado, diagnosticoSeleccionado);
+                self.obtenerHistoricoEscolar(escuelaSeleccionada, diagnosticoSeleccionado);
             };
 
             self.descargarPDF = function (event) {
