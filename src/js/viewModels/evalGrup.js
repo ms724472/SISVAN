@@ -165,14 +165,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             };
 
             self.corregirNombreSerie = function(serie) {
-                var nuevoNombre;
+                var nuevoNombre = "";
                 var partesNombre = serie.split("_");
                 partesNombre.forEach(function callback(currentValue, index, array) {
-                    nuevoNombre = nuevoNombre + " " + currentValue.substring(0, 1).toUpperCase() + currentValue.substring(1);                    
+                    nuevoNombre = nuevoNombre + " " + currentValue.substring(0, 1).toUpperCase() + currentValue.substring(1);            
                 });   
                 return nuevoNombre.substring(1);             
             };
-
             self.obtenerTodosLosGrupos = function () {
                 var peticionGrupos = new XMLHttpRequest();
                 peticionGrupos.open("GET", oj.gWSUrl() + "grupos/obtenerTodosLosGrupos/" + self.valorHasta(), false);
