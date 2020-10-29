@@ -68,8 +68,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                     var gruposEscuela = $.extend([], grupos[Object.keys(grupos)[0]]);
                                     gruposEscuela.splice(0, 0, {value:-1,label:"NO SELECCIONADO"});
                                     self.origenDatosGrupos(new oj.ArrayDataProvider(gruposEscuela, { keyAttributes: 'value' }));
-                                    self.nuevoGrupoAlumno(-1);
-                                    self.nuevoGrupoMedicion(-1);
+                                    self.nuevoGrupoAlumno(-1);                                    
                                     self.nuevoEscuelaAlumno(-1);
                                 }
                             }
@@ -617,7 +616,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 } else {
                     if (Object.keys(grupos).length > 0) {
                         self.botonFormularioMedicion("Agregar");
-                        self.tituloMedicion("Agregar nueva medición");                        
+                        self.tituloMedicion("Agregar nueva medición"); 
+                        self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);   
+                        self.nuevoGrupoMedicion(datosAlumnoActual.id_grupo);                    
                         self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
                         document.getElementById('dialogoNuevaMedicion').open();
                     } else {
