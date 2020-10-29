@@ -168,7 +168,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 var nuevoNombre;
                 var partesNombre = serie.split("_");
                 partesNombre.forEach(function callback(currentValue, index, array) {
-                    nuevoNombre = " " + currentValue.substring(0, 1).toUpperCase() + currentValue.substring(1);                    
+                    nuevoNombre = nuevoNombre + " " + currentValue.substring(0, 1).toUpperCase() + currentValue.substring(1);                    
                 });   
                 return nuevoNombre.substring(1);             
             };
