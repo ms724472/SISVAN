@@ -44,7 +44,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             return;
                         } else {
                             json.escuelas.splice(0, 0, {value:-1,label:"NO SELECCIONADA"});
-                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
+                            self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas, { keyAttributes: 'value' }));
                         }
                     }
                 }).fail(function () {
