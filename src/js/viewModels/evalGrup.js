@@ -28,6 +28,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
             self.tituloGraficoGrupal = ko.observable();
             self.orientationValue = ko.observable('vertical');
             self.origenDatosHistorico = ko.observable();
+            self.tituloGrafico = ko.observable();
 
             self.diagnosticos = [
                 { value: "imc", label: "IMC" },
@@ -128,6 +129,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                                 }
                             } else {
                                 self.origenDatosHistorico(new oj.ArrayDataProvider(respuestaJSON.mediciones, { keyAttributes: 'id' }));
+                                self.tituloGrafico("PRIMARIA " + nombreEscuelaSeleccionada);
                             }
                         } else {
                             alert(ERROR_INTERNO_SERVIDOR);
@@ -160,6 +162,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                 };
 
                 peticionListaEscuelas.send();
+            };
+
+            self.corregirNombreSerie = function(serie) {
+                var nuevoNombre;
+                var partesNombre = serie.split("_");
+                partesNombre.forEach(function callback(currentValue, index, array) {
+                    nuevoNombre = " " + currentValue.substring(0, 1).toUpperCase() + currentValue.substring(1);                    
+                });   
+                return nuevoNombre.substring(1);             
             };
 
             self.obtenerTodosLosGrupos = function () {
