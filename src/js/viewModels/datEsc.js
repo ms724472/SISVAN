@@ -349,14 +349,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       };
 
       self.escuelaSeleccionada = function (event) {
-        filaEscSeleccionada = event.detail.value[0].startIndex.row;
-        datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];
-        filaGrpSeleccionado = -1;
-        self.obtenerGrupos();
+            if(event.detail.value[0] !== undefined && event.detail.value[0] !== null) {
+                  filaEscSeleccionada = event.detail.value[0].startIndex.row;
+                  datosEscuela = self.origenDatosEscuelas().dataSource.data[filaEscSeleccionada];
+                  filaGrpSeleccionado = -1;
+                  self.obtenerGrupos();
+            } else {
+                  filaEscSeleccionada = -1;
+                  self.origenDatosGrupos(new oj.PagingTableDataSource(new oj.ArrayTableDataSource([{ NoData: "" }])));
+            }
+        
       };
 
       self.grupoSeleccionado = function (event) {
-        filaGrpSeleccionado = event.detail.value[0].startIndex.row;
+            if(event.detail.value[0] !== undefined && event.detail.value[0] !== null && filaEscSeleccionada !== -1) {
+                  filaGrpSeleccionado = event.detail.value[0].startIndex.row;
+            } else {
+                  filaGrpSeleccionado = -1;
+            }
+        
       };
 
       self.crearNuevaEscuela = function (event) {
@@ -366,17 +377,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       };
 
       self.editarEscuela = function (event) {
-        self.tituloDialogoEscuela("Editar escuela");
-        self.botonDialogoEscuela("Guardar");
-        self.campoCCT(datosEscuela.clave_sep);
-        self.campoNombre(datosEscuela.nombre);
-        self.campoDireccion(datosEscuela.direccion);
-        self.campoColonia(datosEscuela.colonia);
-        self.campoCodigoPostal(datosEscuela.codigo_postal.toString());
-        self.campoTelefono(datosEscuela.telefono);
-        self.campoEstado(datosEscuela.estado);
-        self.campoMunicipio(datosEscuela.municipio);
-        document.getElementById('dialogoEscuela').open();
+        if(filaEscSeleccionada !== -1) {
+              self.tituloDialogoEscuela("Editar escuela");
+              self.botonDialogoEscuela("Guardar");
+              self.campoCCT(datosEscuela.clave_sep);
+              self.campoNombre(datosEscuela.nombre);
+              self.campoDireccion(datosEscuela.direccion);
+              self.campoColonia(datosEscuela.colonia);
+              self.campoCodigoPostal(datosEscuela.codigo_postal.toString());
+              self.campoTelefono(datosEscuela.telefono);
+              self.campoEstado(datosEscuela.estado);
+              self.campoMunicipio(datosEscuela.municipio);
+              document.getElementById('dialogoEscuela').open();
+        } else {
+              alert("Seleccione una escuela.");
+        }        
       };
 
       self.limpiarDialogoEscuela = function (event) {
@@ -465,16 +480,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.limpiarDialogoGrupo = function (event) {
         self.campoGrado("");
         self.campoLetra("");
+        self.fechaToma("");
         document.getElementById('dialogoGrupo').close();
       };
 
       self.crearNuevoGrupo = function (event) {
-        self.tituloDialogoGrupo("Agregar nuevo grupo");
-        self.botonDialogoGrupo("Agregar");
-        document.getElementById('dialogoGrupo').open();
+            if(filaEscSeleccionada !== -1) {
+                  self.tituloDialogoGrupo("Agregar nuevo grupo");
+                  self.botonDialogoGrupo("Agregar");
+                  document.getElementById('dialogoGrupo').open();
+            } else {
+                  alert("Seleccione una escuela.");
+            }
+        
       };
 
       self.editarGrupo = function (event) {
+            console.log(filaGrpSeleccionado);
         if (filaGrpSeleccionado === -1) {
           alert("Seleccione un grupo para editar.");
         } else {
