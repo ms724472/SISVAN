@@ -32,9 +32,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.datosMunicipios = ko.observableArray();
       self.tituloDialogoGrupo = ko.observable("Agregar nuevo grupo");
       self.botonDialogoGrupo = ko.observable("Agregar");
-      self.campoEscuela = ko.observable();
       self.campoGrado = ko.observable();
       self.campoLetra = ko.observable();
+      self.fechaToma = ko.observable('');
 
       self.nombresColumnas = ko.observableArray([
         { headerText: 'Clave de escuela', field: 'clave_sep' },
@@ -267,6 +267,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         }];
       });
 
+      self.convertidorFechas = ko.observable(oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
+        createConverter(
+          {
+            pattern: "dd/MM/yyyy"
+          }));
+
       self.estadoSeleccionado = function (event) {
         var estado = event['detail'].value;
         if (estado !== "" && self.municipios.hasOwnProperty(estado) && Object.keys(self.municipios[estado]).length > 0) {
@@ -457,7 +463,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       };
 
       self.limpiarDialogoGrupo = function (event) {
-        self.campoEscuela("");
         self.campoGrado("");
         self.campoLetra("");
         document.getElementById('dialogoGrupo').close();
@@ -466,7 +471,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.crearNuevoGrupo = function (event) {
         self.tituloDialogoGrupo("Agregar nuevo grupo");
         self.botonDialogoGrupo("Agregar");
-        self.campoEscuela(datosEscuela.nombre);
         document.getElementById('dialogoGrupo').open();
       };
 
@@ -475,7 +479,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
           alert("Seleccione un grupo para editar.");
         } else {
           var datosGrupos = self.origenDatosGrupos().dataSource.data[filaGrpSeleccionado];
-          self.campoEscuela(datosEscuela.nombre);
           self.campoGrado(parseInt(datosGrupos.grado));
           self.campoLetra(datosGrupos.letra);
           self.tituloDialogoGrupo("Editar grupo");
@@ -497,12 +500,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         var metodo = "POST";
         var fechaActual = new Date();
         var mesActual = fechaActual.getMonth() + 1;
+        var anioActual = fechaActual.getFullYear();
         var anio_ingreso;
 
+        if(self.fechaToma() !== "") {
+          var componentes = self.fechaToma().split("-");
+          mesActual = parseInt(componentes[1]);
+          anioActual = parseInt(componentes[0]);
+        }
+
         if (mesActual >= 8 && mesActual <= 12) {
-          anio_ingreso = fechaActual.getFullYear();
+          anio_ingreso = anioActual;
         } else {
-          anio_ingreso = fechaActual.getFullYear() - 1;
+          anio_ingreso = anioActual - 1;
         }
 
         var datosGrupo = {

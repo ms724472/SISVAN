@@ -154,11 +154,9 @@
         <div class="oj-form-layout">
             <div class="oj-form">
                 <div class="oj-flex">
-                    <oj-flex-item>                        
-                        <oj-form-layout class="campo-formulario">
-                            <oj-label for="campo-escuela"  show-required>Escuela:</oj-label>
-                            <oj-input-text required="true" id="campo-escuela" value="{{campoEscuela}}" disabled="true" required></oj-input-text>
-                        </oj-form-layout>
+                    <oj-flex-item>         
+                        <oj-label for="fecha-toma">Fecha toma en campo:</oj-label>
+                            <oj-input-date id="fecha-toma" value="{{fechaToma}}" converter=[[convertidorFechas]]/>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-grado"  show-required>Grado:</oj-label>                       
                             <oj-select-one id="campo-grado" options="[[datosGrados]]" value="{{campoGrado}}" required>
