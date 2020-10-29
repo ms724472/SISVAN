@@ -43,6 +43,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                             alert('No se encontró ninguna escuela');
                             return;
                         } else {
+                            json.escuelas.splice(0, 0, {value:-1,label:"NO SELECCIONADA"});
                             self.origenDatosEscuelas(new oj.ArrayDataProvider(json.escuelas));
                         }
                     }
@@ -65,8 +66,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                                 } else {
                                     grupos = jsonResponse;
                                     var gruposEscuela = $.extend([], grupos[Object.keys(grupos)[0]]);
-                                    gruposEscuela.splice(0, 0, {value:-1,label:"No seleccionado"});
+                                    gruposEscuela.splice(0, 0, {value:-1,label:"NO SELECCIONADO"});
                                     self.origenDatosGrupos(new oj.ArrayDataProvider(gruposEscuela, { keyAttributes: 'value' }));
+                                    self.nuevoGrupoAlumno(-1);
+                                    self.nuevoGrupoMedicion(-1);
                                     self.nuevoEscuelaAlumno(-1);
                                 }
                             }
@@ -387,6 +390,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
             self.agregarAlumno = function () {
                 self.dialogoAlumno("Agregar nuevo alumno");
                 self.botonFormularioAlumno("Agregar");
+                self.nuevoEscuelaAlumno(-1);                
                 document.getElementById('dialogoNuevoAlumno').open();
             };
 
@@ -431,8 +435,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById("nuevoApellidoMAlumno").value = '';
                 document.getElementById("nuevoSexoAlumno").value = 'femenino';
                 document.getElementById("nuevoFNacimientoAlumno").value = '';
-                self.nuevoEscuelaAlumno('');
-                self.nuevoGrupoAlumno('');
+                self.nuevoEscuelaAlumno(-1);
+                self.nuevoGrupoAlumno(-1);
                 if (Object.keys(grupos).length > 0) {
                     self.origenDatosGrupos(new oj.ArrayDataProvider(datos));
                 }
@@ -444,9 +448,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     var gruposEscuela;
                     if(grupos.hasOwnProperty(id_escuela)) {
                         gruposEscuela = $.extend([], grupos[id_escuela]);
-                        gruposEscuela.splice(0, 0, {value:-1,label:"No seleccionado"});
+                        gruposEscuela.splice(0, 0, {value:-1,label:"NO SELECCIONADO"});
                     } else {
-                        gruposEscuela = [{value:-1,label:"No seleccionado"}];
+                        gruposEscuela = [{value:-1,label:"NO SELECCIONADO"}];
                     }
                     self.origenDatosGrupos(new oj.ArrayDataProvider(gruposEscuela, { keyAttributes: 'value' }));
                     self.nuevoGrupoAlumno(-1);            
@@ -484,6 +488,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     document.getElementById("nuevaTricepsMedicion").value = mediciones.triceps.toString();
                     document.getElementById("nuevaSubescapulaMedicion").value = mediciones.subescapula.toString();
                     document.getElementById("nuevaPliegueCuelloMedicion").value = mediciones.pliegue_cuello.toString();
+                    self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);
                     self.nuevoGrupoMedicion(mediciones.id_grupo);
                     document.getElementById('dialogoNuevaMedicion').open();
                 } else {
@@ -519,6 +524,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var campoSexoAlumno = document.getElementById("nuevoSexoAlumno");
                 var campoFechaNac = document.getElementById("nuevoFNacimientoAlumno");
                 var campoGrupoAlumno = document.getElementById("nuevoGrupoAlumno");
+
+                if(self.nuevoGrupoAlumno() === -1) {
+                    alert("Favor de seleccionar un grupo.");
+                    return;
+                }
 
                 campoId.validate();
                 campoNombre.validate();
@@ -607,7 +617,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 } else {
                     if (Object.keys(grupos).length > 0) {
                         self.botonFormularioMedicion("Agregar");
-                        self.tituloMedicion("Agregar nueva medición");
+                        self.tituloMedicion("Agregar nueva medición");                        
                         self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
                         document.getElementById('dialogoNuevaMedicion').open();
                     } else {
@@ -636,6 +646,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 campoSubescapular.validate();
                 campoPliegue.validate();
                 campoGrupo.validate();
+
+                if(self.nuevoGrupoMedicion() === -1) {
+                    alert("Favor de seleccionar un grupo.");
+                    return;
+                }
                 
                 if (campoFecha.valid === 'invalidShown' || campoPeso.valid === 'invalidShown' ||
                     campoTalla.valid === 'invalidShown' || campoPerimetro.valid === 'invalidShown' ||
@@ -713,6 +728,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 document.getElementById("nuevaTricepsMedicion").value  = '';
                 document.getElementById("nuevaSubescapulaMedicion").value  = '';
                 document.getElementById("nuevaPliegueCuelloMedicion").value  = '';
+                self.nuevoGrupoMedicion(-1);
             };
 
             this.descargarInfo = function () {
