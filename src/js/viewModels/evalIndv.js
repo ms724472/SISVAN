@@ -511,6 +511,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                 var compFechaNac = datosAlumnoActual.fecha_nac.split("/");
                 self.nuevaFechaNac(compFechaNac[2] + "-" + compFechaNac[1] + "-" + compFechaNac[0]);
                 self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);
+                self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));                                        
                 self.nuevoGrupoAlumno(datosAlumnoActual.id_grupo);
                 document.getElementById('dialogoNuevoAlumno').open();
             };
@@ -617,10 +618,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                     if (Object.keys(grupos).length > 0) {
                         self.botonFormularioMedicion("Agregar");
                         self.tituloMedicion("Agregar nueva medición"); 
-                        self.nuevoEscuelaAlumno(datosAlumnoActual.id_escuela);   
-                        self.nuevoGrupoMedicion(datosAlumnoActual.id_grupo);                    
                         self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
-                        document.getElementById('dialogoNuevaMedicion').open();
+                        self.nuevoGrupoMedicion(datosAlumnoActual.id_grupo);  document.getElementById('dialogoNuevaMedicion').open();
                     } else {
                         alert("Favor de agregar un nuevo grupo.");
                     }
