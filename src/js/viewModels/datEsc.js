@@ -569,7 +569,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
                   if(self.fechaToma() !== "") { 
                     gradoFinal = gradoFinal - parseInt(datosGrupo.anio_ingreso);
                   }
-                  self.grupoFinal(gradoFinal.toString());
+                  self.grupoFinal((gradoFinal+1).toString() + " " + self.campoLetra());
                   if (self.botonDialogoGrupo() === "Agregar") {
                     self.tituloNotificacionGrupo("Grupo creado");
                   } else {
