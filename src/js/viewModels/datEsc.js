@@ -35,6 +35,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
       self.campoGrado = ko.observable();
       self.campoLetra = ko.observable();
       self.fechaToma = ko.observable('');
+      self.tituloNotificacionGrupo = ko.observable();
+      self.grupoFinal = ko.observable();
 
       self.nombresColumnas = ko.observableArray([
         { headerText: 'Clave de escuela', field: 'clave_sep' },
@@ -524,11 +526,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
         var mesActual = fechaActual.getMonth() + 1;
         var anioActual = fechaActual.getFullYear();
         var anio_ingreso;
+        var gradoFinal = self.campoGrado();        
 
         if(self.fechaToma() !== "") {
           var componentes = self.fechaToma().split("-");
+          gradoFinal = mesActual >= 8 && mesActual <= 12 ?
+                       anioActual : anioActual - 1;
           mesActual = parseInt(componentes[1]);
-          anioActual = parseInt(componentes[0]);
+          anioActual = parseInt(componentes[0]);          
         }
 
         if (mesActual >= 8 && mesActual <= 12) {
@@ -561,11 +566,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
                 alert('Error, por favor revisa tus datos.');
               } else {
                 if (respuestaJSON.status === 'exito') {
-                  if (self.botonDialogoGrupo() === "Agregar") {
-                    alert('Grupo agregado correctamente.');
-                  } else {
-                    alert('Grupo actualizado correctamente.');
+                  if(self.fechaToma() !== "") { 
+                    gradoFinal = gradoFinal - parseInt(datosGrupo.anio_ingreso);
                   }
+                  self.grupoFinal(gradoFinal.toString());
+                  if (self.botonDialogoGrupo() === "Agregar") {
+                    self.tituloNotificacionGrupo("Grupo creado");
+                  } else {
+                    self.tituloNotificacionGrupo("Grupo actualizado");
+                  }
+                  document.getElementById("dialogo-notif-grupo").open();
                 } else {
                   alert('Error, por favor revisa tus datos.');
                 }
