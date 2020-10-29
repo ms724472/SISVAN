@@ -110,17 +110,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                 // Dropdown menu states
                 self.menuItemSelect = function (event, ui) {
                     switch (ui.item.attr("id")) {
-                        case "pref":
-                            if ($('html').attr('lang') === 'lt-LT') {
-                                self.languageChecked(true);
-                            } else {
-                                self.languageChecked(false);
-                            }
-
-                            $("#md1").ojDialog("open");
-                            break;
                         case "about":
-
+                            document.getElementById('dialogo-acerca').open();
                             break;
                         case "out":
                             document.body.style.background = "url(\"../css/images/fondo_login.jpg\")";
@@ -155,9 +146,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                     }
                 };
 
-                self.closePreferences = function () {
-                    $("#md1").ojDialog("close");
-                }
+                self.cerrarAcerca = function (event) {
+                    document.getElementById('dialogo-acerca').close();
+                };
 
                 self.link1Name = "About Oracle";
                 self.link1Id = "aboutOracle";

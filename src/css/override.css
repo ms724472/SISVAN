@@ -156,6 +156,10 @@ body{
     content:url("images/fondo_home.png");
 }
 
+#imagen-apoyos {
+    content:url("images/apoyos.png");
+}
+
 #curvas-oms{
     content:url("images/curvas_oms.png");
     width: 435px;

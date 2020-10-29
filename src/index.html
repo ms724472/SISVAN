@@ -101,16 +101,16 @@
                                 <li id="about"><a href="#">Acerca</a></li>
                                 <li id="out"><a href="#">Cerrar Sesión</a></li>
                             </ul>
-                            <div style="display:none" id="md1" title="Preferences" 
-                                 data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
-                                <div class="oj-dialog-body">
-                                    <label id="switchLabel" for="switch" class="oj-label-inline">English or Lithuanian</label>
-                                    <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value: languageChecked}" />
+                            <oj-dialog style="display:none" id="dialogo-acerca" dialog-title="Acerca...">
+                                <div slot="body" style="text-align: center;">
+                                  SISVAN v.0.1.0 alpha
+                                  <span role="img" id="imagen-apoyos"></span>
                                 </div>
-                                <div class="oj-dialog-footer">
-                                    <button id="okButton" data-bind="click: closePreferences, ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+                                <div slot="footer">
+                                  <oj-button on-oj-action="[[cerrarAcerca]]">OK
+                                  </oj-button>
                                 </div>
-                            </div>
+                              </oj-dialog>
                         </div>
                     </div>
                 </header>
