@@ -155,8 +155,10 @@
             <div class="oj-form">
                 <div class="oj-flex">
                     <oj-flex-item>         
-                        <oj-label for="fecha-toma">Fecha toma en campo:</oj-label>
+                        <oj-form-layout class="campo-formulario">
+                            <oj-label for="fecha-toma">Fecha toma en campo:</oj-label>
                             <oj-input-date id="fecha-toma" value="{{fechaToma}}" converter=[[convertidorFechas]]/>
+                        </oj-form-layout>
                         <oj-form-layout class="campo-formulario">
                             <oj-label for="campo-grado"  show-required>Grado:</oj-label>                       
                             <oj-select-one id="campo-grado" options="[[datosGrados]]" value="{{campoGrado}}" required>
