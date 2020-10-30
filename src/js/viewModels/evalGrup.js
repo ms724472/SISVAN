@@ -271,11 +271,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                     alert("Favor de abrir una de las evaluaciones para generar el reporte.");
                 } else {
                     document.getElementById("dialogoCargando").open();
+                    var svg = panelesColapsables[0].getElementsByTagName("svg")[0];
 
                     var cuerpoPeticion = {
-                        alto: 350,
-                        ancho: 500,
-                        svg: panelesColapsables[0].getElementsByTagName("svg")[0].outerHTML,
+                        alto: svg.clientHeight,
+                        ancho: svg.clientWidth,
+                        svg: svg.outerHTML,
                         tipo: panelesColapsables[0].outerText.includes("escolar") ? "escuela" : "grupo"
                     };
 
