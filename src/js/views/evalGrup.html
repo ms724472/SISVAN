@@ -136,7 +136,7 @@
                               orientation="[[orientationValue]]"
                               hover-behavior="dim"
                               x-axis.title="[[tituloGrafico]]"
-                              style="max-width:500px;width:100%;height:350px;display: inline-block;"
+                              style="max-width:650px;width:100%;height:350px;display: inline-block;"
                               style-defaults.line-type="curved"
                               translations.label-series="Diagnóstico"
                               translations.label-group="Fecha medicion"
@@ -144,6 +144,12 @@
                         <template slot="itemTemplate" data-oj-as="item">
                             <oj-chart-item value="[[item.data.valor]]" group-id="[[ [item.data.fecha] ]]" series-id="[[corregirNombreSerie(item.data.serie)]]">
                             </oj-chart-item>
+                        </template>
+                        <template slot="seriesTemplate" data-oj-as="series">
+                            <oj-chart-series 
+                                marker-size="0"
+                                marker-displayed="on">
+                            </oj-chart-series>
                         </template>
                     </oj-chart>
                     </div>
