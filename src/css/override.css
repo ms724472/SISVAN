@@ -82,10 +82,8 @@
 }
 
 body{
-    background-image:url("images/fondo_login.jpg");
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
-    background-size: cover;
 }
 
 .login-pane{

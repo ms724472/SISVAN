@@ -22,14 +22,25 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                 self.router = oj.Router.rootInstance;
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
-                /*self.router.configure({
-                    'login': {label: 'Login', isDefault: true}
+                self.router.configure({
+                    'home': {label: 'Principal', isDefault: true},
+                    'evalIndv': {label: 'Evaluaciones individuales'},
+                    'estUtils': {label: 'Estadísticas OMS'},
+                    'datEsc': {label: 'Datos escolares'}
                 });
-                var navData = [{name: 'Login', id: 'login',
-                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24'}
+                // Navigation setup
+                var navData = [
+                    {name: 'Principal', id: 'home',
+                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-home-icon-24'},
+                    {name: 'Evaluaciones individuales', id: 'evalIndv',
+                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-person-icon-24'},
+                    {name: 'Estadísticas OMS', id: 'estUtils',
+                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
+                    {name: 'Datos escolares', id: 'datEsc',
+                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}
                 ];
 
-                self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});*/
+                self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
 
                 // Drawer
                 // Called by nav drawer option change events so we can close drawer after selection
