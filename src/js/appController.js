@@ -22,14 +22,14 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                 self.router = oj.Router.rootInstance;
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
-                self.router.configure({
+                /*self.router.configure({
                     'login': {label: 'Login', isDefault: true}
                 });
                 var navData = [{name: 'Login', id: 'login',
                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24'}
                 ];
 
-                self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
+                self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});*/
 
                 // Drawer
                 // Called by nav drawer option change events so we can close drawer after selection
@@ -114,7 +114,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                             document.getElementById('dialogo-acerca').open();
                             break;
                         case "out":
-                            document.body.style.background = "url(\"../css/images/fondo_login.jpg\")";
+                            /*document.body.style.background = "url(\"../css/images/fondo_login.jpg\")";
                             self.userLogin("");
                             self.isLoggedIn(false);
                             self.restSessionId("");
@@ -140,7 +140,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                                     function (error) {
                                         console.log('Transition to default state failed: ' + error.message);
                                     }
-                            );
+                            );*/
                             break;
                         default:
                     }
