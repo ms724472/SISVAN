@@ -77,12 +77,12 @@
                ** and the CSS documentation under Support/API Docs/Non-Component Styling
                ** on the JET website for more information on how to use this pattern.
             -->
-            <div data-bind="visible: userLogin() != '', ojComponent: {component:'ojToolbar'}">
+            <div data-bind="ojComponent: {component:'ojToolbar'}">
                 <header role="banner" class="oj-web-applayout-header">
                     <div class="oj-flex-bar oj-sm-align-items-center">
                         <!-- Offcanvas toggle button -->
                         <div class="oj-flex-bar-start">
-                            <button class="oj-button-lg" data-bind="visible: userLogin() != '', click: toggleDrawer,
+                            <button class="oj-button-lg" data-bind="click: toggleDrawer,
                     ojComponent: {component:'ojButton', label: 'Application Navigation',
                     chroming: 'half', display: 'icons', icons: {start: 'oj-web-applayout-offcanvas-icon'}}">
                             </button>
