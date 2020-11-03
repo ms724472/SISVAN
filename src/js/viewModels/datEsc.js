@@ -568,8 +568,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojme
                 if (respuestaJSON.status === 'exito') {
                   if(self.fechaToma() !== "") { 
                     gradoFinal = gradoFinal - parseInt(datosGrupo.anio_ingreso);
+                    self.grupoFinal((gradoFinal+1).toString() + " " + self.campoLetra());
+                  } else {
+                    self.grupoFinal((gradoFinal).toString() + " " + self.campoLetra());
                   }
-                  self.grupoFinal((gradoFinal+1).toString() + " " + self.campoLetra());
                   if (self.botonDialogoGrupo() === "Agregar") {
                     self.tituloNotificacionGrupo("Grupo creado");
                   } else {
