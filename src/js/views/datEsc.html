@@ -142,11 +142,16 @@
         </div>
     </div>
     <div slot="footer">
-        <oj-button id="btn-cerrar-dialogo-escuela" on-oj-action="[[limpiarDialogoEscuela]]">Cancelar</oj-button>
-        <oj-button id="btn-abrir-dialogo-escuela" on-oj-action="[[procesarDatosEscuela]]"><span>
-                <oj-bind-text value="[[botonDialogoEscuela]]"></oj-bind-text>
-            </span>
-        </oj-button>
+        <div style="width: 50%; text-align: left;">
+            <h5 style="margin-top: 5px;">* Campos obligatorios</h5>
+        </div>
+        <div style="width: 50%;">
+            <oj-button id="btn-cerrar-dialogo-escuela" on-oj-action="[[limpiarDialogoEscuela]]">Cancelar</oj-button>
+            <oj-button id="btn-abrir-dialogo-escuela" on-oj-action="[[procesarDatosEscuela]]"><span>
+                    <oj-bind-text value="[[botonDialogoEscuela]]"></oj-bind-text>
+                </span>
+            </oj-button>
+        </div>
     </div>
 </oj-dialog>
 <oj-dialog style="display:none" id="dialogoGrupo" class="dialogoInserccionDatos" dialog-title="[[tituloDialogoGrupo]]" cancel-behavior="none">
@@ -178,11 +183,16 @@
         </div>
     </div>
     <div slot="footer">
-        <oj-button id="btn-cerrar-dialogo-grupo" on-oj-action="[[limpiarDialogoGrupo]]">Cancelar</oj-button>
-        <oj-button id="btn-abrir-dialogo-grupo" on-oj-action="[[procesarDatosGrupos]]"><span>
-                <oj-bind-text value="[[botonDialogoGrupo]]"></oj-bind-text>
-            </span>
-        </oj-button>
+        <div style="width: 50%; text-align: left;">
+            <h5 style="margin-top: 5px;">* Campos obligatorios</h5>
+        </div>
+        <div style="width: 50%;">
+            <oj-button id="btn-cerrar-dialogo-grupo" on-oj-action="[[limpiarDialogoGrupo]]">Cancelar</oj-button>
+            <oj-button id="btn-abrir-dialogo-grupo" on-oj-action="[[procesarDatosGrupos]]"><span>
+                    <oj-bind-text value="[[botonDialogoGrupo]]"></oj-bind-text>
+                </span>
+            </oj-button>
+        </div>
     </div>
 </oj-dialog>
 <oj-dialog style="justify-content:center;display:none" id="dialogo-notif-grupo" cancel-behavior="escape" dialog-title="[[tituloNotificacionGrupo]]">
