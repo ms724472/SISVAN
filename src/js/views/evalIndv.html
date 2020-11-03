@@ -279,10 +279,15 @@
         </div>
     </div>
     <div slot="footer">
-        <oj-button id="botonCerrarDialogo" on-oj-action="[[cerrarNuevoAlumno]]">Cancelar</oj-button>
-        <oj-button id='botonAgregarAlumno' on-oj-action='[[crearNuevoAlumno]]'>
-            <span><oj-bind-text value="[[botonFormularioAlumno]]"></oj-bind-text></span>
-        </oj-button>
+        <div style="width: 50%; text-align: left;">
+            <h2>* Campos obligatorios</h2>
+        </div>
+        <div style="width: 50%;">
+            <oj-button id="botonCerrarDialogo" on-oj-action="[[cerrarNuevoAlumno]]">Cancelar</oj-button>
+            <oj-button id='botonAgregarAlumno' on-oj-action='[[crearNuevoAlumno]]'>
+                <span><oj-bind-text value="[[botonFormularioAlumno]]"></oj-bind-text></span>
+            </oj-button>
+        </div>
     </div>
 </oj-dialog>
 <oj-dialog style="display:none" id="dialogoNuevaMedicion" class="dialogoInserccionDatos" dialog-title="[[tituloMedicion]]" cancel-behavior="none">
