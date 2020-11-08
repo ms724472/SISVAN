@@ -125,7 +125,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                             document.getElementById('dialogo-acerca').open();
                             break;
                         case "out":
-                            window.location = '/logout.jsp';
+                            window.location = "/sisvan/logout.jsp";
                             break;
                         default:
                     }
