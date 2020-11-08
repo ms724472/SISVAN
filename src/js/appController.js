@@ -125,33 +125,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                             document.getElementById('dialogo-acerca').open();
                             break;
                         case "out":
-                            /*document.body.style.background = "url(\"../css/images/fondo_login.jpg\")";
-                            self.userLogin("");
-                            self.isLoggedIn(false);
-                            self.restSessionId("");
-
-                            self.router.configure({
-                                'login': {label: 'Login', isDefault: true}
-                            });
-
-                            var data = [
-                                {name: 'Login', id: 'login',
-                                    iconClass: 'demo-home-icon-24 demo-icon-font-24 oj-navigationlist-item-icon'}
-                            ];
-
-                            self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
-
-                            self.router.go().then(
-                                    function (result) {
-                                        if (result.hasChanged) {
-                                        } else {
-                                            oj.Router.sync();
-                                        }
-                                    },
-                                    function (error) {
-                                        console.log('Transition to default state failed: ' + error.message);
-                                    }
-                            );*/
+                            window.location = '/logout.jsp';
                             break;
                         default:
                     }
