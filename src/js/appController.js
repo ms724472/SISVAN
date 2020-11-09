@@ -75,48 +75,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                 self.isLoggedIn = ko.observable(false);
                 self.restSessionId = ko.observable("");
 
-                self.incidentNumber = ko.observable(oj.Translations.getTranslatedString('incidentNumber'));
-
-                self.languageChecked = ko.observable();
-                self.languageChecked.subscribe(function (data) {
-                    var newLang = '';
-                    if (data === true) {
-                        newLang = 'lt-LT';
-                    } else {
-                        newLang = 'en-US';
-                    }
-                    oj.Config.setLocale(newLang,
-                            function () {
-                                $('html').attr('lang', newLang);
-                                self.incidentNumber(oj.Translations.getTranslatedString('incidentNumber'));
-                                self.appName('Sistema de Vigilancia Nutricional | ITESO');
-                                self.copyright(oj.Translations.getTranslatedString('copyright'));
-                                self.about(oj.Translations.getTranslatedString('about'));
-                                self.link2Name(oj.Translations.getTranslatedString('contacts'));
-                                self.dueDate(oj.Translations.getTranslatedString('dueDate'));
-
-                                self.router.configure({
-                                    'home': {label: 'Principal', isDefault: true},
-                                    'evalIndv': {label: 'Evaluaciones individuales'},
-                                    'estUtils': {label: 'Estadísticas OMS'},
-                                    'datEsc': {label: 'Datos escolares'}
-                                });
-                                // Navigation setup
-                                var navData = [
-                                    {name: 'Principal', id: 'home',
-                                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-home-icon-24'},
-                                    {name: 'Evaluaciones individuales', id: 'evalIndv',
-                                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-person-icon-24'},
-                                    {name: 'Estadísticas OMS', id: 'estUtils',
-                                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
-                                    {name: 'Datos escolares', id: 'datEsc',
-                                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-library-icon-24'}
-                                ];
-                                self.navDataSource.reset(navData, {idAttribute: 'id'});
-                                oj.Router.sync();
-                            }
-                    );
-                });
+                self.incidentNumber = ko.observable(oj.Translations.getTranslatedString('incidentNumber'));               
 
                 // Dropdown menu states
                 self.menuItemSelect = function (event, ui) {
@@ -125,7 +84,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                             document.getElementById('dialogo-acerca').open();
                             break;
                         case "out":
-                            window.location = "/sisvan/logout.jsp";
+                            window.location = "/sve/logout.jsp";
                             break;
                         default:
                     }
