@@ -1,7 +1,7 @@
 #login-icon{
     top: 35px;
     position: relative;
-    content:url("imagenes/Logo-ITESO.png");
+    content:url("imagenes/Logo-NACE.png");
 }
 
 .login-page{
@@ -95,14 +95,4 @@ body {
 .wrapper{
     height: 185px;
     position: relative;
-}
-
-#page-footer{
-    left: -30px;
-    right: -50px;
-    height: 75px;
-    background-color: rgba(0,0,0,.6);
-    position: absolute;
-    bottom: -20px;
-    color: #777;
 }
