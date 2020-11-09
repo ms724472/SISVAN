@@ -1,0 +1,6 @@
+{
+    "description": "OJET-CLI hooks configuration file",
+    "hooks": {
+        "after_build": "scripts/hooks/after_build.js"
+    }
+}
