@@ -1,4 +1,4 @@
-use strict';
+'use strict';
 const fs = require('fs');
 const archiver = require('archiver');
 module.exports = function (configObj) {
