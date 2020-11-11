@@ -620,7 +620,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojarray
                         self.botonFormularioMedicion("Agregar");
                         self.tituloMedicion("Agregar nueva medición"); 
                         self.origenDatosGrupos(new oj.ArrayDataProvider(grupos[self.escuelaDelAlumno()], { keyAttributes: 'value' }));
-                        self.nuevoGrupoMedicion(datosAlumnoActual.id_grupo);  document.getElementById('dialogoNuevaMedicion').open();
+                        self.nuevoGrupoMedicion(datosAlumnoActual.id_grupo);  
+                        document.getElementById('dialogoNuevaMedicion').open();
                     } else {
                         alert("Favor de agregar un nuevo grupo.");
                     }

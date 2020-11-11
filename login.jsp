@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>SISVAN NACE | Iniciar Sesi&oacute;n</title>
+		<title>SVE NACE | Iniciar Sesi&oacute;n</title>
 		<link rel="icon" href="imagenes/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="estilos.css" type="text/css"/>
 	</head>
