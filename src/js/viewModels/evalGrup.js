@@ -213,7 +213,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojselec
                             self.obtenerLasEscuelas();
                             self.obtenerTodosLosGrupos();
                             nombreEscuelaSeleccionada = self.escuelas[0].label;
-                            self.obtenerPorcentajesEscolares(todosLosGrupos[self.escuelas[0].value][0].value, "imc");
+                            self.obtenerPorcentajesEscolares(self.escuelas[0].value, "imc");
                             etiquetaGrupoSeleccionado = todosLosGrupos[self.escuelas[0].value][0].label;  
                             self.obtenerPorcentajesGrupales(todosLosGrupos[self.escuelas[0].value][0].value, "imc");    
                             self.obtenerHistoricoEscolar(todosLosGrupos[self.escuelas[0].value][0].value, "imc");                                        
